@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_students"
+            android:icon="@android:drawable/ic_menu_my_calendar"
+            android:title="Students" />
+        <item
+            android:id="@+id/nav_disciplines"
+            android:icon="@android:drawable/ic_input_get"
+            android:title="Disciplines" />
+        <item
+            android:id="@+id/nav_teachers"
+            android:icon="@android:drawable/ic_menu_myplaces"
+            android:title="Teachers" />
+    </group>
+
+    <item android:title="Schedule">
+        <menu>
+            <item
+                android:id="@+id/nav_create_report"
+                android:icon="@android:drawable/ic_menu_agenda"
+                android:title="Reports" />
+            <item
+                android:id="@+id/nav_schedule_cells"
+                android:icon="@android:drawable/ic_menu_today"
+                android:title="Cell view" />
+        </menu>
+    </item>
+
+</menu>
