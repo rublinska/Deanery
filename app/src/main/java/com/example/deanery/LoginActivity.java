@@ -3,8 +3,11 @@ package com.example.deanery;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +23,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,9 +33,18 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.deanery.dataModels.AuthTokenFromLogin;
+import com.example.deanery.dataModels.BodyForLogin;
+import com.example.deanery.dataModels.User;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -63,6 +76,38 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
 
+    final DeaneryAPI client = ServiceGenerator.createService(DeaneryAPI.class);
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+/*
+
+        Call<User> getUser = client.getUser("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE1NTI0NzE3MzUsImV4cCI6MTU1MjQ3NTMzNSwibmJmIjoxNTUyNDcxNzM1LCJqdGkiOiJHTTh3U0lZV1Z3MUUzakRKIiwic3ViIjoxLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.62T5KgXHZJu8DqY4AsK6_HTRsKq-lihnFSdLragloTQ");
+
+        getUser.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()) {
+                    User user = response.body();
+                    Log.i("VladTest", user.getName());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.i("VladTest", String.valueOf(call.isExecuted()));
+                Log.i("VladTest", String.valueOf(call.request().url()));
+                Log.i("VladTest", String.valueOf(t.getMessage()));
+            }
+        });
+*/
+
+
+
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,17 +128,44 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
+        OnClickListener checkLoginCredentials = new OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(i);
+            public void onClick(View v) {
+                Call<AuthTokenFromLogin> call = client.loginPost(new BodyForLogin(mEmailView.getText().toString(), mPasswordView.getText().toString()));
+
+                call.enqueue(new Callback<AuthTokenFromLogin>() {
+                    @Override
+                    public void onResponse(Call<AuthTokenFromLogin> call, Response<AuthTokenFromLogin> response) {
+
+                        if (response.isSuccessful()/* && response.body().getAccessToken()!=null*/) {
+                            Log.i("LizaTest", response.body().getAccessToken());
+                            Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            //    i.putExtra("token", response.body().getAccessToken());
+                            getApplicationContext().startActivity(i);
+                        } else if (response.message() == "Unauthorized") {
+                            //todo: add message about failed authorization
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<AuthTokenFromLogin> call, Throwable t) {
+                        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                        if (!(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED)) {
+                            Toast.makeText(getApplicationContext(), "Check your internet connection and try again",
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
             }
-        });
+        };
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+        ((Button) findViewById(R.id.email_sign_in_button)).setOnClickListener(checkLoginCredentials);
+
     }
 
     private void populateAutoComplete() {
