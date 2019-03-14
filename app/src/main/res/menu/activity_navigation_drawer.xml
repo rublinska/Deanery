@@ -7,7 +7,8 @@
         <item
             android:id="@+id/nav_students"
             android:icon="@android:drawable/ic_menu_my_calendar"
-            android:title="Students" />
+            android:title="Students"
+            />
         <item
             android:id="@+id/nav_disciplines"
             android:icon="@android:drawable/ic_input_get"
