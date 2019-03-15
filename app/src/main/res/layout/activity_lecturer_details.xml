@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="20dp"
+    android:gravity="center">
+    <EditText
+        android:id="@+id/lecturer_full_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bohachek Yelyzaveta Mykolyaevna" />
+
+    <EditText
+        android:id="@+id/lecturer_department"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="biology" />
+
+    <EditText
+        android:id="@+id/lecturer_position"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Professor"/>
+    <EditText
+        android:id="@+id/lecturer_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="+38 (073) 137 0347"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
+        <Button
+            android:id="@+id/cancel"
+            android:background="#F44336"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.45"
+            android:text="Cancel"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="0.04"/>
+        <Button
+            android:id="@+id/submit"
+            android:background="#009688"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.45"
+            android:text="Submit"/>
+    </LinearLayout>
+</LinearLayout>
+
+

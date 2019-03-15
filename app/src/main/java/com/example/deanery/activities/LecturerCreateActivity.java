@@ -48,18 +48,19 @@ public class LecturerCreateActivity extends AppCompatActivity {
                 Lecturer newLecturer = new Lecturer(full_name.getText().toString(),position.getText().toString(),phone.getText().toString(),Integer.parseInt(department.getText().toString()));
 
                 Log.i("Lizatest", getIntent().getStringExtra("token"));
-                final Call<Boolean> createLecturer = client.createLecturer(getIntent().getStringExtra("token"), newLecturer);
+                final Call<Lecturer> createLecturer = client.createLecturer(getIntent().getStringExtra("token"), newLecturer);
 
-                createLecturer.enqueue(new Callback<Boolean>() {
+                createLecturer.enqueue(new Callback<Lecturer>() {
 
                     @Override
-                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                    public void onResponse(Call<Lecturer> call, Response<Lecturer> response) {
                         Log.i("Lizatest", response.raw().toString());
+
                         closeActivity();
                     }
 
                     @Override
-                    public void onFailure(Call<Boolean> call, Throwable t) {
+                    public void onFailure(Call<Lecturer> call, Throwable t) {
                         Log.i("Lizatest", t.getMessage());
 
                     }

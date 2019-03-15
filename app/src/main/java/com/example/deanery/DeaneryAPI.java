@@ -26,7 +26,13 @@ public interface DeaneryAPI {
     Call<GetLecturersData> getLecturerData(@Query("token") String token);
 
     @POST("lecturers")
-    Call<Boolean> createLecturer(@Query("token") String token, @Body Lecturer lecturer);
+    Call<Lecturer> createLecturer(@Query("token") String token, @Body Lecturer lecturer);
+
+    @POST("lecturers/{id}")
+    Call<Lecturer> updateLecturer(@Path("id") Integer id , @Query("token") String token, @Body Lecturer lecturer);
+
+    @POST("lecturers/{id}")
+    Call<Boolean> deleteLecturer(@Path("id") Integer id , @Query("token") String token);
 
     @GET("lecturers/{id}")
     Call<GetLecturer> getLecturer(@Path("id") Integer id , @Query("token") String token);

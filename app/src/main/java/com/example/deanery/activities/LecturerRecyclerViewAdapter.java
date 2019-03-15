@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.example.deanery.R;
 import com.example.deanery.dataModels.Lecturer;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -56,12 +55,13 @@ public class LecturerRecyclerViewAdapter extends RecyclerView.Adapter<LecturerRe
             public void onClick(View view) {
                 Log.i("LizaTest", lecturers.get(position).getFullName() + "   " + lecturers.get(position).getId());
 
-                Intent i = new Intent(context, LecturerDetailsActivity.class);
+                Intent i = new Intent(context, LecturerUpdateActivity.class);
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 i.putExtra("lecturerID", lecturers.get(position).getId());
                 i.putExtra("fullName", lecturers.get(position).getFullName());
                 i.putExtra("department", lecturers.get(position).getDepartment().getName());
                 i.putExtra("phoneNumber", lecturers.get(position).getPhoneNumber());
+                i.putExtra("position", lecturers.get(position).getPosition());
                 i.putExtra("token", token);
                 context.startActivity(i);
             }
