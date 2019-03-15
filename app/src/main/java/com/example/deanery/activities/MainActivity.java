@@ -1,8 +1,11 @@
 package com.example.deanery.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -38,10 +41,14 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     final DeaneryAPI client = ServiceGenerator.createService(DeaneryAPI.class);
-    LecturerRecyclerViewAdapter lecturerRecyclerViewAdapter;
     static String token = "";
-    List<Lecturer> lecturers = new ArrayList<>();
-    RecyclerView contentView;
+
+
+    DrawerLayout drawer;
+
+    public String getToken () {
+        return token;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +63,9 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent i = new Intent(getApplicationContext(), LecturerCreateActivity.class);
+                i.putExtra("token", token);
+                getApplicationContext().startActivity(i);
             }
         });
 
@@ -69,15 +77,12 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        contentView = (RecyclerView) findViewById(R.id.content_list);
-        contentView.setLayoutManager(new LinearLayoutManager(this));
 
-        fillWithData();
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -109,51 +114,43 @@ public class MainActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
+    public boolean onNavigationItemSelected(MenuItem menuItem) {
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        if (id == R.id.nav_students) {
-            // Handle the camera action
-        } else if (id == R.id.nav_disciplines) {
-
-        } else if (id == R.id.nav_teachers) {
-
-        } else if (id == R.id.nav_create_report) {
-
-        } else if (id == R.id.nav_schedule_cells) {
-
+        Fragment fragment = null;
+        Class fragmentClass;
+        switch(menuItem.getItemId()) {
+            case R.id.nav_students:
+                fragmentClass = LecturerFragment.class;
+                break;
+            case R.id.nav_teachers:
+                fragmentClass = LecturerFragment.class;
+                break;
+            case R.id.nav_disciplines:
+                fragmentClass = LecturerFragment.class;
+                break;
+            default:
+                fragmentClass = LecturerFragment.class;
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Insert the fragment by replacing any existing fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+
+        // Highlight the selected item has been done by NavigationView
+        menuItem.setChecked(true);
+        // Set action bar title
+        setTitle(menuItem.getTitle());
+        // Close the navigation drawer
+        drawer.closeDrawers();
+
         return true;
-    }
-    public void fillWithData(){
-
-//      token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE1NTI1MDQwODcsImV4cCI6MTU1MjUwNzY4NywibmJmIjoxNTUyNTA0MDg3LCJqdGkiOiJDT2RpaXdJZzRPV3lBT3NCIiwic3ViIjoxLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.O-yZKKxEC4Mt5QPIqxHLTJVT_Sx1Zwzy0w2AIixE8to"
-        Call<GetLecturersData> getLecturerData = client.getLecturerData(token);
-        getLecturerData.enqueue(new Callback<GetLecturersData>() {
-            @Override
-            public void onResponse(Call<GetLecturersData> call, Response<GetLecturersData> response) {
-                Log.i("Lizatest", call.request().url().toString());
-                Log.i("Lizatest", response.body().getData().get(0).getFullName());
-                if(response.body().getData().size() > 0){
-                    lecturers = (ArrayList<Lecturer>) response.body().getData();
-                    lecturerRecyclerViewAdapter = new LecturerRecyclerViewAdapter(lecturers, token, getApplicationContext());
-                    contentView.setAdapter(lecturerRecyclerViewAdapter);
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<GetLecturersData> call, Throwable t) {
-
-            }
-        });
-
-
-
     }
 
 }

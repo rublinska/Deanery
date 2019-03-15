@@ -37,7 +37,7 @@ public class LecturerRecyclerViewAdapter extends RecyclerView.Adapter<LecturerRe
     public LecturerPlaceHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         final LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.lecturer_item, viewGroup, false);
+        View rowView = inflater.inflate(R.layout.fragment_lecturer, viewGroup, false);
 
         return new LecturerPlaceHolder(rowView);
     }
