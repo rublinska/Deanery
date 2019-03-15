@@ -3,6 +3,7 @@ package com.example.deanery.activities;
 import android.os.Bundle;
 
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.example.deanery.DeaneryAPI;
@@ -16,7 +17,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-class LecturerDetailsActivity extends AppCompatActivity {
+public class LecturerDetailsActivity extends AppCompatActivity {
 
     Lecturer lecturer;
     TextView full_name;
@@ -27,7 +28,7 @@ class LecturerDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.lecturer_details);
+        setContentView(R.layout.lecturer_details_activity);
      //   Toolbar toolbar = findViewById(R.id.toolbar_custom); setSupportActionBar(toolbar);
 
         full_name = (TextView) findViewById(R.id.lecturer_full_name);
@@ -37,14 +38,15 @@ class LecturerDetailsActivity extends AppCompatActivity {
 
 
         final DeaneryAPI client =  ServiceGenerator.createService(DeaneryAPI.class);
-        final Call<GetLecturer> getLecturer = client.getLecturer(getIntent().getStringExtra("token"), getIntent().getIntExtra("lecturerID", 1));
+
+        final Call<GetLecturer> getLecturer = client.getLecturer(getIntent().getIntExtra("lecturerID", -1), getIntent().getStringExtra("token"));
 
         getLecturer.enqueue(new Callback<GetLecturer>() {
 
             @Override
             public void onResponse(Call<GetLecturer> call, Response<GetLecturer> response) {
                 lecturer = response.body().getLecturer();
-
+                Log.i("Lizatest", call.request().url().toString());
                 full_name.setText(lecturer.getFullName());
                 phone.setText(lecturer.getPhoneNumber());
                 position.setText(lecturer.getPosition());

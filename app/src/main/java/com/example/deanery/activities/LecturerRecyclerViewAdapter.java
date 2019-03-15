@@ -17,16 +17,18 @@ import com.example.deanery.dataModels.Lecturer;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.deanery.activities.MainActivity.token;
 
 public class LecturerRecyclerViewAdapter extends RecyclerView.Adapter<LecturerRecyclerViewAdapter.LecturerPlaceHolder> {
 
 
     private List<Lecturer> lecturers;
+    private String token;
     private Context context;
 
-    public LecturerRecyclerViewAdapter(List<Lecturer> lecturers, Context context) {
+
+    public LecturerRecyclerViewAdapter(List<Lecturer> lecturers, String token, Context context) {
         this.lecturers = lecturers;
+        this.token = token;
         this.context = context;
     }
 
@@ -49,7 +51,7 @@ public class LecturerRecyclerViewAdapter extends RecyclerView.Adapter<LecturerRe
         lecturerPlaceHolder.department.setText(lecturer.getDepartment().getName());
 
 
-        lecturerPlaceHolder.itemView.setOnClickListener(new View.OnClickListener() {
+        lecturerPlaceHolder.lecturer_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.i("LizaTest", lecturers.get(position).getFullName() + "   " + lecturers.get(position).getId());

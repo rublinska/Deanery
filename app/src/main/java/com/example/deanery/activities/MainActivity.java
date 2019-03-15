@@ -3,6 +3,7 @@ package com.example.deanery.activities;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    //    token = getIntent().getExtras().getString("token");
+        token = getIntent().getExtras().getString("token");
 
         setContentView(R.layout.activity_navigation);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -69,8 +70,9 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         contentView = (RecyclerView) findViewById(R.id.content_list);
+        contentView.setLayoutManager(new LinearLayoutManager(this));
 
-     //   fillWithData();
+        fillWithData();
     }
 
     @Override
@@ -131,29 +133,16 @@ public class MainActivity extends AppCompatActivity
 
 //      token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE1NTI1MDQwODcsImV4cCI6MTU1MjUwNzY4NywibmJmIjoxNTUyNTA0MDg3LCJqdGkiOiJDT2RpaXdJZzRPV3lBT3NCIiwic3ViIjoxLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.O-yZKKxEC4Mt5QPIqxHLTJVT_Sx1Zwzy0w2AIixE8to"
         Call<GetLecturersData> getLecturerData = client.getLecturerData(token);
-
         getLecturerData.enqueue(new Callback<GetLecturersData>() {
             @Override
             public void onResponse(Call<GetLecturersData> call, Response<GetLecturersData> response) {
+                Log.i("Lizatest", call.request().url().toString());
+                Log.i("Lizatest", response.body().getData().get(0).getFullName());
                 if(response.body().getData().size() > 0){
                     lecturers = (ArrayList<Lecturer>) response.body().getData();
-                    lecturerRecyclerViewAdapter = new LecturerRecyclerViewAdapter(lecturers, getApplicationContext());
+                    lecturerRecyclerViewAdapter = new LecturerRecyclerViewAdapter(lecturers, token, getApplicationContext());
                     contentView.setAdapter(lecturerRecyclerViewAdapter);
-                    for (final Lecturer lect : lecturers) {
-                        Call<GetLecturer> getLecturerCall = client.getLecturer(token, lect.getId());
 
-                        getLecturerCall.enqueue(new Callback<GetLecturer>() {
-                            @Override
-                            public void onResponse(Call<GetLecturer> call, Response<GetLecturer> response) {
-                                lecturerRecyclerViewAdapter.notifyDataSetChanged();
-                            }
-
-                            @Override
-                            public void onFailure(Call<GetLecturer> call, Throwable t) {
-
-                            }
-                        });
-                    }
                 }
             }
 

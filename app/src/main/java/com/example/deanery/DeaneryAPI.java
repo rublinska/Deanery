@@ -11,6 +11,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface DeaneryAPI {
@@ -24,6 +25,6 @@ public interface DeaneryAPI {
     @GET("lecturers")
     Call<GetLecturersData> getLecturerData(@Query("token") String token);
 
-    @GET("lecturers/{{id}}")
-    Call<GetLecturer> getLecturer(@Query("token") String token, @Query("id") Integer id );
+    @GET("lecturers/{id}")
+    Call<GetLecturer> getLecturer(@Path("id") Integer id , @Query("token") String token);
 }
