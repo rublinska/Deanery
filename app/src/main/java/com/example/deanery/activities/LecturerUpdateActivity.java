@@ -11,8 +11,7 @@ import android.widget.EditText;
 import com.example.deanery.DeaneryAPI;
 import com.example.deanery.R;
 import com.example.deanery.ServiceGenerator;
-import com.example.deanery.dataModels.Department;
-import com.example.deanery.dataModels.GetLecturer;
+import com.example.deanery.dataModels.GetStatus;
 import com.example.deanery.dataModels.Lecturer;
 
 
@@ -23,11 +22,12 @@ import retrofit2.Response;
 public class LecturerUpdateActivity extends AppCompatActivity {
 
     final DeaneryAPI client =  ServiceGenerator.createService(DeaneryAPI.class);
-
-    EditText full_name;
+    Lecturer lecturerForUpdate;
+    EditText fullName;
     EditText department;
     EditText phone;
     EditText position;
+    Button delete;
     Button cancel;
     Button updateLecturer;
 
@@ -37,35 +37,61 @@ public class LecturerUpdateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lecturer_details);
      //   Toolbar toolbar = findViewById(R.id.toolbar_custom); setSupportActionBar(toolbar);
 
-        full_name = (EditText) findViewById(R.id.lecturer_full_name);
+        lecturerForUpdate = getIntent().getParcelableExtra("lecturer");
+        Log.i("lizatest", String.valueOf(lecturerForUpdate.getId()));
+        fullName = (EditText) findViewById(R.id.lecturer_full_name);
         department = (EditText) findViewById(R.id.lecturer_department);
         phone = (EditText) findViewById(R.id.lecturer_phone);
         position = (EditText) findViewById(R.id.lecturer_position);
+        delete = (Button) findViewById(R.id.delete);
         cancel = (Button) findViewById(R.id.cancel);
         updateLecturer = (Button) findViewById(R.id.submit);
 
-        full_name.setText(getIntent().getStringExtra("fullName"));
-        department.setText(getIntent().getStringExtra("department"));
-        phone.setText(getIntent().getStringExtra("phoneNumber"));
-        position.setText(getIntent().getStringExtra("position"));
+        fullName.setText(lecturerForUpdate.getFullName());
+        department.setText(lecturerForUpdate.getDepartment().getName());
+        phone.setText(lecturerForUpdate.getPhoneNumber());
+        position.setText(lecturerForUpdate.getPosition());
 
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Call<GetStatus> deleteLecturer = client.deleteLecturer(lecturerForUpdate.getId(), getIntent().getStringExtra("token"));
+                deleteLecturer.enqueue(new Callback<GetStatus>() {
+                    @Override
+                    public void onResponse(Call<GetStatus> call, Response<GetStatus> response) {
+                    //    Log.i("Lizatest", response.raw().toString());
+                        closeActivity();
+                    }
+                    @Override
+                    public void onFailure(Call<GetStatus> call, Throwable t) {
+                    //    Log.i("LizatestError",t.getMessage());
+                        closeActivity();
+                    }
+                });
+            }
+        });
 
         updateLecturer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Lecturer lecturerForUpdate = new Lecturer(full_name.getText().toString(),position.getText().toString(),phone.getText().toString(), 1/* TODO get departmentID by name *//*Integer.parseInt(department.getText().toString())*/);
-                final Call<Lecturer> updateLecturer = client.updateLecturer(getIntent().getIntExtra("lecturerID", -1), getIntent().getStringExtra("token"), lecturerForUpdate);
+                lecturerForUpdate.setFullName(fullName.getText().toString());
+                lecturerForUpdate.setPosition(position.getText().toString());
+                lecturerForUpdate.setPhoneNumber(phone.getText().toString());
+
+        //todo        lecturerForUpdate.setDepartment(Integer.parseInt(department.getText().toString()));
+                final Call<Lecturer> updateLecturer = client.updateLecturer(lecturerForUpdate.getId(),getIntent().getStringExtra("token"),lecturerForUpdate);
 
                 updateLecturer.enqueue(new Callback<Lecturer>() {
 
                     @Override
                     public void onResponse(Call<Lecturer> call, Response<Lecturer> response) {
-                        Log.i("Lizatest", call.request().url().toString());
+                    //    Log.i("LizatestError",response.raw().toString());
                         closeActivity();
                     }
 
                     @Override
                     public void onFailure(Call<Lecturer> call, Throwable t) {
+                    //    Log.i("LizatestError",t.getMessage());
                         closeActivity();
                     }
                 });
@@ -80,6 +106,7 @@ public class LecturerUpdateActivity extends AppCompatActivity {
         });
     }
     public void closeActivity() {
+        setResult(10001);
         this.finish();
     }
 }

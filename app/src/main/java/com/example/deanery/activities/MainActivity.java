@@ -1,13 +1,13 @@
 package com.example.deanery.activities;
 
+import android.accounts.Account;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -18,31 +18,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
 import com.example.deanery.DeaneryAPI;
 import com.example.deanery.R;
 import com.example.deanery.ServiceGenerator;
-import com.example.deanery.dataModels.GetLecturer;
-import com.example.deanery.dataModels.GetLecturersData;
-import com.example.deanery.dataModels.Lecturer;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     final DeaneryAPI client = ServiceGenerator.createService(DeaneryAPI.class);
     static String token = "";
-
+    static Integer lastItemId = 0;
 
     DrawerLayout drawer;
 
@@ -78,6 +63,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        setFragment();
     }
 
     @Override
@@ -117,9 +103,67 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
+        lastItemId = menuItem.getItemId();
+        setFragment();
+
+        // Highlight the selected item has been done by NavigationView
+        menuItem.setChecked(true);
+        // Set action bar title
+        setTitle(menuItem.getTitle());
+        // Close the navigation drawer
+        drawer.closeDrawers();
+
+        return true;
+    }
+
+/*
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+    @Override
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeInt(id);
+        out.writeString(fullName);
+        out.writeString(position);
+        out.writeString(phoneNumber);
+        out.writeInt(departmentId);
+        out.writeString(createdAt);
+        out.writeString(updatedAt);
+    }
+
+    // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
+    public static final Parcelable.Creator<Account> CREATOR = new Parcelable.Creator() {
+        public ObjectB createFromParcel(Parcel in) {
+            return new ObjectB(in);
+        }
+
+        public ObjectB[] newArray(int size) {
+            return new ObjectB[size];
+        }
+    };
+*/
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if ((requestCode == 10001) && (resultCode == 10001)) {
+            setFragment();/*
+            for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+                if (fragment != null) {
+                    fragment.onActivityResult(requestCode, resultCode, data);
+                }
+            }
+            super.onActivityResult(requestCode, resultCode, data);*/
+        }
+    }
+
+    private void setFragment () {
         Fragment fragment = null;
         Class fragmentClass;
-        switch(menuItem.getItemId()) {
+        switch(lastItemId) {
             case R.id.nav_students:
                 fragmentClass = LecturerFragment.class;
                 break;
@@ -142,15 +186,6 @@ public class MainActivity extends AppCompatActivity
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
-
-        // Highlight the selected item has been done by NavigationView
-        menuItem.setChecked(true);
-        // Set action bar title
-        setTitle(menuItem.getTitle());
-        // Close the navigation drawer
-        drawer.closeDrawers();
-
-        return true;
     }
 
 }

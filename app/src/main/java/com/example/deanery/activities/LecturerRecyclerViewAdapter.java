@@ -2,6 +2,7 @@ package com.example.deanery.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -23,7 +24,7 @@ public class LecturerRecyclerViewAdapter extends RecyclerView.Adapter<LecturerRe
     private List<Lecturer> lecturers;
     private String token;
     private Context context;
-
+    Lecturer lecturer;
 
     public LecturerRecyclerViewAdapter(List<Lecturer> lecturers, String token, Context context) {
         this.lecturers = lecturers;
@@ -43,27 +44,28 @@ public class LecturerRecyclerViewAdapter extends RecyclerView.Adapter<LecturerRe
 
     @Override
     public void onBindViewHolder(@NonNull LecturerPlaceHolder lecturerPlaceHolder, final int position) {
-        final Lecturer lecturer = lecturers.get(position);
+
+        lecturer = lecturers.get(position);
+
         lecturerPlaceHolder.full_name.setText(lecturer.getFullName());
         lecturerPlaceHolder.phone.setText(lecturer.getPhoneNumber());
         lecturerPlaceHolder.position.setText(lecturer.getPosition());
         lecturerPlaceHolder.department.setText(lecturer.getDepartment().getName());
 
-
-        lecturerPlaceHolder.lecturer_view.setOnClickListener(new View.OnClickListener() {
+        lecturerPlaceHolder.item.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Log.i("LizaTest", lecturers.get(position).getFullName() + "   " + lecturers.get(position).getId());
+            public void onClick(View v) {
+                lecturer = lecturers.get(position);
 
-                Intent i = new Intent(context, LecturerUpdateActivity.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                i.putExtra("lecturerID", lecturers.get(position).getId());
-                i.putExtra("fullName", lecturers.get(position).getFullName());
-                i.putExtra("department", lecturers.get(position).getDepartment().getName());
-                i.putExtra("phoneNumber", lecturers.get(position).getPhoneNumber());
-                i.putExtra("position", lecturers.get(position).getPosition());
+            //    Log.i("lizatestOnclick", lecturer.getFullName());
+                Intent i = new Intent(v.getContext(), LecturerUpdateActivity.class);
+
+                Bundle mBundle = new Bundle();
+                mBundle.putParcelable("lecturer", lecturer);
+                i.putExtras(mBundle);
+
                 i.putExtra("token", token);
-                context.startActivity(i);
+                v.getContext().startActivity(i);
             }
         });
     }
@@ -73,12 +75,13 @@ public class LecturerRecyclerViewAdapter extends RecyclerView.Adapter<LecturerRe
         return lecturers.size();
     }
 
+
     class LecturerPlaceHolder extends RecyclerView.ViewHolder {
         TextView full_name;
         TextView department;
         TextView phone;
         TextView position;
-        Button lecturer_view;
+        Button item;
 
         public LecturerPlaceHolder(@NonNull View itemView) {
             super(itemView);
@@ -87,7 +90,9 @@ public class LecturerRecyclerViewAdapter extends RecyclerView.Adapter<LecturerRe
             department = (TextView) itemView.findViewById(R.id.lecturer_department);
             phone = (TextView) itemView.findViewById(R.id.lecturer_phone);
             position = (TextView) itemView.findViewById(R.id.lecturer_position);
-            lecturer_view  =(Button) itemView.findViewById(R.id.lecturer_view);
+            item = (Button) itemView.findViewById(R.id.lecturer_button);
         }
+
     }
+
 }

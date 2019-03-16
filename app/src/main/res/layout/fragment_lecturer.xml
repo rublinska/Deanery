@@ -10,7 +10,7 @@
     tools:context=".activities.MainActivity">
 
     <Button
-        android:id="@+id/lecturer_view"
+        android:id="@+id/lecturer_button"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#00FFFFFF"/>

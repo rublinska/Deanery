@@ -1,9 +1,10 @@
 package com.example.deanery.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.DrawerLayout;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -84,8 +85,8 @@ public class LecturerFragment extends Fragment {
         getLecturerData.enqueue(new Callback<GetLecturersData>() {
             @Override
             public void onResponse(Call<GetLecturersData> call, Response<GetLecturersData> response) {
-                Log.i("Lizatest", call.request().url().toString());
-                Log.i("Lizatest", response.body().getData().get(0).getFullName());
+            //    Log.i("Lizatest", call.request().url().toString());
+            //    Log.i("Lizatest", response.body().getData().get(0).getFullName());
                 if(response.body().getData().size() > 0){
                     lecturers = (ArrayList<Lecturer>) response.body().getData();
 
@@ -124,17 +125,4 @@ public class LecturerFragment extends Fragment {
         super.onDetach();
 
     }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-
-
 }
