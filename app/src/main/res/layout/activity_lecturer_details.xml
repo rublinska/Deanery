@@ -15,7 +15,7 @@
         android:text="Delete lecturer"/>
 
     <EditText
-        android:id="@+id/lecturer_full_name"
+        android:id="@+id/department_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Bohachek Yelyzaveta Mykolyaevna" />
@@ -27,12 +27,12 @@
         android:text="biology" />
 
     <EditText
-        android:id="@+id/lecturer_position"
+        android:id="@+id/auditories_num"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Professor"/>
     <EditText
-        android:id="@+id/lecturer_phone"
+        android:id="@+id/lecturers_num"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="+38 (073) 137 0347"/>

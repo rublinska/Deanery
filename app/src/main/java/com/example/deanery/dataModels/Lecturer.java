@@ -33,7 +33,7 @@ public class Lecturer implements Parcelable {
     private String updatedAt;
     @SerializedName("department")
     @Expose
-    private Department department;
+    private Department department = null;
 
     public Lecturer(String fullName, String position, String phoneNumber, Integer departmentId) {
         this.fullName = fullName;

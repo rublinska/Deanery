@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import com.example.deanery.DeaneryAPI;
 import com.example.deanery.R;
 import com.example.deanery.ServiceGenerator;
+import com.example.deanery.dataModels.Department;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity
     final DeaneryAPI client = ServiceGenerator.createService(DeaneryAPI.class);
     static String token = "";
     static Integer lastItemId = 0;
-
+    FloatingActionButton fab;
     DrawerLayout drawer;
 
     public String getToken () {
@@ -44,16 +45,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), LecturerCreateActivity.class);
-                i.putExtra("token", token);
-                getApplicationContext().startActivity(i);
-            }
-        });
-
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -125,7 +117,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void writeToParcel(Parcel out, int flags) {
         out.writeInt(id);
-        out.writeString(fullName);
+        out.writeString(departmentName);
         out.writeString(position);
         out.writeString(phoneNumber);
         out.writeInt(departmentId);
@@ -162,19 +154,29 @@ public class MainActivity extends AppCompatActivity
 
     private void setFragment () {
         Fragment fragment = null;
+        final Intent intent;
         Class fragmentClass;
         switch(lastItemId) {
+
+            case R.id.nav_departments:
+                fragmentClass = DepartmentFragment.class;
+                intent = new Intent(getApplicationContext(), DepartmentCreateActivity.class);
+                break;
             case R.id.nav_students:
                 fragmentClass = LecturerFragment.class;
+                intent = new Intent(getApplicationContext(), LecturerCreateActivity.class);
                 break;
             case R.id.nav_teachers:
                 fragmentClass = LecturerFragment.class;
+                intent = new Intent(getApplicationContext(), LecturerCreateActivity.class);
                 break;
             case R.id.nav_disciplines:
                 fragmentClass = LecturerFragment.class;
+                intent = new Intent(getApplicationContext(), LecturerCreateActivity.class);
                 break;
             default:
-                fragmentClass = LecturerFragment.class;
+                fragmentClass = DepartmentFragment.class;
+                intent = new Intent(getApplicationContext(), DepartmentCreateActivity.class);
         }
 
         try {
@@ -182,6 +184,13 @@ public class MainActivity extends AppCompatActivity
         } catch (Exception e) {
             e.printStackTrace();
         }
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent.putExtra("token", token);
+                getApplicationContext().startActivity(intent);
+            }
+        });
 
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getSupportFragmentManager();

@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import com.example.deanery.DeaneryAPI;
 import com.example.deanery.R;
 import com.example.deanery.ServiceGenerator;
+import com.example.deanery.dataModels.Department;
+import com.example.deanery.dataModels.GetAllDepartments;
 import com.example.deanery.dataModels.GetAllLecturers;
 import com.example.deanery.dataModels.Lecturer;
 
@@ -29,7 +31,7 @@ import retrofit2.Response;
 
  * interface.
  */
-public class LecturerFragment extends Fragment {
+public class DepartmentFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -40,20 +42,20 @@ public class LecturerFragment extends Fragment {
     final DeaneryAPI client = ServiceGenerator.createService(DeaneryAPI.class);
 
     static String token = "";
-    List<Lecturer> lecturers = new ArrayList<>();
+    ArrayList<Department> departments = new ArrayList<>();
 
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public LecturerFragment() {
+    public DepartmentFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static LecturerFragment newInstance(int columnCount) {
-        LecturerFragment fragment = new LecturerFragment();
+    public static DepartmentFragment newInstance(int columnCount) {
+        DepartmentFragment fragment = new DepartmentFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -78,14 +80,14 @@ public class LecturerFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_lecturer_list, container, false);
 
 //      token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE1NTI1MDQwODcsImV4cCI6MTU1MjUwNzY4NywibmJmIjoxNTUyNTA0MDg3LCJqdGkiOiJDT2RpaXdJZzRPV3lBT3NCIiwic3ViIjoxLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.O-yZKKxEC4Mt5QPIqxHLTJVT_Sx1Zwzy0w2AIixE8to"
-        Call<GetAllLecturers> getLecturerData = client.getAllLecturers(token);
-        getLecturerData.enqueue(new Callback<GetAllLecturers>() {
+        Call<GetAllDepartments> getAllDepartments = client.getAllDepartments(token);
+        getAllDepartments.enqueue(new Callback<GetAllDepartments>() {
             @Override
-            public void onResponse(Call<GetAllLecturers> call, Response<GetAllLecturers> response) {
-            //    Log.i("Lizatest", call.request().url().toString());
-            //    Log.i("Lizatest", response.body().getData().get(0).getFullName());
+            public void onResponse(Call<GetAllDepartments> call, Response<GetAllDepartments> response) {
+                //    Log.i("Lizatest", call.request().url().toString());
+                //    Log.i("Lizatest", response.body().getData().get(0).getFullName());
                 if(response.body().getData().size() > 0){
-                    lecturers = (ArrayList<Lecturer>) response.body().getData();
+                    departments = (ArrayList<Department>) response.body().getData();
 
                     // Set the adapter
                     if (view instanceof RecyclerView) {
@@ -96,14 +98,14 @@ public class LecturerFragment extends Fragment {
                         } else {
                             recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
                         }
-                        recyclerView.setAdapter(new LecturerRecyclerViewAdapter(lecturers, token, getActivity()));
+                        recyclerView.setAdapter(new DepartmentRecyclerViewAdapter(departments, token, getActivity()));
                     }
 
                 }
             }
 
             @Override
-            public void onFailure(Call<GetAllLecturers> call, Throwable t) {
+            public void onFailure(Call<GetAllDepartments> call, Throwable t) {
 
             }
         });

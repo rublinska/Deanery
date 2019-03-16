@@ -14,23 +14,6 @@
             android:layout_height="wrap_content"
             android:text="lizatest"/>
 
-        <EditText
-            android:id="@+id/position"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="lizatest"/>
-
-        <EditText
-            android:id="@+id/phone_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="lizatest"/>
-
-
-        <Spinner
-            android:id="@+id/department"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
 
     <!--TODO place it at the bottom-->

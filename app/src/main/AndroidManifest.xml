@@ -16,6 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activities.LecturerCreateActivity"></activity>
+        <activity android:name=".activities.DepartmentCreateActivity"></activity>
+
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/title_activity_navigation"

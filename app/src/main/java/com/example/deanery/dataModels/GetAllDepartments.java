@@ -5,25 +5,20 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class GetLecturersData {
+public class GetAllDepartments {
 
     @SerializedName("data")
     @Expose
-    private List<Lecturer> data = null;
+    private List<Department> data = null;
     @SerializedName("status")
     @Expose
     private Boolean status;
 
-    public GetLecturersData(List<Lecturer> data, Boolean status) {
-        this.data = data;
-        this.status = status;
-    }
-
-    public List<Lecturer> getData() {
+    public List<Department> getData() {
         return data;
     }
 
-    public void setData(List<Lecturer> data) {
+    public void setData(List<Department> data) {
         this.data = data;
     }
 
@@ -36,5 +31,3 @@ public class GetLecturersData {
     }
 
 }
-
-

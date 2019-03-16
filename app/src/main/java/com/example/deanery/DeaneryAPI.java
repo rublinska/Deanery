@@ -2,8 +2,9 @@ package com.example.deanery;
 
 import com.example.deanery.dataModels.AuthTokenFromLogin;
 import com.example.deanery.dataModels.BodyForLogin;
+import com.example.deanery.dataModels.GetAllDepartments;
+import com.example.deanery.dataModels.GetAllLecturers;
 import com.example.deanery.dataModels.GetLecturer;
-import com.example.deanery.dataModels.GetLecturersData;
 import com.example.deanery.dataModels.GetStatus;
 import com.example.deanery.dataModels.Lecturer;
 import com.example.deanery.dataModels.User;
@@ -34,10 +35,11 @@ public interface DeaneryAPI {
     Call<GetStatus> deleteLecturer(@Path("id") Integer id , @Query("token") String token);
 
     @GET("lecturers")
-    Call<GetLecturersData> getLecturerData(@Query("token") String token);
+    Call<GetAllLecturers> getAllLecturers(@Query("token") String token);
 
     @GET("lecturers/{id}")
     Call<GetLecturer> getLecturer(@Path("id") Integer id , @Query("token") String token);
 
-
+    @GET("departments")
+    Call<GetAllDepartments> getAllDepartments(@Query("token") String token);
 }

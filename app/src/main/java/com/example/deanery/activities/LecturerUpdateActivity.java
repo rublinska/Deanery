@@ -37,12 +37,12 @@ public class LecturerUpdateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lecturer_details);
      //   Toolbar toolbar = findViewById(R.id.toolbar_custom); setSupportActionBar(toolbar);
 
-        lecturerForUpdate = getIntent().getParcelableExtra("lecturer");
+        lecturerForUpdate = getIntent().getParcelableExtra("department");
         Log.i("lizatest", String.valueOf(lecturerForUpdate.getId()));
-        fullName = (EditText) findViewById(R.id.lecturer_full_name);
+        fullName = (EditText) findViewById(R.id.department_name);
         department = (EditText) findViewById(R.id.lecturer_department);
-        phone = (EditText) findViewById(R.id.lecturer_phone);
-        position = (EditText) findViewById(R.id.lecturer_position);
+        phone = (EditText) findViewById(R.id.lecturers_num);
+        position = (EditText) findViewById(R.id.auditories_num);
         delete = (Button) findViewById(R.id.delete);
         cancel = (Button) findViewById(R.id.cancel);
         updateLecturer = (Button) findViewById(R.id.submit);

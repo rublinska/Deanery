@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +46,7 @@ public class LecturerRecyclerViewAdapter extends RecyclerView.Adapter<LecturerRe
 
         lecturer = lecturers.get(position);
 
-        lecturerPlaceHolder.full_name.setText(lecturer.getFullName());
+        lecturerPlaceHolder.fullName.setText(lecturer.getFullName());
         lecturerPlaceHolder.phone.setText(lecturer.getPhoneNumber());
         lecturerPlaceHolder.position.setText(lecturer.getPosition());
         lecturerPlaceHolder.department.setText(lecturer.getDepartment().getName());
@@ -57,11 +56,11 @@ public class LecturerRecyclerViewAdapter extends RecyclerView.Adapter<LecturerRe
             public void onClick(View v) {
                 lecturer = lecturers.get(position);
 
-            //    Log.i("lizatestOnclick", lecturer.getFullName());
+            //    Log.i("lizatestOnclick", department.getFullName());
                 Intent i = new Intent(v.getContext(), LecturerUpdateActivity.class);
 
                 Bundle mBundle = new Bundle();
-                mBundle.putParcelable("lecturer", lecturer);
+                mBundle.putParcelable("department", lecturer);
                 i.putExtras(mBundle);
 
                 i.putExtra("token", token);
@@ -77,7 +76,7 @@ public class LecturerRecyclerViewAdapter extends RecyclerView.Adapter<LecturerRe
 
 
     class LecturerPlaceHolder extends RecyclerView.ViewHolder {
-        TextView full_name;
+        TextView fullName;
         TextView department;
         TextView phone;
         TextView position;
@@ -86,7 +85,7 @@ public class LecturerRecyclerViewAdapter extends RecyclerView.Adapter<LecturerRe
         public LecturerPlaceHolder(@NonNull View itemView) {
             super(itemView);
 
-            full_name = (TextView) itemView.findViewById(R.id.lecturer_full_name);
+            fullName = (TextView) itemView.findViewById(R.id.lecturer_full_name);
             department = (TextView) itemView.findViewById(R.id.lecturer_department);
             phone = (TextView) itemView.findViewById(R.id.lecturer_phone);
             position = (TextView) itemView.findViewById(R.id.lecturer_position);

@@ -1,10 +1,8 @@
 package com.example.deanery.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -13,42 +11,32 @@ import com.example.deanery.DeaneryAPI;
 import com.example.deanery.R;
 import com.example.deanery.ServiceGenerator;
 import com.example.deanery.dataModels.Department;
-import com.example.deanery.dataModels.GetAllDepartments;
-import com.example.deanery.dataModels.Lecturer;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-public class LecturerCreateActivity extends AppCompatActivity {
+public class DepartmentCreateActivity extends AppCompatActivity {
 
     final DeaneryAPI client =  ServiceGenerator.createService(DeaneryAPI.class);
     String token;
-    TextView fullName;
+    TextView departmentName;
     Spinner department;
-    TextView phone;
-    TextView position;
     Button cancel;
-    Button createNewLecturer;
+    Button createNewDepartment;
 
     List<Department> departmentsArray;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lecturer_create);
+        setContentView(R.layout.activity_department_create);
         //   Toolbar toolbar = findViewById(R.id.toolbar_custom); setSupportActionBar(toolbar);
         token = getIntent().getStringExtra("token");
-        fullName = (TextView) findViewById(R.id.department_name);
-        department = (Spinner) findViewById(R.id.department);
-        phone = (TextView) findViewById(R.id.phone_number);
-        position = (TextView) findViewById(R.id.position);
+        departmentName = (TextView) findViewById(R.id.department_name);
+
+
         cancel = (Button) findViewById(R.id.cancel);
-        createNewLecturer = (Button) findViewById(R.id.submit);
-        departmentsArray = new ArrayList<>();
+        createNewDepartment = (Button) findViewById(R.id.submit);
+     /*   departmentsArray = new ArrayList<>();
         final ArrayAdapter[] adapter = {new ArrayAdapter(this, android.R.layout.simple_spinner_item, departmentsArray)};
         adapter[0].setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         department.setAdapter(adapter[0]);
@@ -69,14 +57,14 @@ public class LecturerCreateActivity extends AppCompatActivity {
             public void onFailure(Call<GetAllDepartments> call, Throwable t) {
                 Log.i("LizatestError", String.valueOf(call.isExecuted()));
             }
-        });
+        });*/
 
-
-        createNewLecturer.setOnClickListener(new View.OnClickListener() {
+/*
+        createNewDepartment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Department departmentId = (Department) department.getSelectedItem();
-                Lecturer newLecturer = new Lecturer(fullName.getText().toString(),position.getText().toString(),phone.getText().toString(),Integer.parseInt(departmentId.getId().toString()));
+
 
             //    Log.i("Lizatest", getIntent().getStringExtra("token"));
                 final Call<Lecturer> createLecturer = client.createLecturer(token, newLecturer);
@@ -98,7 +86,7 @@ public class LecturerCreateActivity extends AppCompatActivity {
                     }
                 });
             }
-        });
+        });*/
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -52,22 +52,22 @@ public class LoginActivity extends AppCompatActivity  {
 /*
         final String token ="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE1NTI1MDQwODcsImV4cCI6MTU1MjUwNzY4NywibmJmIjoxNTUyNTA0MDg3LCJqdGkiOiJDT2RpaXdJZzRPV3lBT3NCIiwic3ViIjoxLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.O-yZKKxEC4Mt5QPIqxHLTJVT_Sx1Zwzy0w2AIixE8to";
 
-        Call<GetLecturersData> getLecturersData = client.getLecturerData(token);
+        Call<GetAllLecturers> getLecturersData = client.getAllLecturers(token);
         final List<Lecturer> lecturers = new ArrayList<>();
 
 
-        getLecturersData.enqueue(new Callback<GetLecturersData>() {
+        getLecturersData.enqueue(new Callback<GetAllLecturers>() {
             @Override
-            public void onResponse(Call<GetLecturersData> call, Response<GetLecturersData> response) {
+            public void onResponse(Call<GetAllLecturers> call, Response<GetAllLecturers> response) {
 
-                Log.i("LizaTest", client.getLecturerData(token).request().toString());
+                Log.i("LizaTest", client.getAllLecturers(token).request().toString());
                 if (response.isSuccessful()) {
                     Log.i("LizaTest", response.body().getData().get(0).getFullName());
                 }
             }
 
             @Override
-            public void onFailure(Call<GetLecturersData> call, Throwable t) {
+            public void onFailure(Call<GetAllLecturers> call, Throwable t) {
 
             }
         });
