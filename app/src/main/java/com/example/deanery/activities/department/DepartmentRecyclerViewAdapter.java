@@ -1,4 +1,4 @@
-package com.example.deanery.activities;
+package com.example.deanery.activities.department;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.deanery.R;
-import com.example.deanery.dataModels.Department;
+import com.example.deanery.dataModels.department.Department;
 
 import java.util.List;
 
@@ -54,7 +54,7 @@ public class DepartmentRecyclerViewAdapter extends RecyclerView.Adapter<Departme
         departmentPlaceHolder.name.setText(department.getName());
         departmentPlaceHolder.auditoriesNum.setText(String.valueOf(department.getAuditories().size()));
         departmentPlaceHolder.lecturersNum.setText(String.valueOf(department.getLecturers().size()));
-        /*
+
         departmentPlaceHolder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,15 +62,15 @@ public class DepartmentRecyclerViewAdapter extends RecyclerView.Adapter<Departme
 
             //    Log.i("lizatestOnclick", department.getFullName());
                 Intent i = new Intent(v.getContext(), DepartmentUpdateActivity.class);
-*//*
+
                 Bundle mBundle = new Bundle();
-                mBundle.putParcelable("department", department);
-                i.putExtras(mBundle);*//*
+                mBundle.putSerializable("department", department);
+                i.putExtras(mBundle);
 
                 i.putExtra("token", token);
                 v.getContext().startActivity(i);
             }
-        });*/
+        });
     }
 
     @Override

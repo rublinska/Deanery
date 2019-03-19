@@ -1,5 +1,5 @@
 
-package com.example.deanery.dataModels;
+package com.example.deanery.dataModels.auditory;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

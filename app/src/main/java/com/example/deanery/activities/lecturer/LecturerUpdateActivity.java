@@ -1,4 +1,4 @@
-package com.example.deanery.activities;
+package com.example.deanery.activities.lecturer;
 
 import android.os.Bundle;
 
@@ -11,8 +11,8 @@ import android.widget.EditText;
 import com.example.deanery.DeaneryAPI;
 import com.example.deanery.R;
 import com.example.deanery.ServiceGenerator;
-import com.example.deanery.dataModels.GetStatus;
-import com.example.deanery.dataModels.Lecturer;
+import com.example.deanery.dataModels.lecturer.GetStatus;
+import com.example.deanery.dataModels.lecturer.Lecturer;
 
 
 import retrofit2.Call;
@@ -34,7 +34,7 @@ public class LecturerUpdateActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lecturer_details);
+        setContentView(R.layout.activity_lecturer_update);
      //   Toolbar toolbar = findViewById(R.id.toolbar_custom); setSupportActionBar(toolbar);
 
         lecturerForUpdate = getIntent().getParcelableExtra("department");
@@ -45,7 +45,7 @@ public class LecturerUpdateActivity extends AppCompatActivity {
         position = (EditText) findViewById(R.id.auditories_num);
         delete = (Button) findViewById(R.id.delete);
         cancel = (Button) findViewById(R.id.cancel);
-        updateLecturer = (Button) findViewById(R.id.submit);
+        updateLecturer = (Button) findViewById(R.id.create);
 
         fullName.setText(lecturerForUpdate.getFullName());
         department.setText(lecturerForUpdate.getDepartment().getName());

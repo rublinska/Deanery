@@ -1,5 +1,5 @@
 
-package com.example.deanery.dataModels;
+package com.example.deanery.dataModels.department;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;

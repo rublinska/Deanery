@@ -1,10 +1,10 @@
 
-package com.example.deanery.dataModels;
+package com.example.deanery.dataModels.lecturer;
 
-import android.accounts.Account;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.example.deanery.dataModels.department.Department;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

@@ -1,4 +1,4 @@
-package com.example.deanery.activities;
+package com.example.deanery.activities.lecturer;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.deanery.R;
-import com.example.deanery.dataModels.Lecturer;
+import com.example.deanery.dataModels.lecturer.Lecturer;
 
 import java.util.List;
 

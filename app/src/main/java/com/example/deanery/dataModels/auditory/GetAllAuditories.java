@@ -1,29 +1,26 @@
 
-package com.example.deanery.dataModels;
+package com.example.deanery.dataModels.auditory;
 
-import java.util.List;
+import com.example.deanery.dataModels.department.Department;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class GetAllLecturers {
+import java.util.List;
+
+public class GetAllAuditories {
 
     @SerializedName("data")
     @Expose
-    private List<Lecturer> data = null;
+    private List<Auditory> data = null;
     @SerializedName("status")
     @Expose
     private Boolean status;
 
-    public GetAllLecturers(List<Lecturer> data, Boolean status) {
-        this.data = data;
-        this.status = status;
-    }
-
-    public List<Lecturer> getData() {
+    public List<Auditory> getData() {
         return data;
     }
 
-    public void setData(List<Lecturer> data) {
+    public void setData(List<Auditory> data) {
         this.data = data;
     }
 
@@ -36,5 +33,3 @@ public class GetAllLecturers {
     }
 
 }
-
-

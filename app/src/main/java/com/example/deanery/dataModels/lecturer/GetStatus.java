@@ -1,4 +1,4 @@
-package com.example.deanery.dataModels;
+package com.example.deanery.dataModels.lecturer;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

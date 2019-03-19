@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="20dp"
-    tools:context=".activities.LecturerCreateActivity"
+    tools:context=".activities.lecturer.LecturerCreateActivity"
     android:gravity="center">
 
         <EditText
@@ -51,7 +51,7 @@
             android:layout_height="0dp"
             android:layout_weight="0.04"/>
         <Button
-            android:id="@+id/submit"
+            android:id="@+id/create"
             android:background="#009688"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

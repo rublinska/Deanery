@@ -15,15 +15,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.LecturerCreateActivity"></activity>
-        <activity android:name=".activities.DepartmentCreateActivity"></activity>
+        <activity android:name=".activities.lecturer.LecturerCreateActivity"></activity>
+        <activity android:name=".activities.department.DepartmentCreateActivity"></activity>
 
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/title_activity_navigation"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".activities.LecturerUpdateActivity"
+            android:name=".activities.lecturer.LecturerUpdateActivity"
             android:label="@string/title_activity_navigation"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity

@@ -1,4 +1,4 @@
-package com.example.deanery.activities;
+package com.example.deanery.activities.department;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -13,13 +13,11 @@ import android.view.ViewGroup;
 import com.example.deanery.DeaneryAPI;
 import com.example.deanery.R;
 import com.example.deanery.ServiceGenerator;
-import com.example.deanery.dataModels.Department;
-import com.example.deanery.dataModels.GetAllDepartments;
-import com.example.deanery.dataModels.GetAllLecturers;
-import com.example.deanery.dataModels.Lecturer;
+import com.example.deanery.activities.MainActivity;
+import com.example.deanery.dataModels.department.Department;
+import com.example.deanery.dataModels.department.GetAllDepartments;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -77,7 +75,7 @@ public class DepartmentFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_lecturer_list, container, false);
+        final View view = inflater.inflate(R.layout.fragment_department_list, container, false);
 
 //      token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE1NTI1MDQwODcsImV4cCI6MTU1MjUwNzY4NywibmJmIjoxNTUyNTA0MDg3LCJqdGkiOiJDT2RpaXdJZzRPV3lBT3NCIiwic3ViIjoxLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.O-yZKKxEC4Mt5QPIqxHLTJVT_Sx1Zwzy0w2AIixE8to"
         Call<GetAllDepartments> getAllDepartments = client.getAllDepartments(token);

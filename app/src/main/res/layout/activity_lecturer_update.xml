@@ -55,7 +55,7 @@
             android:layout_height="0dp"
             android:layout_weight="0.04"/>
         <Button
-            android:id="@+id/submit"
+            android:id="@+id/create"
             android:background="#009688"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

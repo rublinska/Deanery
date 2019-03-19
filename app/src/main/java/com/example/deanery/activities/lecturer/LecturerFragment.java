@@ -1,4 +1,4 @@
-package com.example.deanery.activities;
+package com.example.deanery.activities.lecturer;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -13,8 +13,9 @@ import android.view.ViewGroup;
 import com.example.deanery.DeaneryAPI;
 import com.example.deanery.R;
 import com.example.deanery.ServiceGenerator;
-import com.example.deanery.dataModels.GetAllLecturers;
-import com.example.deanery.dataModels.Lecturer;
+import com.example.deanery.activities.MainActivity;
+import com.example.deanery.dataModels.lecturer.GetAllLecturers;
+import com.example.deanery.dataModels.lecturer.Lecturer;
 
 import java.util.ArrayList;
 import java.util.List;

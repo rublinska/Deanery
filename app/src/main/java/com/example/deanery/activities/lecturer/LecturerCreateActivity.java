@@ -1,4 +1,4 @@
-package com.example.deanery.activities;
+package com.example.deanery.activities.lecturer;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,9 +12,9 @@ import android.widget.TextView;
 import com.example.deanery.DeaneryAPI;
 import com.example.deanery.R;
 import com.example.deanery.ServiceGenerator;
-import com.example.deanery.dataModels.Department;
-import com.example.deanery.dataModels.GetAllDepartments;
-import com.example.deanery.dataModels.Lecturer;
+import com.example.deanery.dataModels.department.Department;
+import com.example.deanery.dataModels.department.GetAllDepartments;
+import com.example.deanery.dataModels.lecturer.Lecturer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +47,7 @@ public class LecturerCreateActivity extends AppCompatActivity {
         phone = (TextView) findViewById(R.id.phone_number);
         position = (TextView) findViewById(R.id.position);
         cancel = (Button) findViewById(R.id.cancel);
-        createNewLecturer = (Button) findViewById(R.id.submit);
+        createNewLecturer = (Button) findViewById(R.id.create);
         departmentsArray = new ArrayList<>();
         final ArrayAdapter[] adapter = {new ArrayAdapter(this, android.R.layout.simple_spinner_item, departmentsArray)};
         adapter[0].setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

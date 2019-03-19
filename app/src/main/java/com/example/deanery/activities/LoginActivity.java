@@ -21,8 +21,8 @@ import android.widget.Toast;
 import com.example.deanery.DeaneryAPI;
 import com.example.deanery.R;
 import com.example.deanery.ServiceGenerator;
-import com.example.deanery.dataModels.AuthTokenFromLogin;
-import com.example.deanery.dataModels.BodyForLogin;
+import com.example.deanery.dataModels.login.AuthTokenFromLogin;
+import com.example.deanery.dataModels.login.BodyForLogin;
 
 import retrofit2.Call;
 import retrofit2.Callback;

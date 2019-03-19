@@ -1,14 +1,10 @@
 package com.example.deanery.activities;
 
-import android.accounts.Account;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -21,7 +17,11 @@ import android.view.MenuItem;
 import com.example.deanery.DeaneryAPI;
 import com.example.deanery.R;
 import com.example.deanery.ServiceGenerator;
-import com.example.deanery.dataModels.Department;
+import com.example.deanery.activities.department.DepartmentCreateActivity;
+import com.example.deanery.activities.department.DepartmentFragment;
+import com.example.deanery.activities.lecturer.LecturerCreateActivity;
+import com.example.deanery.activities.lecturer.LecturerFragment;
+import com.example.deanery.dataModels.lecturer.Lecturer;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -162,21 +162,30 @@ public class MainActivity extends AppCompatActivity
                 fragmentClass = DepartmentFragment.class;
                 intent = new Intent(getApplicationContext(), DepartmentCreateActivity.class);
                 break;
-            case R.id.nav_students:
-                fragmentClass = LecturerFragment.class;
-                intent = new Intent(getApplicationContext(), LecturerCreateActivity.class);
-                break;
             case R.id.nav_teachers:
                 fragmentClass = LecturerFragment.class;
                 intent = new Intent(getApplicationContext(), LecturerCreateActivity.class);
+                break;/*
+            case R.id.nav_students:
+                fragmentClass = StudentFragment.class;
+                intent = new Intent(getApplicationContext(), StudentCreateActivity.class);
                 break;
             case R.id.nav_disciplines:
-                fragmentClass = LecturerFragment.class;
-                intent = new Intent(getApplicationContext(), LecturerCreateActivity.class);
+                fragmentClass = DisciplineFragment.class;
+                intent = new Intent(getApplicationContext(), DiciplineCreateActivity.class);
+                break;
+            case R.id.nav_create_report:
+                fragmentClass = UniReportFragment.class;
+                intent = new Intent(getApplicationContext(), UniReportCreateActivity.class);
                 break;
             default:
-                fragmentClass = DepartmentFragment.class;
-                intent = new Intent(getApplicationContext(), DepartmentCreateActivity.class);
+                fragmentClass = SceduleFragment.class;
+                intent = new Intent(getApplicationContext(), ClassCreateActivity.class);*/
+
+
+            default:
+                fragmentClass = LecturerFragment.class;
+                intent = new Intent(getApplicationContext(), LecturerCreateActivity.class);
         }
 
         try {

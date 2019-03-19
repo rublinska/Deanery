@@ -1,10 +1,15 @@
 
-package com.example.deanery.dataModels;
+package com.example.deanery.dataModels.department;
 
+import java.io.Serializable;
+import java.util.List;
+
+import com.example.deanery.dataModels.auditory.Auditory;
+import com.example.deanery.dataModels.lecturer.Lecturer;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class User {
+public class Department implements Serializable {
 
     @SerializedName("id")
     @Expose
@@ -12,15 +17,22 @@ public class User {
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("email")
-    @Expose
-    private String email;
     @SerializedName("created_at")
     @Expose
     private String createdAt;
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
+    @SerializedName("auditories")
+    @Expose
+    private List<Auditory> auditories = null;
+    @SerializedName("lecturers")
+    @Expose
+    private List<Lecturer> lecturers = null;
+
+    public Department(String name) {
+        this.name = name;
+    }
 
     public Integer getId() {
         return id;
@@ -36,14 +48,6 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getCreatedAt() {
@@ -62,4 +66,24 @@ public class User {
         this.updatedAt = updatedAt;
     }
 
+    public List<Auditory> getAuditories() {
+        return auditories;
+    }
+
+    public void setAuditories(List<Auditory> auditories) {
+        this.auditories = auditories;
+    }
+
+    public List<Lecturer> getLecturers() {
+        return lecturers;
+    }
+
+    public void setLecturers(List<Lecturer> lecturers) {
+        this.lecturers = lecturers;
+    }
+
+    public String toString() {
+
+        return this.getName();
+    }
 }
