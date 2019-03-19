@@ -11,7 +11,7 @@ import android.widget.EditText;
 import com.example.deanery.DeaneryAPI;
 import com.example.deanery.R;
 import com.example.deanery.ServiceGenerator;
-import com.example.deanery.dataModels.lecturer.GetStatus;
+import com.example.deanery.dataModels.GetStatus;
 import com.example.deanery.dataModels.lecturer.Lecturer;
 
 
@@ -45,7 +45,7 @@ public class LecturerUpdateActivity extends AppCompatActivity {
         position = (EditText) findViewById(R.id.auditories_num);
         delete = (Button) findViewById(R.id.delete);
         cancel = (Button) findViewById(R.id.cancel);
-        updateLecturer = (Button) findViewById(R.id.create);
+        updateLecturer = (Button) findViewById(R.id.update);
 
         fullName.setText(lecturerForUpdate.getFullName());
         department.setText(lecturerForUpdate.getDepartment().getName());

@@ -3,7 +3,6 @@ package com.example.deanery.activities.department;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,12 +14,8 @@ import com.example.deanery.R;
 import com.example.deanery.ServiceGenerator;
 import com.example.deanery.dataModels.auditory.Auditory;
 import com.example.deanery.dataModels.auditory.GetAllAuditories;
-import com.example.deanery.dataModels.department.Department;
 import com.example.deanery.dataModels.lecturer.GetAllLecturers;
 import com.example.deanery.dataModels.lecturer.Lecturer;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,8 +30,8 @@ public class DepartmentCreateActivity extends AppCompatActivity {
     Button cancel;
     Button createNewDepartment;
 
-    List<Auditory> auditoryList, checkedAuditories;
-    List<Lecturer> lecturerList, checkedLecturers;
+    Auditory[] auditoryList, checkedAuditories;
+    Lecturer[] lecturerList, checkedLecturers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,14 +46,14 @@ public class DepartmentCreateActivity extends AppCompatActivity {
         auditories = findViewById(R.id.department_auditories);
         lecturers = findViewById(R.id.department_lecturers);
 
-        auditoryList = new ArrayList<>();
+
         Call<GetAllAuditories> getAllAuditories = client.getAllAuditories(token);
         getAllAuditories.enqueue(new Callback<GetAllAuditories>() {
             @Override
             public void onResponse(Call<GetAllAuditories> call, Response<GetAllAuditories> response) {
                 Log.i("LizatestGEtAuditory", response.body().getData().get(0).getNumber());
                 Log.i("LizatestGEtAuditory", response.raw().toString());
-                auditoryList = response.body().getData();
+                auditoryList = response.body().getData().toArray(new Auditory[0]);
             }
 
             @Override
@@ -71,14 +66,14 @@ public class DepartmentCreateActivity extends AppCompatActivity {
         auditories.setAdapter(auditoryAdapter);
 
 
-        lecturerList = new ArrayList<>();
+
         Call<GetAllLecturers> getAllLecturers = client.getAllLecturers(token);
         getAllLecturers.enqueue(new Callback<GetAllLecturers>() {
             @Override
             public void onResponse(Call<GetAllLecturers> call, Response<GetAllLecturers> response) {
                 Log.i("LizatestGEtLecturer", response.body().getData().get(0).getFullName());
                 Log.i("LizatestGEtLecturer", response.raw().toString());
-                lecturerList = response.body().getData();
+                lecturerList = response.body().getData().toArray(new Lecturer[0]);
             }
 
             @Override
@@ -90,6 +85,7 @@ public class DepartmentCreateActivity extends AppCompatActivity {
         lecturers.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         lecturers.setAdapter(lecturerAdapter);
 
+/*
 
         createNewDepartment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,6 +129,7 @@ public class DepartmentCreateActivity extends AppCompatActivity {
                 });
             }
         });
+*/
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override

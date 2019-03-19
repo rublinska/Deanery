@@ -11,13 +11,9 @@ import android.widget.EditText;
 import com.example.deanery.DeaneryAPI;
 import com.example.deanery.R;
 import com.example.deanery.ServiceGenerator;
-import com.example.deanery.dataModels.auditory.Auditory;
 import com.example.deanery.dataModels.department.Department;
-import com.example.deanery.dataModels.lecturer.GetStatus;
-import com.example.deanery.dataModels.lecturer.Lecturer;
+import com.example.deanery.dataModels.GetStatus;
 
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,7 +42,7 @@ public class DepartmentUpdateActivity extends AppCompatActivity {
 
         delete = (Button) findViewById(R.id.delete);
         cancel = (Button) findViewById(R.id.cancel);
-        updateDepartment = (Button) findViewById(R.id.create);
+        updateDepartment = (Button) findViewById(R.id.update);
 
         departmentName.setText(departmentForUpdate.getName());
 

@@ -76,7 +76,7 @@ public class LecturerCreateActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Department departmentId = (Department) department.getSelectedItem();
-                Lecturer newLecturer = new Lecturer(fullName.getText().toString(),position.getText().toString(),phone.getText().toString(),Integer.parseInt(departmentId.getId().toString()));
+                Lecturer newLecturer = new Lecturer(fullName.getText().toString(),position.getText().toString(),phone.getText().toString(),departmentId.getId());
 
             //    Log.i("Lizatest", getIntent().getStringExtra("token"));
                 final Call<Lecturer> createLecturer = client.createLecturer(token, newLecturer);

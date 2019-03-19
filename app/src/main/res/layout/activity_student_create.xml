@@ -1,48 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_margin="20dp"
+    tools:context=".activities.student.StudentCreateActivity"
     android:gravity="center">
 
-    <Button
-        android:id="@+id/delete"
-        android:background="#FF9800"
+    <EditText
+        android:id="@+id/student_full_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Delete lecturer"/>
+        android:text="lizatest"/>
 
     <EditText
-        android:id="@+id/department_name"
+        android:id="@+id/student_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Bohachek Yelyzaveta Mykolyaevna" />
+        android:text="+985 840598 2"/>
 
     <EditText
-        android:id="@+id/lecturer_department"
+        android:id="@+id/student_startUni"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="biology" />
+        android:inputType="date"/>
 
     <EditText
-        android:id="@+id/auditories_num"
+        android:id="@+id/student_endUni"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Professor"/>
+        android:inputType="date"/>
+
     <EditText
-        android:id="@+id/lecturers_num"
+        android:id="@+id/student_endReason"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="+38 (073) 137 0347"/>
+        android:text="end of uni reason"/>
 
 
+        <Spinner
+            android:id="@+id/student_specialty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+    <!--TODO place it at the bottom-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="10dp">
+        android:layout_gravity="bottom">
         <Button
             android:id="@+id/cancel"
             android:background="#F44336"
@@ -55,13 +63,11 @@
             android:layout_height="0dp"
             android:layout_weight="0.04"/>
         <Button
-            android:id="@+id/update"
+            android:id="@+id/create"
             android:background="#009688"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.45"
-            android:text="Update"/>
+            android:text="Create"/>
     </LinearLayout>
 </LinearLayout>
-
-

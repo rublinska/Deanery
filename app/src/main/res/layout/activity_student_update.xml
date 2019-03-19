@@ -12,30 +12,36 @@
         android:background="#FF9800"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Delete lecturer"/>
+        android:text="Delete student"/>
 
     <EditText
-        android:id="@+id/department_name"
+        android:id="@+id/student_full_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Bohachek Yelyzaveta Mykolyaevna" />
 
     <EditText
-        android:id="@+id/lecturer_department"
+        android:id="@+id/student_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="biology" />
+        android:text="+985 840598 2"/>
 
     <EditText
-        android:id="@+id/auditories_num"
+        android:id="@+id/student_startUni"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Professor"/>
+        android:inputType="date"/>
+
     <EditText
-        android:id="@+id/lecturers_num"
+        android:id="@+id/student_endUni"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="+38 (073) 137 0347"/>
+        android:inputType="date"/>
+    <EditText
+        android:id="@+id/student_endReason"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="end of uni reason"/>
 
 
     <LinearLayout

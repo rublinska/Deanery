@@ -1,4 +1,4 @@
-package com.example.deanery.activities.department;
+package com.example.deanery.activities.student;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -14,10 +14,11 @@ import com.example.deanery.DeaneryAPI;
 import com.example.deanery.R;
 import com.example.deanery.ServiceGenerator;
 import com.example.deanery.activities.MainActivity;
-import com.example.deanery.dataModels.department.Department;
-import com.example.deanery.dataModels.department.GetAllDisciplines;
+import com.example.deanery.dataModels.student.GetAllStudents;
+import com.example.deanery.dataModels.student.Student;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,7 +30,7 @@ import retrofit2.Response;
 
  * interface.
  */
-public class DepartmentFragment extends Fragment {
+public class StudentFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -40,20 +41,20 @@ public class DepartmentFragment extends Fragment {
     final DeaneryAPI client = ServiceGenerator.createService(DeaneryAPI.class);
 
     static String token = "";
-    ArrayList<Department> departments = new ArrayList<>();
+    List<Student> students = new ArrayList<>();
 
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public DepartmentFragment() {
+    public StudentFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static DepartmentFragment newInstance(int columnCount) {
-        DepartmentFragment fragment = new DepartmentFragment();
+    public static StudentFragment newInstance(int columnCount) {
+        StudentFragment fragment = new StudentFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -75,17 +76,17 @@ public class DepartmentFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_department_list, container, false);
+        final View view = inflater.inflate(R.layout.fragment_student_list, container, false);
 
 //      token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE1NTI1MDQwODcsImV4cCI6MTU1MjUwNzY4NywibmJmIjoxNTUyNTA0MDg3LCJqdGkiOiJDT2RpaXdJZzRPV3lBT3NCIiwic3ViIjoxLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.O-yZKKxEC4Mt5QPIqxHLTJVT_Sx1Zwzy0w2AIixE8to"
-        Call<GetAllDisciplines> getAllDepartments = client.getAllDepartments(token);
-        getAllDepartments.enqueue(new Callback<GetAllDisciplines>() {
+        Call<GetAllStudents> getData = client.getAllStudents(token);
+        getData.enqueue(new Callback<GetAllStudents>() {
             @Override
-            public void onResponse(Call<GetAllDisciplines> call, Response<GetAllDisciplines> response) {
-                //    Log.i("Lizatest", call.request().url().toString());
-                //    Log.i("Lizatest", response.body().getData().get(0).getFullName());
+            public void onResponse(Call<GetAllStudents> call, Response<GetAllStudents> response) {
+            //    Log.i("Lizatest", call.request().url().toString());
+            //    Log.i("Lizatest", response.body().getData().get(0).getFullName());
                 if(response.body().getData().size() > 0){
-                    departments = (ArrayList<Department>) response.body().getData();
+                    students = response.body().getData();
 
                     // Set the adapter
                     if (view instanceof RecyclerView) {
@@ -96,14 +97,14 @@ public class DepartmentFragment extends Fragment {
                         } else {
                             recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
                         }
-                        recyclerView.setAdapter(new DepartmentRecyclerViewAdapter(departments, token, getActivity()));
+                        recyclerView.setAdapter(new StudentRecyclerViewAdapter(students, token, getActivity()));
                     }
 
                 }
             }
 
             @Override
-            public void onFailure(Call<GetAllDisciplines> call, Throwable t) {
+            public void onFailure(Call<GetAllStudents> call, Throwable t) {
 
             }
         });

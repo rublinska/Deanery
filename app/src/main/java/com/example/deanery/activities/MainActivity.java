@@ -17,11 +17,12 @@ import android.view.MenuItem;
 import com.example.deanery.DeaneryAPI;
 import com.example.deanery.R;
 import com.example.deanery.ServiceGenerator;
+import com.example.deanery.activities.student.StudentCreateActivity;
+import com.example.deanery.activities.student.StudentFragment;
 import com.example.deanery.activities.department.DepartmentCreateActivity;
 import com.example.deanery.activities.department.DepartmentFragment;
 import com.example.deanery.activities.lecturer.LecturerCreateActivity;
 import com.example.deanery.activities.lecturer.LecturerFragment;
-import com.example.deanery.dataModels.lecturer.Lecturer;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -165,12 +166,12 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_teachers:
                 fragmentClass = LecturerFragment.class;
                 intent = new Intent(getApplicationContext(), LecturerCreateActivity.class);
-                break;/*
+                break;
             case R.id.nav_students:
                 fragmentClass = StudentFragment.class;
                 intent = new Intent(getApplicationContext(), StudentCreateActivity.class);
                 break;
-            case R.id.nav_disciplines:
+         /*  case R.id.nav_disciplines:
                 fragmentClass = DisciplineFragment.class;
                 intent = new Intent(getApplicationContext(), DiciplineCreateActivity.class);
                 break;

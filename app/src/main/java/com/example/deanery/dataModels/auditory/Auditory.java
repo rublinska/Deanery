@@ -85,6 +85,6 @@ public class Auditory {
     }
 
     public String toString() {
-        return getNumber();
+        return getBuildingNumber() + "." + getNumber() + "(capacity: " + getCapacity().toString();
     }
 }
