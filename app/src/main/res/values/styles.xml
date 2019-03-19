@@ -19,6 +19,10 @@
 
     <style name="card">
         <item name="android:background">@drawable/rounded_corners_for_cards</item>
-
     </style>
+    <style name="background">
+        <item name="android:background">@color/colorBackground</item>
+    </style>
+
+
 </resources>

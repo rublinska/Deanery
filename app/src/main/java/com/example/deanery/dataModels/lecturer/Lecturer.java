@@ -157,4 +157,8 @@ public class Lecturer implements Parcelable {
             return new Lecturer[size];
         }
     };
+
+    public String toString() {
+        return getFullName();
+    }
 }

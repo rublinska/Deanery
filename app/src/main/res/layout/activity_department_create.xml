@@ -17,22 +17,43 @@
         android:layout_gravity="bottom"
         android:layout_marginTop="20dp">
 
-        <EditText
-            android:id="@+id/department_name"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.1"
-            android:text="lizatest"/>
-        <ListView
-            android:id="@+id/department_auditories"
-            android:layout_width="fill_parent"
+            android:layout_weight="0.1">
+            <EditText
+                android:id="@+id/department_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Department name"
+                android:text="lizatest"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.4"/>
-        <ListView
-            android:id="@+id/department_lecturers"
-            android:layout_width="fill_parent"
-            android:layout_height="0.dp"
-            android:layout_weight="0.4" />
+            android:layout_weight="0.3">
+            <ListView
+                android:id="@+id/department_auditories"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="Auditories"
+                tools:listitem="@layout/fragment_auditory"
+                />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+                android:layout_weight="0.3">
+            <ListView
+                android:id="@+id/department_lecturers"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="Lecturers"
+                tools:listitem="@layout/fragment_lecturer"
+                />
+        </android.support.design.widget.TextInputLayout>
 
 
         <!--TODO place it at the bottom-->

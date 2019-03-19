@@ -3,12 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
+    android:gravity="center"
     android:orientation="vertical"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:layout_margin="20dp"
+    style="@style/background"
+    android:id="@+id/login_form"
     tools:context=".activities.LoginActivity">
 
     <!-- Login progress -->
@@ -20,10 +19,6 @@
         android:layout_marginBottom="8dp"
         android:visibility="gone" />
 
-    <ScrollView
-        android:id="@+id/login_form"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <LinearLayout
             android:id="@+id/email_login_form"
@@ -77,5 +72,5 @@
 
 
         </LinearLayout>
-    </ScrollView>
+
 </LinearLayout>

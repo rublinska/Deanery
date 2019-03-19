@@ -84,4 +84,7 @@ public class Auditory {
         this.updatedAt = updatedAt;
     }
 
+    public String toString() {
+        return getNumber();
+    }
 }
