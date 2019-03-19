@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,15 +51,16 @@ public class StudentRecyclerViewAdapter extends RecyclerView.Adapter<StudentRecy
         studentPlaceHolder.fullName.setText(student.getName());
         studentPlaceHolder.startUni.setText(student.getStartUniversity());
         studentPlaceHolder.endUni.setText(student.getEndUniversity());
+        studentPlaceHolder.endReason.setText(student.getEndReason());
+        Log.i("lizatestSpecialty", student.getSpecialtyId().toString());
         //TODO add startUni
-        studentPlaceHolder.specialty.setText(student.getSpecialtyId());
+        studentPlaceHolder.specialty.setText(student.getSpecialty().getName());
 
         studentPlaceHolder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 student = students.get(position);
 
-            //    Log.i("lizatestOnclick", startUni.getFullName());
                 Intent i = new Intent(v.getContext(), StudentUpdateActivity.class);
 
                 Bundle mBundle = new Bundle();

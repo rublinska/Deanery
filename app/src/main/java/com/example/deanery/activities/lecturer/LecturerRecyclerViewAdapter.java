@@ -56,11 +56,11 @@ public class LecturerRecyclerViewAdapter extends RecyclerView.Adapter<LecturerRe
             public void onClick(View v) {
                 lecturer = lecturers.get(position);
 
-            //    Log.i("lizatestOnclick", department.getFullName());
+            //    Log.i("lizatestOnclick", departmentSpinner.getFullName());
                 Intent i = new Intent(v.getContext(), LecturerUpdateActivity.class);
 
                 Bundle mBundle = new Bundle();
-                mBundle.putParcelable("department", lecturer);
+                mBundle.putParcelable("departmentSpinner", lecturer);
                 i.putExtras(mBundle);
 
                 i.putExtra("token", token);

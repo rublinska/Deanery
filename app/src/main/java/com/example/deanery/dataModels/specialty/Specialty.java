@@ -111,4 +111,7 @@ public class Specialty implements Parcelable
         return  0;
     }
 
+    public String toString() {
+        return getName();
+    }
 }

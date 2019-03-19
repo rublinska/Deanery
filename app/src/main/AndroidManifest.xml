@@ -16,16 +16,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activities.lecturer.LecturerCreateActivity"></activity>
+        <activity android:name=".activities.lecturer.LecturerUpdateActivity"></activity>
+
         <activity android:name=".activities.department.DepartmentCreateActivity"></activity>
+        <activity android:name=".activities.department.DepartmentUpdateActivity"></activity>
+
+        <activity android:name=".activities.student.StudentCreateActivity"></activity>
+        <activity android:name=".activities.student.StudentUpdateActivity"></activity>
+
+        <activity android:name=".activities.discipline.DisciplineCreateActivity"></activity>
+        <activity android:name=".activities.discipline.DisciplineUpdateActivity"></activity>
 
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/title_activity_navigation"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity
-            android:name=".activities.lecturer.LecturerUpdateActivity"
-            android:label="@string/title_activity_navigation"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+
         <activity
             android:name=".activities.LoginActivity"
             android:label="@string/app_name">

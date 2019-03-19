@@ -5,15 +5,21 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.example.deanery.DeaneryAPI;
 import com.example.deanery.R;
 import com.example.deanery.ServiceGenerator;
 import com.example.deanery.dataModels.GetStatus;
+import com.example.deanery.dataModels.department.Department;
+import com.example.deanery.dataModels.department.GetAllDepartments;
 import com.example.deanery.dataModels.lecturer.Lecturer;
 
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,9 +28,11 @@ import retrofit2.Response;
 public class LecturerUpdateActivity extends AppCompatActivity {
 
     final DeaneryAPI client =  ServiceGenerator.createService(DeaneryAPI.class);
+    String token;
+
     Lecturer lecturerForUpdate;
     EditText fullName;
-    EditText department;
+    Spinner departmentSpinner;
     EditText phone;
     EditText position;
     Button delete;
@@ -36,26 +44,51 @@ public class LecturerUpdateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lecturer_update);
      //   Toolbar toolbar = findViewById(R.id.toolbar_custom); setSupportActionBar(toolbar);
-
-        lecturerForUpdate = getIntent().getParcelableExtra("department");
+        token  =getIntent().getStringExtra("token");
+        lecturerForUpdate = getIntent().getParcelableExtra("departmentSpinner");
         Log.i("lizatest", String.valueOf(lecturerForUpdate.getId()));
-        fullName = (EditText) findViewById(R.id.department_name);
-        department = (EditText) findViewById(R.id.lecturer_department);
-        phone = (EditText) findViewById(R.id.lecturers_num);
-        position = (EditText) findViewById(R.id.auditories_num);
-        delete = (Button) findViewById(R.id.delete);
-        cancel = (Button) findViewById(R.id.cancel);
-        updateLecturer = (Button) findViewById(R.id.update);
+        fullName = findViewById(R.id.department_name);
+        departmentSpinner = findViewById(R.id.lecturer_department);
+        phone = findViewById(R.id.lecturers_num);
+        position = findViewById(R.id.auditories_num);
+        delete = findViewById(R.id.delete);
+        cancel = findViewById(R.id.cancel);
+        updateLecturer = findViewById(R.id.update);
 
         fullName.setText(lecturerForUpdate.getFullName());
-        department.setText(lecturerForUpdate.getDepartment().getName());
         phone.setText(lecturerForUpdate.getPhoneNumber());
         position.setText(lecturerForUpdate.getPosition());
+
+        Call<GetAllDepartments> getAllDepartments = client.getAllDepartments(token);
+        getAllDepartments.enqueue(new Callback<GetAllDepartments>() {
+            @Override
+            public void onResponse(Call<GetAllDepartments> call, Response<GetAllDepartments> response) {
+
+                List<Department> departmentsArray = response.body().getData();
+                ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, departmentsArray);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                departmentSpinner.setAdapter(adapter);
+                for (int i = 0; i < adapter.getCount(); i++) {
+
+                //    Log.i("LizatestCreateLecturer", String.valueOf(((Department) adapter.getItem(i)).getName().equals(lecturerForUpdate.getDepartment().getName())));
+                //    Log.i("LizatestCreateLecturer", String.valueOf(adapter.getItem(position) == lecturerForUpdate.getDepartment().getName()));
+
+                    if(((Department) adapter.getItem(i)).getName().equals(lecturerForUpdate.getDepartment().getName())) {
+                        departmentSpinner.setSelection(i);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GetAllDepartments> call, Throwable t) {
+                Log.i("LizatestError", String.valueOf(call.isExecuted()));
+            }
+        });
 
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Call<GetStatus> deleteLecturer = client.deleteLecturer(lecturerForUpdate.getId(), getIntent().getStringExtra("token"));
+                final Call<GetStatus> deleteLecturer = client.deleteLecturer(lecturerForUpdate.getId(), token);
                 deleteLecturer.enqueue(new Callback<GetStatus>() {
                     @Override
                     public void onResponse(Call<GetStatus> call, Response<GetStatus> response) {
@@ -77,8 +110,10 @@ public class LecturerUpdateActivity extends AppCompatActivity {
                 lecturerForUpdate.setFullName(fullName.getText().toString());
                 lecturerForUpdate.setPosition(position.getText().toString());
                 lecturerForUpdate.setPhoneNumber(phone.getText().toString());
+                Department newDepartment = (Department) departmentSpinner.getSelectedItem();
+                lecturerForUpdate.setDepartmentId(newDepartment.getId());
+                lecturerForUpdate.setDepartment(newDepartment);
 
-        //todo        lecturerForUpdate.setDepartment(Integer.parseInt(department.getText().toString()));
                 final Call<Lecturer> updateLecturer = client.updateLecturer(lecturerForUpdate.getId(),getIntent().getStringExtra("token"),lecturerForUpdate);
 
                 updateLecturer.enqueue(new Callback<Lecturer>() {
