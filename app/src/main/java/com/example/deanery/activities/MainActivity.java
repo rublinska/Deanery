@@ -17,6 +17,8 @@ import android.view.MenuItem;
 import com.example.deanery.DeaneryAPI;
 import com.example.deanery.R;
 import com.example.deanery.ServiceGenerator;
+import com.example.deanery.activities.discipline.DisciplineCreateActivity;
+import com.example.deanery.activities.discipline.DisciplineFragment;
 import com.example.deanery.activities.student.StudentCreateActivity;
 import com.example.deanery.activities.student.StudentFragment;
 import com.example.deanery.activities.department.DepartmentCreateActivity;
@@ -171,16 +173,16 @@ public class MainActivity extends AppCompatActivity
                 fragmentClass = StudentFragment.class;
                 intent = new Intent(getApplicationContext(), StudentCreateActivity.class);
                 break;
-         /*  case R.id.nav_disciplines:
+          case R.id.nav_disciplines:
                 fragmentClass = DisciplineFragment.class;
-                intent = new Intent(getApplicationContext(), DiciplineCreateActivity.class);
+                intent = new Intent(getApplicationContext(), DisciplineCreateActivity.class);
                 break;
-            case R.id.nav_create_report:
+         /*   case R.id.nav_create_report:
                 fragmentClass = UniReportFragment.class;
                 intent = new Intent(getApplicationContext(), UniReportCreateActivity.class);
                 break;
             default:
-                fragmentClass = SceduleFragment.class;
+                fragmentClass = ScheduleFragment.class;
                 intent = new Intent(getApplicationContext(), ClassCreateActivity.class);*/
 
 

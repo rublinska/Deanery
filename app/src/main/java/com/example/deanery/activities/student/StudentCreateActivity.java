@@ -52,7 +52,7 @@ public class StudentCreateActivity extends AppCompatActivity {
         endUni = (EditText) findViewById(R.id.student_endUni);
         endReason = findViewById(R.id.student_endReason);
         cancel = (Button) findViewById(R.id.cancel);
-        createNewStudent = (Button) findViewById(R.id.update);
+        createNewStudent = (Button) findViewById(R.id.create);
         specialtiesArray = new ArrayList<>();
         final ArrayAdapter[] adapter = {new ArrayAdapter(this, android.R.layout.simple_spinner_item, specialtiesArray)};
         adapter[0].setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

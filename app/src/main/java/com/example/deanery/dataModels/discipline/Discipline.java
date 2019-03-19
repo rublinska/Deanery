@@ -1,9 +1,9 @@
 
 package com.example.deanery.dataModels.discipline;
-
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.example.deanery.dataModels.specialty.Specialty;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -24,18 +24,24 @@ public class Discipline implements Parcelable
     private Integer specialtyId;
     @SerializedName("pre_discipline_id")
     @Expose
-    private Object preDisciplineId;
+    private Integer preDisciplineId;
     @SerializedName("created_at")
     @Expose
     private String createdAt;
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
+    @SerializedName("pre_discipline")
+    @Expose
+    private Discipline preDiscipline;
+    @SerializedName("specialty")
+    @Expose
+    private Specialty specialty;
     public final static Parcelable.Creator<Discipline> CREATOR = new Creator<Discipline>() {
 
 
         @SuppressWarnings({
-            "unchecked"
+                "unchecked"
         })
         public Discipline createFromParcel(Parcel in) {
             return new Discipline(in);
@@ -46,36 +52,55 @@ public class Discipline implements Parcelable
         }
 
     }
-    ;
+            ;
 
     protected Discipline(Parcel in) {
         this.id = ((Integer) in.readValue((Integer.class.getClassLoader())));
         this.name = ((String) in.readValue((String.class.getClassLoader())));
         this.selfWorkTime = ((Integer) in.readValue((Integer.class.getClassLoader())));
         this.specialtyId = ((Integer) in.readValue((Integer.class.getClassLoader())));
-        this.preDisciplineId = ((Object) in.readValue((Object.class.getClassLoader())));
+        this.preDisciplineId = ((Integer) in.readValue((Object.class.getClassLoader())));
         this.createdAt = ((String) in.readValue((String.class.getClassLoader())));
         this.updatedAt = ((String) in.readValue((String.class.getClassLoader())));
+        this.preDiscipline = ((Discipline) in.readValue((Discipline.class.getClassLoader())));
+        this.specialty = ((Specialty) in.readValue((Specialty.class.getClassLoader())));
     }
 
     /**
      * No args constructor for use in serialization
-     * 
+     *
      */
     public Discipline() {
     }
 
     /**
-     * 
+     *
+     * @param updatedAt
      * @param id
      * @param selfWorkTime
+     * @param createdAt
      * @param name
+     * @param specialtyId
+     * @param preDisciplineId
      */
-    public Discipline(Integer id, String name, Integer selfWorkTime) {
+    public Discipline(Integer id, String name, Integer selfWorkTime, Integer specialtyId, Integer preDisciplineId, String createdAt, String updatedAt) {
         super();
         this.id = id;
         this.name = name;
         this.selfWorkTime = selfWorkTime;
+        this.specialtyId = specialtyId;
+        this.preDisciplineId = preDisciplineId;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+
+    public Discipline(String name, Integer selfWorkTime, Integer specialtyId, Integer preDisciplineId) {
+        super();
+        this.name = name;
+        this.selfWorkTime = selfWorkTime;
+        this.specialtyId = specialtyId;
+        this.preDisciplineId = preDisciplineId;
     }
 
     public Integer getId() {
@@ -110,11 +135,11 @@ public class Discipline implements Parcelable
         this.specialtyId = specialtyId;
     }
 
-    public Object getPreDisciplineId() {
+    public Integer getPreDisciplineId() {
         return preDisciplineId;
     }
 
-    public void setPreDisciplineId(Object preDisciplineId) {
+    public void setPreDisciplineId(Integer preDisciplineId) {
         this.preDisciplineId = preDisciplineId;
     }
 
@@ -134,6 +159,22 @@ public class Discipline implements Parcelable
         this.updatedAt = updatedAt;
     }
 
+    public Discipline getPreDiscipline() {
+        return preDiscipline;
+    }
+
+    public void setPreDiscipline(Discipline preDiscipline) {
+        this.preDiscipline = preDiscipline;
+    }
+
+    public Specialty getSpecialty() {
+        return specialty;
+    }
+
+    public void setSpecialty(Specialty specialty) {
+        this.specialty = specialty;
+    }
+
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(id);
         dest.writeValue(name);
@@ -142,6 +183,8 @@ public class Discipline implements Parcelable
         dest.writeValue(preDisciplineId);
         dest.writeValue(createdAt);
         dest.writeValue(updatedAt);
+        dest.writeValue(preDiscipline);
+        dest.writeValue(specialty);
     }
 
     public int describeContents() {
