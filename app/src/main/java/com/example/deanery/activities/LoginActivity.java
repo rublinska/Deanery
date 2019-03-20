@@ -129,7 +129,6 @@ public class LoginActivity extends AppCompatActivity  {
                     public void onResponse(Call<AuthTokenFromLogin> call, Response<AuthTokenFromLogin> response) {
 
                         if (response.isSuccessful() && response.body().getAccessToken()!=null) {
-                            Log.i("token", response.body().getAccessToken().toString());
                             Intent i = new Intent(LoginActivity.this, MainActivity.class);
                             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             i.putExtra("token", response.body().getAccessToken());
