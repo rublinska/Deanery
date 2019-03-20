@@ -48,9 +48,11 @@ public class DisciplineRecyclerViewAdapter extends RecyclerView.Adapter<Discipli
         discipline = disciplines.get(position);
 
         disciplinePlaceHolder.fullName.setText(discipline.getName());
-        disciplinePlaceHolder.selfWorkTime.setText(discipline.getSelfWorkTime());
-        disciplinePlaceHolder.preDiscipline.setText(discipline.getPreDiscipline().getName());
-        disciplinePlaceHolder.specialty.setText(discipline.getSpecialty().getName());
+        disciplinePlaceHolder.selfWorkTime.setText(discipline.getSelfWorkTime().toString());
+        if (discipline.getPreDisciplineId() != null)
+            disciplinePlaceHolder.preDiscipline.setText(discipline.getPreDiscipline().getName());
+        if (discipline.getSpecialtyId() != null)
+            disciplinePlaceHolder.specialty.setText(discipline.getSpecialty().getName());
 
         disciplinePlaceHolder.item.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +63,7 @@ public class DisciplineRecyclerViewAdapter extends RecyclerView.Adapter<Discipli
                 Intent i = new Intent(v.getContext(), DisciplineUpdateActivity.class);
 
                 Bundle mBundle = new Bundle();
-                mBundle.putParcelable("specialty", discipline.getSpecialty());
+                mBundle.putParcelable("discipline", discipline);
                 i.putExtras(mBundle);
 
                 i.putExtra("token", token);

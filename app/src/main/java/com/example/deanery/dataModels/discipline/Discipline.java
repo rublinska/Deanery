@@ -21,10 +21,10 @@ public class Discipline implements Parcelable
     private Integer selfWorkTime;
     @SerializedName("specialty_id")
     @Expose
-    private Integer specialtyId;
+    private Integer specialtyId = null;
     @SerializedName("pre_discipline_id")
     @Expose
-    private Integer preDisciplineId;
+    private Integer preDisciplineId = null;
     @SerializedName("created_at")
     @Expose
     private String createdAt;
@@ -33,10 +33,10 @@ public class Discipline implements Parcelable
     private String updatedAt;
     @SerializedName("pre_discipline")
     @Expose
-    private Discipline preDiscipline;
+    private Discipline preDiscipline = null;
     @SerializedName("specialty")
     @Expose
-    private Specialty specialty;
+    private Specialty specialty = null;
     public final static Parcelable.Creator<Discipline> CREATOR = new Creator<Discipline>() {
 
 
@@ -95,12 +95,10 @@ public class Discipline implements Parcelable
     }
 
 
-    public Discipline(String name, Integer selfWorkTime, Integer specialtyId, Integer preDisciplineId) {
+    public Discipline(String name, Integer selfWorkTime) {
         super();
         this.name = name;
         this.selfWorkTime = selfWorkTime;
-        this.specialtyId = specialtyId;
-        this.preDisciplineId = preDisciplineId;
     }
 
     public Integer getId() {
@@ -191,4 +189,7 @@ public class Discipline implements Parcelable
         return  0;
     }
 
+    public String toString() {
+        return getName();
+    }
 }

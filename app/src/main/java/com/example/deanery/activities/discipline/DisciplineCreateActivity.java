@@ -32,8 +32,8 @@ public class DisciplineCreateActivity extends AppCompatActivity {
     Discipline disciplineForUpdate;
     EditText fullName;
     EditText selfWorkTime;
-    Spinner specialty;
-    Spinner preDiscipline;
+    Spinner specialtySpinner;
+    Spinner preDisciplineSpinner;
     List<Specialty> specialtiesArray;
     List<Discipline> disciplinesArray;
 
@@ -48,14 +48,10 @@ public class DisciplineCreateActivity extends AppCompatActivity {
         token = getIntent().getStringExtra("token");
         fullName = findViewById(R.id.discipline_name);
         selfWorkTime = findViewById(R.id.discipline_selfWorkTime);
-        specialty = findViewById(R.id.discipline_specialty);
-        preDiscipline = findViewById(R.id.discipline_preDiscipline);
+        specialtySpinner = findViewById(R.id.discipline_specialty);
+        preDisciplineSpinner = findViewById(R.id.discipline_preDiscipline);
         cancel = (Button) findViewById(R.id.cancel);
         createNewStudent = (Button) findViewById(R.id.create);
-        specialtiesArray = new ArrayList<>();
-        final ArrayAdapter[] specialtiesAdapter = {new ArrayAdapter(this, android.R.layout.simple_spinner_item, specialtiesArray)};
-        specialtiesAdapter[0].setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        specialty.setAdapter(specialtiesAdapter[0]);
 
         Call<GetAllSpecialties> getAllSpecialties = client.getAllSpecialties(token);
         getAllSpecialties.enqueue(new Callback<GetAllSpecialties>() {
@@ -63,23 +59,17 @@ public class DisciplineCreateActivity extends AppCompatActivity {
             public void onResponse(Call<GetAllSpecialties> call, Response<GetAllSpecialties> response) {
                 //    Log.i("LizatestUpdDiscipline", response.body().getData().get(0).getName());
                 //    Log.i("LizatestUpdDiscipline", response.raw().toString());
-                specialtiesArray = response.body().getData();/*
-                specialtiesAdapter[0] = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, specialtiesArray);
-                specialtiesAdapter[0].setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);*/
-                specialty.setAdapter(specialtiesAdapter[0]);
+                specialtiesArray = response.body().getData();
+                ArrayAdapter specialtiesAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, specialtiesArray);
+                specialtiesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                specialtySpinner.setAdapter(specialtiesAdapter);
             }
-
             @Override
             public void onFailure(Call<GetAllSpecialties> call, Throwable t) {
                 //    Log.i("LizatestError", String.valueOf(call.isExecuted()));
             }
         });
 
-
-        disciplinesArray = new ArrayList<>();
-        final ArrayAdapter[] disciplinesAdapter = {new ArrayAdapter(this, android.R.layout.simple_spinner_item, disciplinesArray)};
-        disciplinesAdapter[0].setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        specialty.setAdapter(disciplinesAdapter[0]);
 
         Call<GetAllDisciplines> getAllDisciplines = client.getAllDisciplines(token);
         getAllDisciplines.enqueue(new Callback<GetAllDisciplines>() {
@@ -88,28 +78,26 @@ public class DisciplineCreateActivity extends AppCompatActivity {
                 //    Log.i("LizatestUpdDiscipline", response.body().getData().get(0).getName());
                 //    Log.i("LizatestUpdDiscipline", response.raw().toString());
                 disciplinesArray = response.body().getData();
-                specialty.setAdapter(disciplinesAdapter[0]);
+                ArrayAdapter disciplinesAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, disciplinesArray);
+                disciplinesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                preDisciplineSpinner.setAdapter(disciplinesAdapter);
             }
-
             @Override
             public void onFailure(Call<GetAllDisciplines> call, Throwable t) {
                 //    Log.i("LizatestError", String.valueOf(call.isExecuted()));
             }
         });
 
-
-
-
         createNewStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Specialty newSpecialty = (Specialty) specialty.getSelectedItem();
-                Discipline newPreDiscipline = (Discipline) preDiscipline.getSelectedItem();
+                Specialty newSpecialty = (Specialty) specialtySpinner.getSelectedItem();
+                Discipline newPreDiscipline = (Discipline) preDisciplineSpinner.getSelectedItem();
 
-                Discipline newDiscipline = new Discipline(fullName.getText().toString(),Integer.valueOf(selfWorkTime.getText().toString()), newSpecialty.getId(), newPreDiscipline.getId());
-
-
+                Discipline newDiscipline = new Discipline(fullName.getText().toString(),Integer.valueOf(selfWorkTime.getText().toString()));
+                newDiscipline.setPreDisciplineId(newPreDiscipline.getId());
+                newDiscipline.setSpecialtyId(newSpecialty.getId());
             //    Log.i("Lizatest", getIntent().getStringExtra("token"));
                 final Call<Discipline> createDiscipline = client.createDiscipline(token, newDiscipline);
 
