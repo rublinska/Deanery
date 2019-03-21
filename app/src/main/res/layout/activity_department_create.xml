@@ -20,7 +20,7 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.1">
+            android:layout_weight="0.3">
             <EditText
                 android:id="@+id/department_name"
                 android:layout_width="match_parent"
@@ -29,31 +29,35 @@
                 android:text="lizatest"/>
         </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.3">
-            <ListView
-                android:id="@+id/department_auditories"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:hint="Auditories"
-                tools:listitem="@layout/fragment_auditory"
-                />
-        </android.support.design.widget.TextInputLayout>
+            android:layout_weight="0.1"
+            android:text="Auditories"/>
+        <Button
+            android:id="@+id/department_auditories"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:dropDownWidth="match_parent"
+            android:hint="Auditories"
+            android:layout_weight="0.15"
+            android:spinnerMode="dialog"
+            />
 
-        <android.support.design.widget.TextInputLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-                android:layout_weight="0.3">
-            <ListView
-                android:id="@+id/department_lecturers"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:hint="Lecturers"
-                tools:listitem="@layout/fragment_lecturer"
-                />
-        </android.support.design.widget.TextInputLayout>
+            android:layout_weight="0.1"
+            android:text="Lecturers"/>
+        <Button
+            android:id="@+id/department_lecturers"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:dropDownWidth="match_parent"
+            android:hint="Lecturers"
+            android:layout_weight="0.15"
+            android:spinnerMode="dialog"
+            />
 
 
         <!--TODO place it at the bottom-->
@@ -63,7 +67,7 @@
             android:orientation="horizontal"
             android:layout_gravity="bottom"
             android:layout_marginTop="20dp"
-            android:layout_weight="0.1">
+            android:layout_weight="0.2">
             <Button
                 android:id="@+id/cancel"
                 android:background="#F44336"

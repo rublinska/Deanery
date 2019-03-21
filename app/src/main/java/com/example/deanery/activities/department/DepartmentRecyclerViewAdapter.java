@@ -46,10 +46,6 @@ public class DepartmentRecyclerViewAdapter extends RecyclerView.Adapter<Departme
     public void onBindViewHolder(@NonNull DepartmentPlaceHolder departmentPlaceHolder, final int position) {
 
         department = departments.get(position);
-        Log.i("LizatestDepartRecycler", department.getName());
-
-        Log.i("LizatestDepartRecycler", String.valueOf(department.getAuditories().size()));
-        Log.i("LizatestDepartRecycler", String.valueOf(department.getLecturers().size()));
 
         departmentPlaceHolder.name.setText(department.getName());
         departmentPlaceHolder.auditoriesNum.setText(String.valueOf(department.getAuditories().size()));
@@ -64,7 +60,7 @@ public class DepartmentRecyclerViewAdapter extends RecyclerView.Adapter<Departme
                 Intent i = new Intent(v.getContext(), DepartmentUpdateActivity.class);
 
                 Bundle mBundle = new Bundle();
-                mBundle.putSerializable("department", department);
+                mBundle.putParcelable("department", department);
                 i.putExtras(mBundle);
 
                 i.putExtra("token", token);

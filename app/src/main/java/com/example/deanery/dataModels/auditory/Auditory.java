@@ -4,7 +4,9 @@ package com.example.deanery.dataModels.auditory;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Auditory {
+import java.io.Serializable;
+
+public class Auditory implements Serializable {
 
     @SerializedName("id")
     @Expose

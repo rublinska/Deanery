@@ -1,5 +1,6 @@
 package com.example.deanery;
 
+import com.example.deanery.dataModels.auditory.Auditory;
 import com.example.deanery.dataModels.auditory.GetAllAuditories;
 import com.example.deanery.dataModels.department.Department;
 import com.example.deanery.dataModels.department.GetAllDepartments;
@@ -64,6 +65,9 @@ public interface DeaneryAPI {
 
     @GET("auditories")
     Call<GetAllAuditories> getAllAuditories(@Query("token") String token);
+
+    @POST("departments/{id}")
+    Call<Auditory> updateAuditory(@Path("id") Integer id , @Query("token") String token, @Body Auditory auditory);
 
 
     @POST("students")

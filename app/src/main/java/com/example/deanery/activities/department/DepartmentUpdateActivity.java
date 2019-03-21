@@ -33,7 +33,7 @@ public class DepartmentUpdateActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lecturer_update);
+        setContentView(R.layout.activity_department_update);
         //   Toolbar toolbar = findViewById(R.id.toolbar_custom); setSupportActionBar(toolbar);
 
         departmentForUpdate = getIntent().getParcelableExtra("department");

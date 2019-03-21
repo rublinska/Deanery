@@ -49,9 +49,14 @@ public class DisciplineRecyclerViewAdapter extends RecyclerView.Adapter<Discipli
 
         disciplinePlaceHolder.fullName.setText(discipline.getName());
         disciplinePlaceHolder.selfWorkTime.setText(discipline.getSelfWorkTime().toString());
-        if (discipline.getPreDisciplineId() != null)
+        if (discipline.getPreDisciplineId() == null)
+            disciplinePlaceHolder.preDiscipline.setText("any required pre disciplines");
+        else
             disciplinePlaceHolder.preDiscipline.setText(discipline.getPreDiscipline().getName());
-        if (discipline.getSpecialtyId() != null)
+
+        if (discipline.getSpecialtyId() == null)
+            disciplinePlaceHolder.preDiscipline.setText("any specialty is required to learn it");
+        else
             disciplinePlaceHolder.specialty.setText(discipline.getSpecialty().getName());
 
         disciplinePlaceHolder.item.setOnClickListener(new View.OnClickListener() {

@@ -20,6 +20,7 @@ import com.example.deanery.dataModels.specialty.GetAllSpecialties;
 import com.example.deanery.dataModels.specialty.Specialty;
 import com.example.deanery.dataModels.discipline.Discipline;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -40,7 +41,7 @@ public class DisciplineUpdateActivity extends AppCompatActivity {
     Spinner specialtySpinner;
     Spinner disciplineSpinner;
     List<Specialty> specialtiesArray;
-    List<Discipline> disciplinesArray;
+    List<Discipline> disciplinesArray = new ArrayList<>();
 
     Button delete;
     Button cancel;
@@ -61,6 +62,7 @@ public class DisciplineUpdateActivity extends AppCompatActivity {
         specialtySpinner = findViewById(R.id.discipline_specialty);
         disciplineSpinner = findViewById(R.id.discipline_preDiscipline);
         specialtyCheckbox = findViewById(R.id.discipline_spec_checkbox);
+        specialtyCheckbox.setChecked(disciplineForUpdate.getSpecialtyId()!= null);
         specialtySpinner.setEnabled(specialtyCheckbox.isChecked());
         specialtyCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -70,6 +72,7 @@ public class DisciplineUpdateActivity extends AppCompatActivity {
         });
 
         preDiscCheckbox = findViewById(R.id.discipline_predisc_checkbox);
+        preDiscCheckbox.setChecked(disciplineForUpdate.getPreDisciplineId()!= null);
         disciplineSpinner.setEnabled(preDiscCheckbox.isChecked());
         preDiscCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -119,7 +122,11 @@ public class DisciplineUpdateActivity extends AppCompatActivity {
             public void onResponse(Call<GetAllDisciplines> call, Response<GetAllDisciplines> response) {
                 //    Log.i("LizatestUpdDiscipline", response.body().getData().get(0).getName());
                 //    Log.i("LizatestUpdDiscipline", response.raw().toString());
-                disciplinesArray = response.body().getData();
+                for (Discipline d : response.body().getData()) {
+                    if (!d.getId().equals(disciplineForUpdate.getId()))
+                        disciplinesArray.add(d);
+
+                }
                 ArrayAdapter disciplinesAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, disciplinesArray);
                 disciplinesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 disciplineSpinner.setAdapter(disciplinesAdapter);
@@ -164,10 +171,16 @@ public class DisciplineUpdateActivity extends AppCompatActivity {
             public void onClick(View v) {
                 disciplineForUpdate.setName(fullName.getText().toString());
                 disciplineForUpdate.setSelfWorkTime(Integer.valueOf(selfWorkTime.getText().toString()));
-                Specialty newSpecialty = (Specialty) specialtySpinner.getSelectedItem();
-                disciplineForUpdate.setSpecialtyId(newSpecialty.getId());
-                Discipline newDiscipline = (Discipline) disciplineSpinner.getSelectedItem();
-                disciplineForUpdate.setPreDisciplineId(newDiscipline.getId());
+
+                if (specialtyCheckbox.isChecked())
+                    disciplineForUpdate.setSpecialtyId(((Specialty) specialtySpinner.getSelectedItem()).getId());
+                else
+                    disciplineForUpdate.setSpecialtyId(null);
+
+                if (preDiscCheckbox.isChecked())
+                    disciplineForUpdate.setPreDisciplineId(((Discipline) disciplineSpinner.getSelectedItem()).getId());
+                else
+                    disciplineForUpdate.setPreDisciplineId(null);
 
                 final Call<Discipline> updateDiscipline = client.updateDiscipline(disciplineForUpdate.getId(),getIntent().getStringExtra("token"), disciplineForUpdate);
 
