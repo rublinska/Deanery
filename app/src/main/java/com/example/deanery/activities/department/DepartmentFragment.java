@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,7 +84,7 @@ public class DepartmentFragment extends Fragment {
             @Override
             public void onResponse(Call<GetAllDepartments> call, Response<GetAllDepartments> response) {
                 //    Log.i("Lizatest", call.request().url().toString());
-                //    Log.i("Lizatest", response.body().getData().get(0).getFullName());
+                    Log.i("LizatestArraySize", String.valueOf(response.body().getData().size()));
                 if(response.body().getData().size() > 0){
                     departments = (ArrayList<Department>) response.body().getData();
 

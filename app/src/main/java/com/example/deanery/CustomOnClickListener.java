@@ -29,7 +29,7 @@ public class  CustomOnClickListener<T>  implements View.OnClickListener
      //   this.activity = activity;
     }
     @Override
-    public void onClick(final View v) {
+    public void onClick(View v) {
         final List<String> list = Arrays.asList(stringArray);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(button.getContext());
@@ -40,7 +40,7 @@ public class  CustomOnClickListener<T>  implements View.OnClickListener
 
                 // Update the current focused item's checked status
                 checkedArray[which] = isChecked;
-
+                allItemsArray.set(which, Pair.create(allItemsArray.get(which).first, isChecked));
                 // Get the current focused item
                 String currentItem = list.get(which);
 

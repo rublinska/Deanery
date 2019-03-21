@@ -138,61 +138,73 @@ public class DepartmentCreateActivity extends AppCompatActivity {
         createNewDepartment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                List<Auditory> addAuditories  =new ArrayList<>();
+                List<Lecturer> addLecturers = new ArrayList<>();
+
+                for (Pair<Auditory, Boolean> ab : allAuditories)
+                    if (ab.second)
+                        addAuditories.add(ab.first);
+                for (Pair<Lecturer, Boolean> ab : allLecturers)
+                    if (ab.second)
+                        addLecturers.add(ab.first);
+
                 final Integer[] departmentID = new Integer[1];
                 Department newDepartment = new Department("" + departmentName.getText());
-             //   newDepartment.setAuditories(addAuditories);
-             //   newDepartment.setLecturers(addLecturers);
+                newDepartment.setAuditories(addAuditories);
+                newDepartment.setLecturers(addLecturers);
 
                 //    Log.i("Lizatest", getIntent().getStringExtra("token"));
                 final Call<Department> createDepartment = client.createDepartment(token, newDepartment);
                 createDepartment.enqueue(new Callback<Department>() {
                     @Override
                     public void onResponse(Call<Department> call, Response<Department> response) {
-                        //        Log.i("Lizatest", response.raw().toString());
+                                Log.i("Lizatest", response.raw().toString());
                         departmentID[0] = response.body().getId();
                     }
                     @Override
                     public void onFailure(Call<Department> call, Throwable t) {
-                        //       Log.i("Lizatest", t.getMessage());
+                               Log.i("Lizatest", t.getMessage());
                     }
                 });
 
-                List<Auditory> addAuditories = new ArrayList<>();
+/*
                 for (Pair<Auditory, Boolean> ab : allAuditories)
                     if (ab.second) {
                         Auditory auditory = ab.first;
+                        Log.i("lizatestdepid", departmentID[0].toString());
                         auditory.setDepartmentId(departmentID[0]);
                         final Call<Auditory> updateAuditory = client.updateAuditory(auditory.getId(), getIntent().getStringExtra("token"), auditory);
                         updateAuditory.enqueue(new Callback<Auditory>() {
                             @Override
                             public void onResponse(Call<Auditory> call, Response<Auditory> response) {
-                                //    Log.i("LizatestError",response.raw().toString());
+                                    Log.i("LizatestError",response.raw().toString());
                             }
 
                             @Override
                             public void onFailure(Call<Auditory> call, Throwable t) {
-                                //    Log.i("LizatestError",t.getMessage());
+                                    Log.i("LizatestError",t.getMessage());
                             }
                         });
                     }
 
-                List<Lecturer> addLecturers = new ArrayList<>();
+
                 for (Pair<Lecturer, Boolean> ab : allLecturers)
                     if (ab.second) {
                         Lecturer lecturer = ab.first;
+                        Log.i("lizatestdepid", departmentID[0].toString());
                         lecturer.setDepartmentId(departmentID[0]);
                         final Call<Lecturer> updateLecturer = client.updateLecturer(lecturer.getId(),getIntent().getStringExtra("token"), lecturer);
                         updateLecturer.enqueue(new Callback<Lecturer>() {
                             @Override
                             public void onResponse(Call<Lecturer> call, Response<Lecturer> response) {
-                                //    Log.i("LizatestError",response.raw().toString());
+                                    Log.i("LizatestError",response.raw().toString());
                             }
                             @Override
                             public void onFailure(Call<Lecturer> call, Throwable t) {
-                                //    Log.i("LizatestError",t.getMessage());
+                                    Log.i("LizatestError",t.getMessage());
                             }
                         });
-                    }
+                    }*/
                 closeActivity();
 
             }
