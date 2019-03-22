@@ -24,6 +24,7 @@ import com.example.deanery.dataModels.department.Department;
 import com.example.deanery.dataModels.lecturer.GetAllLecturers;
 import com.example.deanery.dataModels.lecturer.Lecturer;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -157,8 +158,17 @@ public class DepartmentCreateActivity extends AppCompatActivity {
                 createDepartment.enqueue(new Callback<Department>() {
                     @Override
                     public void onResponse(Call<Department> call, Response<Department> response) {
-                                Log.i("Lizatest", String.valueOf(response.body().getId()));
-                        Integer departmentID = response.body().getId();
+                        Log.i("Lizatest", String.valueOf(response.raw().toString()));
+                        try {
+                            Log.i("Lizatest", String.valueOf(response.raw().body().string()));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        Integer departmentID = null;
+                        if (response.isSuccessful()) {
+                            Department department = response.body();
+                            departmentID = department.getId();
+                        }
 
                         for (Pair<Auditory, Boolean> ab : allAuditories)
                             if (ab.second) {

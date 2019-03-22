@@ -17,7 +17,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.example.deanery.DeaneryAPI;
+import com.example.deanery.FragmentExtend;
 import com.example.deanery.R;
+import com.example.deanery.RefreshInterface;
 import com.example.deanery.ServiceGenerator;
 import com.example.deanery.activities.discipline.DisciplineCreateActivity;
 import com.example.deanery.activities.discipline.DisciplineFragment;
@@ -36,6 +38,8 @@ public class MainActivity extends AppCompatActivity
     static Integer lastItemId = 0;
     FloatingActionButton fab;
     DrawerLayout drawer;
+    SwipeRefreshLayout swipeLayout;
+    FragmentManager fragmentManager;
 
     public String getToken () {
         return token;
@@ -47,25 +51,26 @@ public class MainActivity extends AppCompatActivity
         token = getIntent().getExtras().getString("token");
 
         setContentView(R.layout.activity_navigation);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        fab = findViewById(R.id.fab);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        fragmentManager = getSupportFragmentManager();
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
+        swipeLayout = findViewById(R.id.swipeRefreshLayout);
         setFragment();
     }
 
     @Override
     public void onBackPressed() {
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -98,7 +103,7 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = findViewById(R.id.drawer_layout);
 
         lastItemId = menuItem.getItemId();
         setFragment();
@@ -164,15 +169,16 @@ public class MainActivity extends AppCompatActivity
         switch(lastItemId) {
 
             case R.id.nav_departments:
-                fragmentClass = DepartmentFragment.class;
+                /*fragmentClass = DepartmentFragment.class;*/
                 intent = new Intent(getApplicationContext(), DepartmentCreateActivity.class);
+                fragment = DepartmentFragment.newInstance(swipeLayout);
                 break;
             case R.id.nav_teachers:
-                fragmentClass = LecturerFragment.class;
+            //    fragment = LecturerFragment.newInstance(swipeLayout);
                 intent = new Intent(getApplicationContext(), LecturerCreateActivity.class);
                 break;
             case R.id.nav_students:
-                fragmentClass = StudentFragment.class;
+             //   fragment = StudentFragment.newInstance(swipeLayout);
                 intent = new Intent(getApplicationContext(), StudentCreateActivity.class);
                 break;
           case R.id.nav_disciplines:
@@ -189,15 +195,17 @@ public class MainActivity extends AppCompatActivity
 
 
             default:
-                fragmentClass = LecturerFragment.class;
-                intent = new Intent(getApplicationContext(), LecturerCreateActivity.class);
+                intent = new Intent(getApplicationContext(), DepartmentCreateActivity.class);
+                fragment = DepartmentFragment.newInstance(swipeLayout);
+                /*fragmentClass = LecturerFragment.class;
+                intent = new Intent(getApplicationContext(), LecturerCreateActivity.class);*/
         }
 
-        try {
+        /*try {
             fragment = (Fragment) fragmentClass.newInstance();
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -207,8 +215,15 @@ public class MainActivity extends AppCompatActivity
         });
 
         // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+
+        final Fragment finalFragment = fragment;
+        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                ((RefreshInterface) finalFragment).refreshItems();
+            }
+        });
     }
 
 }
