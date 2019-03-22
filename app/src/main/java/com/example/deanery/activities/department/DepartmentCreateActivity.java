@@ -21,8 +21,10 @@ import com.example.deanery.ServiceGenerator;
 import com.example.deanery.dataModels.auditory.Auditory;
 import com.example.deanery.dataModels.auditory.GetAllAuditories;
 import com.example.deanery.dataModels.department.Department;
+import com.example.deanery.dataModels.department.DepartmentResponse;
 import com.example.deanery.dataModels.lecturer.GetAllLecturers;
 import com.example.deanery.dataModels.lecturer.Lecturer;
+import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -154,19 +156,14 @@ public class DepartmentCreateActivity extends AppCompatActivity {
               //  newDepartment.setLecturers(addLecturers);
 
                 //    Log.i("Lizatest", getIntent().getStringExtra("token"));
-                final Call<Department> createDepartment = client.createDepartment(token, newDepartment);
-                createDepartment.enqueue(new Callback<Department>() {
+                final Call<DepartmentResponse> createDepartment = client.createDepartment(token, newDepartment);
+                createDepartment.enqueue(new Callback<DepartmentResponse>() {
                     @Override
-                    public void onResponse(Call<Department> call, Response<Department> response) {
-                        Log.i("Lizatest", String.valueOf(response.raw().toString()));
-                        try {
-                            Log.i("Lizatest", String.valueOf(response.raw().body().string()));
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                    public void onResponse(Call<DepartmentResponse> call, Response<DepartmentResponse> response) {
+
                         Integer departmentID = null;
                         if (response.isSuccessful()) {
-                            Department department = response.body();
+                            Department department = response.body().getData();
                             departmentID = department.getId();
                         }
 
@@ -209,7 +206,7 @@ public class DepartmentCreateActivity extends AppCompatActivity {
                             }
                     }
                     @Override
-                    public void onFailure(Call<Department> call, Throwable t) {
+                    public void onFailure(Call<DepartmentResponse> call, Throwable t) {
                                Log.i("Lizatest", t.getMessage());
                     }
                 });

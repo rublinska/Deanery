@@ -1,5 +1,6 @@
 package com.example.deanery.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity
     DrawerLayout drawer;
     SwipeRefreshLayout swipeLayout;
     FragmentManager fragmentManager;
+    Context context;
 
     public String getToken () {
         return token;
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         token = getIntent().getExtras().getString("token");
-
+        context = this;
         setContentView(R.layout.activity_navigation);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -174,17 +176,17 @@ public class MainActivity extends AppCompatActivity
                 fragment = DepartmentFragment.newInstance(swipeLayout);
                 break;
             case R.id.nav_teachers:
-            //    fragment = LecturerFragment.newInstance(swipeLayout);
+                fragment = LecturerFragment.newInstance(swipeLayout);
                 intent = new Intent(getApplicationContext(), LecturerCreateActivity.class);
                 break;
             case R.id.nav_students:
-             //   fragment = StudentFragment.newInstance(swipeLayout);
+                fragment = StudentFragment.newInstance(swipeLayout);
                 intent = new Intent(getApplicationContext(), StudentCreateActivity.class);
                 break;
-          case R.id.nav_disciplines:
-                fragmentClass = DisciplineFragment.class;
+        /*  case R.id.nav_disciplines:
+                fragment = DisciplineFragment.newInstance(swipeLayout);
                 intent = new Intent(getApplicationContext(), DisciplineCreateActivity.class);
-                break;
+                break;*/
          /*   case R.id.nav_create_report:
                 fragmentClass = UniReportFragment.class;
                 intent = new Intent(getApplicationContext(), UniReportCreateActivity.class);
@@ -210,7 +212,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 intent.putExtra("token", token);
-                getApplicationContext().startActivity(intent);
+                context.startActivity(intent);
             }
         });
 

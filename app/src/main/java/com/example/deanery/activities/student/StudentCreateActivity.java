@@ -39,7 +39,6 @@ public class StudentCreateActivity extends AppCompatActivity {
     Button createNewStudent;
 
     List<Specialty> specialtiesArray;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,20 +52,20 @@ public class StudentCreateActivity extends AppCompatActivity {
         endReason = findViewById(R.id.student_endReason);
         cancel = (Button) findViewById(R.id.cancel);
         createNewStudent = (Button) findViewById(R.id.create);
-        specialtiesArray = new ArrayList<>();
-        final ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, specialtiesArray);
+        specialty = findViewById(R.id.student_specialty);
 
+        specialtiesArray = new ArrayList<>();
 
         Call<GetAllSpecialties> getAllSpecialties = client.getAllSpecialties(token);
         getAllSpecialties.enqueue(new Callback<GetAllSpecialties>() {
             @Override
             public void onResponse(Call<GetAllSpecialties> call, Response<GetAllSpecialties> response) {
-                Log.i("LizatestCreStu", response.body().getData().get(0).getName());
+              //  Log.i("LizatestCreStu", response.body().getData().get(0).getName());
              //   Log.i("LizatestCreStu", response.raw().toString());
                 specialtiesArray = response.body().getData();
+                ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, specialtiesArray);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 specialty.setAdapter(adapter);
-                specialty.setSelection(0);
             }
 
             @Override

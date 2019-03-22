@@ -37,7 +37,6 @@ public class StudentUpdateActivity extends AppCompatActivity {
     EditText endUni;
     EditText endReason;
     Spinner specialty;
-    List<Specialty> specialtiesArray;
 
     Button delete;
     Button cancel;
@@ -66,21 +65,16 @@ public class StudentUpdateActivity extends AppCompatActivity {
         endUni.setText(studentForUpdate.getEndUniversity());
         endReason.setText(studentForUpdate.getEndReason());
 
-        specialtiesArray = new ArrayList<>();
-        final ArrayAdapter[] adapter = {new ArrayAdapter(this, android.R.layout.simple_spinner_item, specialtiesArray)};
-        adapter[0].setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        specialty.setAdapter(adapter[0]);
-
         Call<GetAllSpecialties> getAllSpecialties = client.getAllSpecialties(token);
         getAllSpecialties.enqueue(new Callback<GetAllSpecialties>() {
             @Override
             public void onResponse(Call<GetAllSpecialties> call, Response<GetAllSpecialties> response) {
             //    Log.i("LizatestUpdStudent", response.body().getData().get(0).getName());
             //    Log.i("LizatestUpdStudent", response.raw().toString());
-                specialtiesArray = response.body().getData();
-                adapter[0] = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, specialtiesArray);
-                adapter[0].setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                specialty.setAdapter(adapter[0]);
+                List<Specialty> specialtiesArray = response.body().getData();
+                ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, specialtiesArray);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                specialty.setAdapter(adapter);
             }
 
             @Override
@@ -118,9 +112,7 @@ public class StudentUpdateActivity extends AppCompatActivity {
                 studentForUpdate.setEndUniversity(endUni.getText().toString());
                 Specialty newSpecialty = (Specialty) specialty.getSelectedItem();
                 studentForUpdate.setSpecialtyId(newSpecialty.getId());
-                studentForUpdate.setSpecialty(newSpecialty);
 
-        //todo        studentForUpdate.setDepartment(Integer.parseInt(startUni.getText().toString()));
                 final Call<Student> updateStudent = client.updateStudent(studentForUpdate.getId(),getIntent().getStringExtra("token"), studentForUpdate);
 
                 updateStudent.enqueue(new Callback<Student>() {

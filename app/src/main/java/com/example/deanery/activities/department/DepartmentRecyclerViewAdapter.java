@@ -1,12 +1,15 @@
 package com.example.deanery.activities.department;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -54,17 +57,7 @@ public class DepartmentRecyclerViewAdapter extends RecyclerView.Adapter<Departme
         departmentPlaceHolder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                department = departments.get(position);
-
-            //    Log.i("lizatestOnclick", department.getFullName());
-                Intent i = new Intent(v.getContext(), DepartmentUpdateActivity.class);
-
-                Bundle mBundle = new Bundle();
-                mBundle.putParcelable("department", department);
-                i.putExtras(mBundle);
-
-                i.putExtra("token", token);
-                v.getContext().startActivity(i);
+                clickItem(position, v.getContext());
             }
         });
     }
@@ -90,6 +83,20 @@ public class DepartmentRecyclerViewAdapter extends RecyclerView.Adapter<Departme
             item = (Button) itemView.findViewById(R.id.department_button);
         }
 
+    }
+
+    public void clickItem(Integer position, Context context) {
+        department = departments.get(position);
+
+        //    Log.i("lizatestOnclick", department.getFullName());
+        Intent i = new Intent(context, DepartmentUpdateActivity.class);
+
+        Bundle mBundle = new Bundle();
+        mBundle.putParcelable("department", department);
+        i.putExtras(mBundle);
+
+        i.putExtra("token", token);
+        context.startActivity(i);
     }
 
 }

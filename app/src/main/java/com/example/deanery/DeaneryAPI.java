@@ -3,6 +3,7 @@ package com.example.deanery;
 import com.example.deanery.dataModels.auditory.Auditory;
 import com.example.deanery.dataModels.auditory.GetAllAuditories;
 import com.example.deanery.dataModels.department.Department;
+import com.example.deanery.dataModels.department.DepartmentResponse;
 import com.example.deanery.dataModels.department.GetAllDepartments;
 import com.example.deanery.dataModels.discipline.Discipline;
 import com.example.deanery.dataModels.discipline.GetAllDisciplines;
@@ -51,7 +52,7 @@ public interface DeaneryAPI {
 
 
     @POST("departments")
-    Call<Department> createDepartment(@Query("token") String token, @Body Department department);
+    Call<DepartmentResponse> createDepartment(@Query("token") String token, @Body Department department);
 
     @POST("departments/{id}")
     Call<Department> updateDepartment(@Path("id") Integer id , @Query("token") String token, @Body Department department);
