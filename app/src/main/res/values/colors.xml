@@ -3,4 +3,7 @@
     <color name="colorPrimary">#081EAC</color>
     <color name="colorPrimaryDark">#505364</color>
     <color name="colorAccent">#B8D7EC</color>
+    <color name="loginBackgroundColor">#ecf0f1</color>
+    <color name="mainBlue">#1E88E5</color>
+    <color name="mainGrey">#BDBDBD</color>
 </resources>

@@ -20,7 +20,6 @@ import java.util.List;
 
 public class LecturerRecyclerViewAdapter extends RecyclerView.Adapter<LecturerRecyclerViewAdapter.LecturerPlaceHolder> {
 
-
     private List<Lecturer> lecturers;
     private String token;
     private Context context;
@@ -75,19 +74,19 @@ public class LecturerRecyclerViewAdapter extends RecyclerView.Adapter<LecturerRe
 
     class LecturerPlaceHolder extends RecyclerView.ViewHolder {
         TextView full_name;
+        TextView position;
         TextView department;
         TextView phone;
-        TextView position;
         Button lecturer_view;
 
         public LecturerPlaceHolder(@NonNull View itemView) {
             super(itemView);
 
             full_name = (TextView) itemView.findViewById(R.id.lecturer_full_name);
+            position = (TextView) itemView.findViewById(R.id.lecturer_position);
             department = (TextView) itemView.findViewById(R.id.lecturer_department);
             phone = (TextView) itemView.findViewById(R.id.lecturer_phone);
-            position = (TextView) itemView.findViewById(R.id.lecturer_position);
-            lecturer_view  =(Button) itemView.findViewById(R.id.lecturer_view);
+            lecturer_view  =(CardView) itemView.findViewById(R.id.lecturer_view);
         }
     }
 }
