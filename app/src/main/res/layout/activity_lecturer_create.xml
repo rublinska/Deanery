@@ -1,61 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="20dp"
-    tools:context=".activities.lecturer.LecturerCreateActivity"
-    android:gravity="center">
+    tools:context=".activities.LecturerCreateActivity">
 
-        <EditText
-            android:id="@+id/department_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="lizatest"/>
-
-        <EditText
-            android:id="@+id/position"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="lizatest"/>
-
-        <EditText
-            android:id="@+id/phone_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="lizatest"/>
-
-
-        <Spinner
-            android:id="@+id/department"
-            android:layout_width="match_parent"
-            android:layout_height="40dp" />
-
-
-    <!--TODO place it at the bottom-->
-    <LinearLayout
-        android:layout_width="match_parent"
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_gravity="bottom">
-        <Button
-            android:id="@+id/cancel"
-            android:background="#F44336"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.45"
-            android:text="Cancel"/>
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="0.04"/>
-        <Button
-            android:id="@+id/create"
-            android:background="#009688"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.45"
-            android:text="Create"/>
-    </LinearLayout>
-</LinearLayout>
+        app:layout_constraintGuide_begin="134dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="40dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="371dp" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginRight="40dp"
+        android:text="@string/title_lecturer_create"
+        android:textSize="36sp"
+        app:fontFamily="@font/montserrat_bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/lecturer_full_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/form_input"
+        android:hint="Full name"
+        android:padding="12dp"
+        app:fontFamily="@font/montserrat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <EditText
+        android:id="@+id/position"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+
+        android:background="@drawable/form_input"
+        android:hint="Position"
+        android:padding="12dp"
+        app:fontFamily="@font/montserrat"
+        app:layout_constraintEnd_toEndOf="@+id/lecturer_full_name"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/lecturer_full_name"
+        app:layout_constraintTop_toBottomOf="@+id/lecturer_full_name" />
+
+    <EditText
+        android:id="@+id/phone_number"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/form_input"
+        android:hint="Phone number"
+        android:padding="12dp"
+        app:fontFamily="@font/montserrat"
+        app:layout_constraintEnd_toEndOf="@+id/position"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/position"
+        app:layout_constraintTop_toBottomOf="@+id/position" />
+
+
+    <Spinner
+        android:id="@+id/lecturer_department"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/phone_number"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/phone_number"
+        app:layout_constraintTop_toBottomOf="@+id/phone_number" />
+
+    <Button
+        android:id="@+id/create"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+
+        android:background="@drawable/main_button"
+        android:padding="16dp"
+        android:text="Create"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:fontFamily="@font/montserrat"
+        app:layout_constraintEnd_toEndOf="@+id/lecturer_department"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/lecturer_department"
+        app:layout_constraintTop_toBottomOf="@+id/lecturer_department" />
+
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/transparent_button"
+        android:padding="16dp"
+        android:text="Cancel"
+        android:textColor="@color/mainBlue"
+        android:textSize="20sp"
+        app:fontFamily="@font/montserrat"
+        app:layout_constraintEnd_toEndOf="@+id/create"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="@+id/create"
+        app:layout_constraintTop_toBottomOf="@+id/create" />
+
+</android.support.constraint.ConstraintLayout>

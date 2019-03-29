@@ -34,7 +34,7 @@
         android:layout_marginTop="28dp"
         android:layout_marginRight="40dp"
         android:text="@string/title_student_update"
-        android:textSize="36sp"
+        android:textSize="40sp"
         app:fontFamily="@font/montserrat_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.512"

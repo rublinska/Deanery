@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -72,7 +73,7 @@ public class DepartmentRecyclerViewAdapter extends RecyclerView.Adapter<Departme
         TextView name;
         TextView auditoriesNum;
         TextView lecturersNum;
-        Button item;
+        CardView item;
 
         public DepartmentPlaceHolder(@NonNull View itemView) {
             super(itemView);
@@ -80,7 +81,8 @@ public class DepartmentRecyclerViewAdapter extends RecyclerView.Adapter<Departme
             name = (TextView) itemView.findViewById(R.id.department_name);
             auditoriesNum = (TextView) itemView.findViewById(R.id.lecturers_num);
             lecturersNum = (TextView) itemView.findViewById(R.id.auditories_num);
-            item = (Button) itemView.findViewById(R.id.department_button);
+            //item = (Button) itemView.findViewById(R.id.department_button);
+            item = (CardView) itemView.findViewById(R.id.department_view);
         }
 
     }

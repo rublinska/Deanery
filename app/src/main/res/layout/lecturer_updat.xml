@@ -31,7 +31,7 @@
         android:layout_marginLeft="40dp"
         android:layout_marginTop="28dp"
         android:layout_marginRight="40dp"
-        android:text="@string/title_discipline_create"
+        android:text="@string/title_discipline_update"
         android:textSize="36sp"
         app:fontFamily="@font/montserrat_bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -88,7 +88,7 @@
         app:fontFamily="@font/montserrat"
         app:layout_constraintEnd_toEndOf="@+id/discipline_selfWorkTime"
         app:layout_constraintStart_toEndOf="@+id/discipline_spec_checkbox"
-        tools:layout_editor_absoluteY="302dp" />
+        tools:layout_editor_absoluteY="243dp" />
 
     <Spinner
         android:id="@+id/discipline_specialty"
@@ -118,7 +118,7 @@
         app:layout_constraintEnd_toEndOf="@+id/text_checkbox1"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/discipline_predisc_checkbox"
-        tools:layout_editor_absoluteY="380dp" />
+        tools:layout_editor_absoluteY="319dp" />
 
     <Spinner
         android:id="@+id/discipline_preDiscipline"

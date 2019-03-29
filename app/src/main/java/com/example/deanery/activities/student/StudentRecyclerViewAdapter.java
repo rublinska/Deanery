@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -85,7 +86,7 @@ public class StudentRecyclerViewAdapter extends RecyclerView.Adapter<StudentRecy
         TextView startUni;
         TextView endUni;
         TextView endReason;
-        Button item;
+        CardView item;
 
         public StudentPlaceHolder(@NonNull View itemView) {
             super(itemView);
@@ -95,7 +96,8 @@ public class StudentRecyclerViewAdapter extends RecyclerView.Adapter<StudentRecy
             startUni = itemView.findViewById(R.id.student_startUni);
             endUni = itemView.findViewById(R.id.student_endUni);
             endReason = itemView.findViewById(R.id.student_endReason);
-            item = itemView.findViewById(R.id.student_button);
+            //item = itemView.findViewById(R.id.student_button);
+            item = itemView.findViewById(R.id.student_view);
         }
 
     }

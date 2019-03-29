@@ -1,92 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="20dp"
-    tools:context=".activities.lecturer.LecturerCreateActivity"
-    android:gravity="center">
+    tools:context=".activities.LecturerCreateActivity">
 
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="134dp" />
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_gravity="bottom"
-        android:layout_marginTop="20dp">
+        app:layout_constraintGuide_begin="40dp" />
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.3">
-            <EditText
-                android:id="@+id/department_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Department name"
-                android:text="lizatest"/>
-        </android.support.design.widget.TextInputLayout>
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="371dp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.1"
-            android:text="Auditories"/>
-        <Button
-            android:id="@+id/department_auditories"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:dropDownWidth="match_parent"
-            android:hint="Auditories"
-            android:layout_weight="0.15"
-            android:spinnerMode="dialog"
-            />
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginRight="40dp"
+        android:text="@string/title_department_create"
+        android:textSize="40sp"
+        app:fontFamily="@font/montserrat_bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.1"
-            android:text="Lecturers"/>
-        <Button
-            android:id="@+id/department_lecturers"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:dropDownWidth="match_parent"
-            android:hint="Lecturers"
-            android:layout_weight="0.15"
-            android:spinnerMode="dialog"
-            />
+    <EditText
+        android:id="@+id/department_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="40dp"
+        android:background="@drawable/form_input"
+        android:hint="Department name"
+        android:padding="12dp"
+        app:fontFamily="@font/montserrat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
+    <Button
+        android:id="@+id/department_auditories"
+        android:layout_width="0dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/form_button"
+        android:dropDownWidth="match_parent"
+        android:spinnerMode="dialog"
+        android:text="Press to choose auditories"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:fontFamily="@font/montserrat"
+        app:layout_constraintEnd_toEndOf="@+id/department_name"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/department_name"
+        app:layout_constraintTop_toBottomOf="@+id/department_name" />
 
-        <!--TODO place it at the bottom-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="horizontal"
-            android:layout_gravity="bottom"
-            android:layout_marginTop="20dp"
-            android:layout_weight="0.2">
-            <Button
-                android:id="@+id/cancel"
-                android:background="#F44336"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.45"
-                android:text="Cancel"/>
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="0.04"/>
-            <Button
-                android:id="@+id/create"
-                android:background="#009688"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.45"
-                android:text="Create"/>
-        </LinearLayout>
+    <Button
+        android:id="@+id/department_lecturers"
+        android:layout_width="0dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/form_button"
+        android:dropDownWidth="match_parent"
+        android:spinnerMode="dialog"
+        android:text="Press to choose lecturers"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:fontFamily="@font/montserrat"
+        app:layout_constraintEnd_toEndOf="@+id/department_auditories"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/department_auditories"
+        app:layout_constraintTop_toBottomOf="@+id/department_auditories" />
 
-    </LinearLayout>
-</LinearLayout>
+    <Button
+        android:id="@+id/create"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="42dp"
+        android:background="@drawable/main_button"
+        android:padding="16dp"
+        android:text="Create"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:fontFamily="@font/montserrat"
+        app:layout_constraintEnd_toEndOf="@+id/department_lecturers"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/department_lecturers"
+        app:layout_constraintTop_toBottomOf="@+id/department_lecturers" />
+
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/transparent_button"
+        android:padding="16dp"
+        android:text="Cancel"
+        android:textColor="@color/mainBlue"
+        android:textSize="20sp"
+        app:fontFamily="@font/montserrat"
+        app:layout_constraintEnd_toEndOf="@+id/create"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="@+id/create"
+        app:layout_constraintTop_toBottomOf="@+id/create" />
+
+</android.support.constraint.ConstraintLayout>

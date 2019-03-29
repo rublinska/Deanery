@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.deanery.R;
-import com.example.deanery.activities.discipline.DisciplineUpdateActivity;
 import com.example.deanery.dataModels.discipline.Discipline;
 
 import java.util.List;
@@ -37,7 +37,7 @@ public class DisciplineRecyclerViewAdapter extends RecyclerView.Adapter<Discipli
     public DisciplinePlaceHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         final LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.fragment_discipine, viewGroup, false);
+        View rowView = inflater.inflate(R.layout.fragment_discipline, viewGroup, false);
 
         return new DisciplinePlaceHolder(rowView);
     }
@@ -88,7 +88,7 @@ public class DisciplineRecyclerViewAdapter extends RecyclerView.Adapter<Discipli
         TextView specialty;
         TextView selfWorkTime;
         TextView preDiscipline;
-        Button item;
+        CardView item;
 
         public DisciplinePlaceHolder(@NonNull View itemView) {
             super(itemView);
@@ -97,7 +97,8 @@ public class DisciplineRecyclerViewAdapter extends RecyclerView.Adapter<Discipli
             specialty = itemView.findViewById(R.id.discipline_specialty);
             selfWorkTime = itemView.findViewById(R.id.discipline_selfWorkTime);
             preDiscipline = itemView.findViewById(R.id.discipline_preDiscipline);
-            item = itemView.findViewById(R.id.discipline_button);
+            //item = itemView.findViewById(R.id.discipline_button);
+            item = itemView.findViewById(R.id.discipline_view);
         }
 
     }

@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="122dp" />
+        app:layout_constraintGuide_begin="134dp" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
@@ -32,7 +32,7 @@
         android:layout_marginTop="28dp"
         android:layout_marginRight="40dp"
         android:text="@string/title_discipline_create"
-        android:textSize="36sp"
+        android:textSize="40sp"
         app:fontFamily="@font/montserrat_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +43,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="40dp"
         android:layout_marginRight="40dp"
         android:background="@drawable/form_input"
         android:hint="Discipline name"
@@ -133,7 +133,7 @@
         android:id="@+id/create"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="36dp"
         android:background="@drawable/main_button"
         android:padding="16dp"
         android:text="Create"
