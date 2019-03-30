@@ -1,13 +1,17 @@
 package com.example.deanery.activities.schedule;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.deanery.R;
@@ -42,6 +46,7 @@ public class ScheduleTimeRecyclerViewAdapter extends RecyclerView.Adapter<Schedu
     public void onBindViewHolder(@NonNull TimeSlotPlaceholder timeSlotPlaceholder, int i) {
         final TimeSlot item = getScheduleItems().get(i);
         timeSlotPlaceholder.copyProperties(item);
+        timeSlotPlaceholder.setOnClick();
     }
 
     @Override
@@ -59,7 +64,7 @@ public class ScheduleTimeRecyclerViewAdapter extends RecyclerView.Adapter<Schedu
         private TextView group;
         private TextView lecturer;
         private TimeSlot timeSlot;
-        private Button button;
+        private View timeSlotRow;
 
         public TimeSlotPlaceholder(@NonNull View view) {
             super(view);
@@ -67,6 +72,7 @@ public class ScheduleTimeRecyclerViewAdapter extends RecyclerView.Adapter<Schedu
             discipline = (TextView) view.findViewById(R.id.schedule_discipline);
             lecturer = (TextView) view.findViewById(R.id.schedule_lecturer);
             group = (TextView) view.findViewById(R.id.schedule_group);
+            timeSlotRow = view.findViewById(R.id.schedule_time_slot_row);
         }
 
         void copyProperties(final TimeSlot timeSlot) {
@@ -78,19 +84,32 @@ public class ScheduleTimeRecyclerViewAdapter extends RecyclerView.Adapter<Schedu
         }
 
         void setOnClick() {
-            // andlys
-//            button.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    //    Log.i("lizatestOnclick", departmentSpinner.getFullName());
-//                    Intent i = new Intent(v.getContext(), ScheduleUpdateActivity.class);
-//                    Bundle mBundle = new Bundle();
-//                    mBundle.putParcelable("schedule", item);
-//                    i.putExtras(mBundle);
-//                    i.putExtra("token", token);
-//                    v.getContext().startActivity(i);
-//                }
-//            });
+            timeSlotRow.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motion) {
+                    if (motion.getAction() == MotionEvent.ACTION_UP) {
+                        final Drawable background =
+                                ResourcesCompat.getDrawable(getContext().getResources(),
+                                        R.drawable.rounded_corners_for_cards_light_blue,
+                                        null);
+                        view.setBackground(background);
+                        return true;
+                    } else if (motion.getAction() == MotionEvent.ACTION_DOWN){
+                        final Drawable background =
+                                ResourcesCompat.getDrawable(getContext().getResources(),
+                                        R.drawable.rounded_corners_for_cards,
+                                        null);
+                        view.setBackground(background);
+                        Intent i = new Intent(view.getContext(), ScheduleUpdateActivity.class);
+                        Bundle mBundle = new Bundle();
+                        mBundle.putParcelable("schedule_time_slot", timeSlot);
+                        i.putExtras(mBundle);
+                        view.getContext().startActivity(i);
+                        return true;
+                    }
+                    return false;
+                }
+            });
         }
 
     }

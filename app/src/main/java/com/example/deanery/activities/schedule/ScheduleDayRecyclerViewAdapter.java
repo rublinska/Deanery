@@ -90,21 +90,5 @@ public class ScheduleDayRecyclerViewAdapter extends RecyclerView.Adapter<Schedul
 
         }
 
-        void setOnClick() {
-            // andlys
-//            button.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    //    Log.i("lizatestOnclick", departmentSpinner.getFullName());
-//                    Intent i = new Intent(v.getContext(), ScheduleUpdateActivity.class);
-//                    Bundle mBundle = new Bundle();
-//                    mBundle.putParcelable("schedule", item);
-//                    i.putExtras(mBundle);
-//                    i.putExtra("token", token);
-//                    v.getContext().startActivity(i);
-//                }
-//            });
-        }
-
     }
 }
