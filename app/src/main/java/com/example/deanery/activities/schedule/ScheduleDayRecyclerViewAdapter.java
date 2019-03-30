@@ -3,7 +3,6 @@ package com.example.deanery.activities.schedule;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -80,14 +79,8 @@ public class ScheduleDayRecyclerViewAdapter extends RecyclerView.Adapter<Schedul
         private void initTimeSlots() {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.list);
-            final int mColumnCount = 1;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
+            recyclerView.setLayoutManager(new LinearLayoutManager(context));
             recyclerView.setAdapter(new ScheduleTimeRecyclerViewAdapter(day.getTimeSlots(), getActivity()));
-
         }
 
     }
