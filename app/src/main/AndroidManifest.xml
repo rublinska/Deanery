@@ -28,6 +28,7 @@
         <activity android:name=".activities.discipline.DisciplineUpdateActivity"></activity>
 
         <activity android:name=".activities.schedule.ScheduleCreateActivity"></activity>
+        <activity android:name=".activities.schedule.ScheduleUpdateActivity"></activity>
 
         <activity
             android:name=".activities.MainActivity"
