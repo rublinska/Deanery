@@ -1,61 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="20dp"
-    tools:context=".activities.schedule.ScheduleCreateActivity"
-    android:gravity="center">
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".activities.schedule.ScheduleCreateActivity">
 
     <EditText
-        android:id="@+id/department_name"
+        android:id="@+id/schedule_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ytryrty" />
+        android:text="time" />
 
     <EditText
-        android:id="@+id/position"
+        android:id="@+id/schedule_discipline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="hgfbvcbvcb" />
+        android:text="discipline" />
 
-        <EditText
-            android:id="@+id/phone_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="oiuoiuo"/>
+    <EditText
+        android:id="@+id/schedule_lecturer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="lecturer" />
 
+    <EditText
+        android:id="@+id/schedule_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="group" />
 
-        <Spinner
-            android:id="@+id/department"
-            android:layout_width="match_parent"
-            android:layout_height="40dp" />
+    <EditText
+        android:id="@+id/schedule_semester"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="semester" />
 
+    <EditText
+        android:id="@+id/schedule_specialty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="specialty" />
+
+    <EditText
+        android:id="@+id/schedule_day_of_week"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="day_of_week" />
 
     <!--TODO place it at the bottom-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="bottom">
+        android:layout_gravity="bottom"
+        android:orientation="horizontal">
+
         <Button
             android:id="@+id/cancel"
-            android:background="#F44336"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.45"
-            android:text="Cancel"/>
+            android:background="#F44336"
+            android:text="Cancel" />
+
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_weight="0.04"/>
+            android:layout_weight="0.04" />
+
         <Button
             android:id="@+id/create"
-            android:background="#009688"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.45"
-            android:text="Create"/>
+            android:background="#009688"
+            android:text="Create" />
     </LinearLayout>
 </LinearLayout>
