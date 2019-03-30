@@ -6,4 +6,5 @@
     <color name="colorAccent">#2196F3</color>
     <color name="colorTextPrimaryLight">#706C6C</color>
     <color name="colorTextPrimaryDark">#000000</color>
+    <color name="colorTimeSlot">#54a9ec</color>
 </resources>

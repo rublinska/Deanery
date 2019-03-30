@@ -3,35 +3,35 @@ package com.example.deanery.dataModels.schedule;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class ScheduleItem implements Parcelable {
+public class TimeSlot implements Parcelable {
     private String timeInterval;
     private String lecturer;
     private String group;
     private String discipline;
 
-    public ScheduleItem(String timeInterval, String lecturer, String group, String discipline) {
+    public TimeSlot(String timeInterval, String lecturer, String group, String discipline) {
         this.timeInterval = timeInterval;
         this.lecturer = lecturer;
         this.group = group;
         this.discipline = discipline;
     }
 
-    protected ScheduleItem(Parcel in) {
+    protected TimeSlot(Parcel in) {
         timeInterval = in.readString();
         lecturer = in.readString();
         group = in.readString();
         discipline = in.readString();
     }
 
-    public static final Creator<ScheduleItem> CREATOR = new Creator<ScheduleItem>() {
+    public static final Creator<TimeSlot> CREATOR = new Creator<TimeSlot>() {
         @Override
-        public ScheduleItem createFromParcel(Parcel in) {
-            return new ScheduleItem(in);
+        public TimeSlot createFromParcel(Parcel in) {
+            return new TimeSlot(in);
         }
 
         @Override
-        public ScheduleItem[] newArray(int size) {
-            return new ScheduleItem[size];
+        public TimeSlot[] newArray(int size) {
+            return new TimeSlot[size];
         }
     };
 

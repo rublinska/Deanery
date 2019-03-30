@@ -1,7 +1,6 @@
 package com.example.deanery.activities.schedule;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -11,17 +10,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.deanery.DeaneryAPI;
 import com.example.deanery.R;
 import com.example.deanery.RefreshInterface;
 import com.example.deanery.ServiceGenerator;
 import com.example.deanery.activities.MainActivity;
-import com.example.deanery.dataModels.schedule.ScheduleItem;
+import com.example.deanery.dataModels.schedule.Day;
+import com.example.deanery.dataModels.schedule.TimeSlot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ScheduleFragment extends Fragment implements RefreshInterface {
@@ -34,7 +33,7 @@ public class ScheduleFragment extends Fragment implements RefreshInterface {
     final DeaneryAPI client = ServiceGenerator.createService(DeaneryAPI.class);
 
     static String token = "";
-    List<ScheduleItem> scheduleItems = new ArrayList<>();
+    final List<Day> days = getTemporaryTestData();
 
 
     /**
@@ -43,8 +42,22 @@ public class ScheduleFragment extends Fragment implements RefreshInterface {
      */
     public ScheduleFragment() {
         // andlys
-        scheduleItems.add(new ScheduleItem("timeinterval", "lecturer", "group", "discipline"));
-        scheduleItems.add(new ScheduleItem("timeinterval2", "lecturer2", "group2", "discipline2"));
+   }
+
+    @Deprecated // TODO andlys change this to real data
+    private static List<Day> getTemporaryTestData() {
+        final List<TimeSlot> scheduleItems = new ArrayList<>();
+        scheduleItems.add(new TimeSlot("timeinterval", "lecturer", "group", "discipline"));
+        scheduleItems.add(new TimeSlot("timeinterval2", "lecturer2", "group2", "discipline2"));
+        scheduleItems.add(new TimeSlot("timeinterval3", "lecturer3", "group3", "discipline3"));
+        final Day monday = new Day("Monday", scheduleItems);
+        final List<TimeSlot> scheduleItems2 = new ArrayList<>();
+        scheduleItems2.add(new TimeSlot("timeinterval4", "lecturer4", "group4", "discipline4"));
+        scheduleItems2.add(new TimeSlot("timeinterval5", "lecturer5", "group5", "discipline5"));
+        scheduleItems2.add(new TimeSlot("timeinterval6", "lecturer6", "group6", "discipline6"));
+        final Day tuesday = new Day("Tuesday", scheduleItems2);
+        final Day wednesday = new Day("Wednesday", scheduleItems);
+        return Arrays.asList(monday, tuesday, wednesday);
     }
 
     // TODO: Customize parameter initialization
@@ -77,11 +90,8 @@ public class ScheduleFragment extends Fragment implements RefreshInterface {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new ScheduleRecyclerViewAdapter(scheduleItems, token, getActivity()));
+            recyclerView.setAdapter(new ScheduleDayRecyclerViewAdapter(days, getActivity()));
         }
-
-
-
 
 //        Button btn = (Button) view.findViewById(R.id.btn);
 //        btn.setOnClickListener(new View.OnClickListener() {
