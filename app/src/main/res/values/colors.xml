@@ -10,4 +10,5 @@
     <color name="mainBlue">#3498db</color>
     <color name="mainGrey">#BDBDBD</color>
     <color name="mainRed">#e74c3c</color>
+    <color name="colorTimeSlot">#54a9ec</color>
 </resources>

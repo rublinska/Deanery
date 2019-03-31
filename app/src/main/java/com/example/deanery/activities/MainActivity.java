@@ -7,7 +7,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.text.Layout;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,12 +17,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.example.deanery.DeaneryAPI;
-import com.example.deanery.FragmentExtend;
 import com.example.deanery.R;
 import com.example.deanery.RefreshInterface;
 import com.example.deanery.ServiceGenerator;
-import com.example.deanery.activities.discipline.DisciplineCreateActivity;
-import com.example.deanery.activities.discipline.DisciplineFragment;
+import com.example.deanery.activities.schedule.ScheduleFragment;
+import com.example.deanery.activities.schedule.ScheduleCreateActivity;
 import com.example.deanery.activities.student.StudentCreateActivity;
 import com.example.deanery.activities.student.StudentFragment;
 import com.example.deanery.activities.department.DepartmentCreateActivity;
@@ -35,7 +33,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     final DeaneryAPI client = ServiceGenerator.createService(DeaneryAPI.class);
-    static String token = "";
+    private static String token = "";
     static Integer lastItemId = 0;
     FloatingActionButton fab;
     DrawerLayout drawer;
@@ -43,7 +41,7 @@ public class MainActivity extends AppCompatActivity
     FragmentManager fragmentManager;
     Context context;
 
-    public String getToken () {
+    public static String getToken () {
         return token;
     }
 
@@ -165,9 +163,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void setFragment () {
-        Fragment fragment = null;
+        final Fragment fragment;
         final Intent intent;
-        Class fragmentClass;
         switch(lastItemId) {
 
             case R.id.nav_departments:
@@ -190,24 +187,17 @@ public class MainActivity extends AppCompatActivity
          /*   case R.id.nav_create_report:
                 fragmentClass = UniReportFragment.class;
                 intent = new Intent(getApplicationContext(), UniReportCreateActivity.class);
+                break;*/
+            case R.id.nav_schedule_cells:
+                fragment = ScheduleFragment.newInstance(swipeLayout);
+                intent = new Intent(getApplicationContext(), ScheduleCreateActivity.class);
                 break;
-            default:
-                fragmentClass = ScheduleFragment.class;
-                intent = new Intent(getApplicationContext(), ClassCreateActivity.class);*/
-
-
             default:
                 intent = new Intent(getApplicationContext(), DepartmentCreateActivity.class);
                 fragment = DepartmentFragment.newInstance(swipeLayout);
                 /*fragmentClass = LecturerFragment.class;
                 intent = new Intent(getApplicationContext(), LecturerCreateActivity.class);*/
         }
-
-        /*try {
-            fragment = (Fragment) fragmentClass.newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -219,11 +209,10 @@ public class MainActivity extends AppCompatActivity
         // Insert the fragment by replacing any existing fragment
         fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 
-        final Fragment finalFragment = fragment;
         swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                ((RefreshInterface) finalFragment).refreshItems();
+                ((RefreshInterface) fragment).refreshItems();
             }
         });
     }

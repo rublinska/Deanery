@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".activities.schedule.ScheduleCreateActivity">
+
+    <EditText
+        android:id="@+id/schedule_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="time" />
+
+    <EditText
+        android:id="@+id/schedule_discipline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="discipline" />
+
+    <EditText
+        android:id="@+id/schedule_lecturer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="lecturer" />
+
+    <EditText
+        android:id="@+id/schedule_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="group" />
+
+    <EditText
+        android:id="@+id/schedule_semester"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="semester" />
+
+    <EditText
+        android:id="@+id/schedule_specialty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="specialty" />
+
+    <EditText
+        android:id="@+id/schedule_day_of_week"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="day_of_week" />
+
+    <EditText
+        android:id="@+id/schedule_auditory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="auditory" />
+
+    <!--TODO place it at the bottom-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.45"
+            android:background="#F44336"
+            android:text="Cancel" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="0.04" />
+
+        <Button
+            android:id="@+id/create"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.45"
+            android:background="#009688"
+            android:text="Create" />
+    </LinearLayout>
+</LinearLayout>

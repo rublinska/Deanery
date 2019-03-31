@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:background="@drawable/rounded_corners_for_cards"
+    android:orientation="horizontal"
+    android:paddingStart="5dp"
+    android:paddingTop="3dp"
+    android:paddingEnd="5dp"
+    android:paddingBottom="3dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".activities.MainActivity">
+
+    <LinearLayout
+        android:id="@+id/schedule_time_slot_row"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/rounded_corners_for_cards_light_blue"
+        android:clickable="true"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp">
+
+        <TextView
+            android:id="@+id/schedule_time"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:ems="10"
+            android:text="8:30 - 9:50" />
+
+        <TextView
+            android:id="@+id/schedule_discipline"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:text="discipline" />
+
+        <TextView
+            android:id="@+id/schedule_lecturer"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:text="lecturer" />
+
+        <TextView
+            android:id="@+id/schedule_group"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:text="group" />
+
+        <TextView
+            android:id="@+id/schedule_auditory"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:text="auditory" />
+
+    </LinearLayout>
+
+</LinearLayout>

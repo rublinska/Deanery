@@ -2,6 +2,7 @@ package com.example.deanery;
 
 import com.example.deanery.dataModels.auditory.Auditory;
 import com.example.deanery.dataModels.auditory.GetAllAuditories;
+import com.example.deanery.dataModels.common.DeaneryGetList;
 import com.example.deanery.dataModels.department.Department;
 import com.example.deanery.dataModels.department.DepartmentResponse;
 import com.example.deanery.dataModels.department.GetAllDepartments;
@@ -14,6 +15,7 @@ import com.example.deanery.dataModels.lecturer.GetLecturer;
 import com.example.deanery.dataModels.GetStatus;
 import com.example.deanery.dataModels.lecturer.Lecturer;
 import com.example.deanery.dataModels.login.User;
+import com.example.deanery.dataModels.schedule.ScheduleItem;
 import com.example.deanery.dataModels.specialty.GetAllSpecialties;
 import com.example.deanery.dataModels.student.GetAllStudents;
 import com.example.deanery.dataModels.student.Student;
@@ -100,7 +102,7 @@ public interface DeaneryAPI {
     @GET("disciplines")
     Call<GetAllDisciplines> getAllDisciplines(@Query("token") String token);
 
-
-
+    @GET("university-schedules")
+    Call<DeaneryGetList<ScheduleItem>> getAllScheduleItems(@Query("token") String token);
 
 }

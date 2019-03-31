@@ -134,7 +134,7 @@ public class LoginActivity extends AppCompatActivity  {
                             i.putExtra("token", response.body().getAccessToken());
                             getApplicationContext().startActivity(i);
 
-                        } else if (response.message() == "Unauthorized") {
+                        } else if (response.message().equals("Unauthorized")) {
                             //todo: add message about failed authorization
                             Toast.makeText(getApplicationContext(), "Check your credentials",
                                     Toast.LENGTH_LONG).show();
@@ -148,6 +148,9 @@ public class LoginActivity extends AppCompatActivity  {
                         if (!(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
                                 connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED)) {
                             Toast.makeText(getApplicationContext(), "Check your internet connection and try again",
+                                    Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Error: server may be down",
                                     Toast.LENGTH_LONG).show();
                         }
                     }
