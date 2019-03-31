@@ -4,11 +4,12 @@ package com.example.deanery.dataModels.student;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.example.deanery.dataModels.common.DeaneryDto;
 import com.example.deanery.dataModels.specialty.Specialty;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Student implements Parcelable
+public class Student extends DeaneryDto implements Parcelable
 {
 
     @SerializedName("id")
@@ -32,12 +33,6 @@ public class Student implements Parcelable
     @SerializedName("specialty_id")
     @Expose
     private Integer specialtyId;
-    @SerializedName("created_at")
-    @Expose
-    private String createdAt;
-    @SerializedName("updated_at")
-    @Expose
-    private String updatedAt;
     @SerializedName("specialty")
     @Expose
     private Specialty specialty;

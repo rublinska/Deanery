@@ -1,23 +1,17 @@
 package com.example.deanery;
 
 import com.example.deanery.dataModels.auditory.Auditory;
-import com.example.deanery.dataModels.auditory.GetAllAuditories;
+import com.example.deanery.dataModels.common.DeaneryGet;
 import com.example.deanery.dataModels.common.DeaneryGetList;
 import com.example.deanery.dataModels.department.Department;
-import com.example.deanery.dataModels.department.DepartmentResponse;
-import com.example.deanery.dataModels.department.GetAllDepartments;
 import com.example.deanery.dataModels.discipline.Discipline;
-import com.example.deanery.dataModels.discipline.GetAllDisciplines;
 import com.example.deanery.dataModels.login.AuthTokenFromLogin;
 import com.example.deanery.dataModels.login.BodyForLogin;
-import com.example.deanery.dataModels.lecturer.GetAllLecturers;
-import com.example.deanery.dataModels.lecturer.GetLecturer;
 import com.example.deanery.dataModels.GetStatus;
 import com.example.deanery.dataModels.lecturer.Lecturer;
 import com.example.deanery.dataModels.login.User;
 import com.example.deanery.dataModels.schedule.ScheduleItem;
-import com.example.deanery.dataModels.specialty.GetAllSpecialties;
-import com.example.deanery.dataModels.student.GetAllStudents;
+import com.example.deanery.dataModels.specialty.Specialty;
 import com.example.deanery.dataModels.student.Student;
 
 import retrofit2.Call;
@@ -47,14 +41,14 @@ public interface DeaneryAPI {
     Call<GetStatus> deleteLecturer(@Path("id") Integer id , @Query("token") String token);
 
     @GET("lecturers")
-    Call<GetAllLecturers> getAllLecturers(@Query("token") String token);
+    Call<DeaneryGetList<Lecturer>> getAllLecturers(@Query("token") String token);
 
     @GET("lecturers/{id}")
-    Call<GetLecturer> getLecturer(@Path("id") Integer id , @Query("token") String token);
+    Call<DeaneryGet<Lecturer>> getLecturer(@Path("id") Integer id , @Query("token") String token);
 
 
     @POST("departments")
-    Call<DepartmentResponse> createDepartment(@Query("token") String token, @Body Department department);
+    Call<Department> createDepartment(@Query("token") String token, @Body Department department);
 
     @POST("departments/{id}")
     Call<Department> updateDepartment(@Path("id") Integer id , @Query("token") String token, @Body Department department);
@@ -63,11 +57,11 @@ public interface DeaneryAPI {
     Call<GetStatus> deleteDepartment(@Path("id") Integer id , @Query("token") String token);
 
     @GET("departments")
-    Call<GetAllDepartments> getAllDepartments(@Query("token") String token);
+    Call<DeaneryGetList<Department>> getAllDepartments(@Query("token") String token);
 
 
     @GET("auditories")
-    Call<GetAllAuditories> getAllAuditories(@Query("token") String token);
+    Call<DeaneryGetList<Auditory>> getAllAuditories(@Query("token") String token);
 
     @POST("departments/{id}")
     Call<Auditory> updateAuditory(@Path("id") Integer id , @Query("token") String token, @Body Auditory auditory);
@@ -83,11 +77,11 @@ public interface DeaneryAPI {
     Call<GetStatus> deleteStudent(@Path("id") Integer id , @Query("token") String token);
 
     @GET("students")
-    Call<GetAllStudents> getAllStudents(@Query("token") String token);
+    Call<DeaneryGetList<Student>> getAllStudents(@Query("token") String token);
 
 
     @GET("specialties")
-    Call<GetAllSpecialties> getAllSpecialties(@Query("token") String token);
+    Call<DeaneryGetList<Specialty>> getAllSpecialties(@Query("token") String token);
 
 
     @POST("disciplines")
@@ -100,7 +94,7 @@ public interface DeaneryAPI {
     Call<GetStatus> deleteDiscipline(@Path("id") Integer id , @Query("token") String token);
 
     @GET("disciplines")
-    Call<GetAllDisciplines> getAllDisciplines(@Query("token") String token);
+    Call<DeaneryGetList<Discipline>> getAllDisciplines(@Query("token") String token);
 
     @GET("university-schedules")
     Call<DeaneryGetList<ScheduleItem>> getAllScheduleItems(@Query("token") String token);

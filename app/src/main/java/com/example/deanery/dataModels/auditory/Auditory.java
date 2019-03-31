@@ -1,12 +1,13 @@
 
 package com.example.deanery.dataModels.auditory;
 
+import com.example.deanery.dataModels.common.DeaneryDto;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Auditory implements Serializable {
+public class Auditory extends DeaneryDto implements Serializable {
 
     @SerializedName("id")
     @Expose
@@ -23,12 +24,6 @@ public class Auditory implements Serializable {
     @SerializedName("department_id")
     @Expose
     private Integer departmentId;
-    @SerializedName("created_at")
-    @Expose
-    private String createdAt;
-    @SerializedName("updated_at")
-    @Expose
-    private String updatedAt;
 
     public Integer getId() {
         return id;

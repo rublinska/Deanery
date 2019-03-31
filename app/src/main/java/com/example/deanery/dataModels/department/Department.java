@@ -8,11 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.deanery.dataModels.auditory.Auditory;
+import com.example.deanery.dataModels.common.DeaneryDto;
 import com.example.deanery.dataModels.lecturer.Lecturer;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Department implements Parcelable {
+public class Department extends DeaneryDto implements Parcelable {
 
     @SerializedName("id")
     @Expose
@@ -20,12 +21,6 @@ public class Department implements Parcelable {
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("created_at")
-    @Expose
-    private String createdAt;
-    @SerializedName("updated_at")
-    @Expose
-    private String updatedAt;
     @SerializedName("auditories")
     @Expose
     private List<Auditory> auditories = null;

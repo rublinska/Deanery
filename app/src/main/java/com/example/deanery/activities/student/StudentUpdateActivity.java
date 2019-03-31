@@ -13,12 +13,10 @@ import com.example.deanery.DeaneryAPI;
 import com.example.deanery.R;
 import com.example.deanery.ServiceGenerator;
 import com.example.deanery.dataModels.GetStatus;
-import com.example.deanery.dataModels.lecturer.Lecturer;
-import com.example.deanery.dataModels.specialty.GetAllSpecialties;
+import com.example.deanery.dataModels.common.DeaneryGetList;
 import com.example.deanery.dataModels.specialty.Specialty;
 import com.example.deanery.dataModels.student.Student;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -65,10 +63,10 @@ public class StudentUpdateActivity extends AppCompatActivity {
         endUni.setText(studentForUpdate.getEndUniversity());
         endReason.setText(studentForUpdate.getEndReason());
 
-        Call<GetAllSpecialties> getAllSpecialties = client.getAllSpecialties(token);
-        getAllSpecialties.enqueue(new Callback<GetAllSpecialties>() {
+        Call<DeaneryGetList<Specialty>> getAllSpecialties = client.getAllSpecialties(token);
+        getAllSpecialties.enqueue(new Callback<DeaneryGetList<Specialty>>() {
             @Override
-            public void onResponse(Call<GetAllSpecialties> call, Response<GetAllSpecialties> response) {
+            public void onResponse(Call<DeaneryGetList<Specialty>> call, Response<DeaneryGetList<Specialty>> response) {
             //    Log.i("LizatestUpdStudent", response.body().getData().get(0).getName());
             //    Log.i("LizatestUpdStudent", response.raw().toString());
                 List<Specialty> specialtiesArray = response.body().getData();
@@ -78,7 +76,7 @@ public class StudentUpdateActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<GetAllSpecialties> call, Throwable t) {
+            public void onFailure(Call<DeaneryGetList<Specialty>> call, Throwable t) {
             //    Log.i("LizatestError", String.valueOf(call.isExecuted()));
             }
         });

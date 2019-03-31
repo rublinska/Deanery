@@ -1,10 +1,11 @@
 package com.example.deanery.dataModels.schedule;
 
 import com.example.deanery.dataModels.auditory.Auditory;
+import com.example.deanery.dataModels.common.DeaneryDto;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ScheduleItem {
+public class ScheduleItem extends DeaneryDto {
 
     @SerializedName("id")
     @Expose

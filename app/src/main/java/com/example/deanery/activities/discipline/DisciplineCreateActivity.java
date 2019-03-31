@@ -14,9 +14,8 @@ import android.widget.Spinner;
 import com.example.deanery.DeaneryAPI;
 import com.example.deanery.R;
 import com.example.deanery.ServiceGenerator;
+import com.example.deanery.dataModels.common.DeaneryGetList;
 import com.example.deanery.dataModels.discipline.Discipline;
-import com.example.deanery.dataModels.discipline.GetAllDisciplines;
-import com.example.deanery.dataModels.specialty.GetAllSpecialties;
 import com.example.deanery.dataModels.specialty.Specialty;
 
 import java.util.ArrayList;
@@ -78,10 +77,10 @@ public class DisciplineCreateActivity extends AppCompatActivity {
         cancel = findViewById(R.id.cancel);
         createNewDiscipline = findViewById(R.id.create);
 
-        Call<GetAllSpecialties> getAllSpecialties = client.getAllSpecialties(token);
-        getAllSpecialties.enqueue(new Callback<GetAllSpecialties>() {
+        Call<DeaneryGetList<Specialty>> getAllSpecialties = client.getAllSpecialties(token);
+        getAllSpecialties.enqueue(new Callback<DeaneryGetList<Specialty>>() {
             @Override
-            public void onResponse(Call<GetAllSpecialties> call, Response<GetAllSpecialties> response) {
+            public void onResponse(Call<DeaneryGetList<Specialty>> call, Response<DeaneryGetList<Specialty>> response) {
                 //    Log.i("LizatestUpdDiscipline", response.body().getData().get(0).getName());
                 //    Log.i("LizatestUpdDiscipline", response.raw().toString());
                 specialtiesArray = response.body().getData();
@@ -90,16 +89,16 @@ public class DisciplineCreateActivity extends AppCompatActivity {
                 specialtySpinner.setAdapter(specialtiesAdapter);
             }
             @Override
-            public void onFailure(Call<GetAllSpecialties> call, Throwable t) {
+            public void onFailure(Call<DeaneryGetList<Specialty>> call, Throwable t) {
                 //    Log.i("LizatestError", String.valueOf(call.isExecuted()));
             }
         });
 
 
-        Call<GetAllDisciplines> getAllDisciplines = client.getAllDisciplines(token);
-        getAllDisciplines.enqueue(new Callback<GetAllDisciplines>() {
+        Call<DeaneryGetList<Discipline>> getAllDisciplines = client.getAllDisciplines(token);
+        getAllDisciplines.enqueue(new Callback<DeaneryGetList<Discipline>>() {
             @Override
-            public void onResponse(Call<GetAllDisciplines> call, Response<GetAllDisciplines> response) {
+            public void onResponse(Call<DeaneryGetList<Discipline>> call, Response<DeaneryGetList<Discipline>> response) {
                 //    Log.i("LizatestUpdDiscipline", response.body().getData().get(0).getName());
                 //    Log.i("LizatestUpdDiscipline", response.raw().toString());
                 disciplinesArray = response.body().getData();
@@ -108,7 +107,7 @@ public class DisciplineCreateActivity extends AppCompatActivity {
                 disciplineSpinner.setAdapter(disciplinesAdapter);
             }
             @Override
-            public void onFailure(Call<GetAllDisciplines> call, Throwable t) {
+            public void onFailure(Call<DeaneryGetList<Discipline>> call, Throwable t) {
                 //    Log.i("LizatestError", String.valueOf(call.isExecuted()));
             }
         });

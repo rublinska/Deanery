@@ -20,9 +20,8 @@ import com.example.deanery.activities.MainActivity;
 import com.example.deanery.activities.department.DepartmentFragment;
 import com.example.deanery.activities.department.DepartmentRecyclerViewAdapter;
 import com.example.deanery.activities.lecturer.LecturerRecyclerViewAdapter;
+import com.example.deanery.dataModels.common.DeaneryGetList;
 import com.example.deanery.dataModels.department.Department;
-import com.example.deanery.dataModels.department.GetAllDepartments;
-import com.example.deanery.dataModels.student.GetAllStudents;
 import com.example.deanery.dataModels.student.Student;
 
 import java.util.ArrayList;
@@ -89,10 +88,10 @@ public class StudentFragment extends Fragment implements RefreshInterface {
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
 //      token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE1NTI1MDQwODcsImV4cCI6MTU1MjUwNzY4NywibmJmIjoxNTUyNTA0MDg3LCJqdGkiOiJDT2RpaXdJZzRPV3lBT3NCIiwic3ViIjoxLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.O-yZKKxEC4Mt5QPIqxHLTJVT_Sx1Zwzy0w2AIixE8to"
-        Call<GetAllStudents> getData = client.getAllStudents(token);
-        getData.enqueue(new Callback<GetAllStudents>() {
+        Call<DeaneryGetList<Student>> getData = client.getAllStudents(token);
+        getData.enqueue(new Callback<DeaneryGetList<Student>>() {
             @Override
-            public void onResponse(Call<GetAllStudents> call, Response<GetAllStudents> response) {
+            public void onResponse(Call<DeaneryGetList<Student>> call, Response<DeaneryGetList<Student>> response) {
             //    Log.i("Lizatest", call.request().url().toString());
             //    Log.i("Lizatest", response.body().getData().get(0).getFullName());
                 if(response.body().getData().size() > 0){
@@ -105,7 +104,7 @@ public class StudentFragment extends Fragment implements RefreshInterface {
             }
 
             @Override
-            public void onFailure(Call<GetAllStudents> call, Throwable t) {
+            public void onFailure(Call<DeaneryGetList<Student>> call, Throwable t) {
 
             }
         });
@@ -127,10 +126,10 @@ public class StudentFragment extends Fragment implements RefreshInterface {
 
     @Override
     public void refreshItems() {
-        Call<GetAllStudents> getAllStudents = client.getAllStudents(token);
-        getAllStudents.enqueue(new Callback<GetAllStudents>() {
+        Call<DeaneryGetList<Student>> getAllStudents = client.getAllStudents(token);
+        getAllStudents.enqueue(new Callback<DeaneryGetList<Student>>() {
             @Override
-            public void onResponse(Call<GetAllStudents> call, Response<GetAllStudents> response) {
+            public void onResponse(Call<DeaneryGetList<Student>> call, Response<DeaneryGetList<Student>> response) {
                 //    Log.i("Lizatest", call.request().url().toString());
                 Log.i("LizatestArraySize", String.valueOf(response.body().getData().size()));
                 if (response.body().getData().size() > 0) {
@@ -144,7 +143,7 @@ public class StudentFragment extends Fragment implements RefreshInterface {
             }
 
             @Override
-            public void onFailure(Call<GetAllStudents> call, Throwable t) {
+            public void onFailure(Call<DeaneryGetList<Student>> call, Throwable t) {
 
             }
         });

@@ -18,6 +18,7 @@ public class DeaneryGet<T> {
 
     public void setData(T data) {
         this.data = data;
+        data.getClass().getTypeName().toLowerCase();
     }
 
     public Boolean getStatus() {

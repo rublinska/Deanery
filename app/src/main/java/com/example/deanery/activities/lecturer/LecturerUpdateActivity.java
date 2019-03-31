@@ -14,8 +14,8 @@ import com.example.deanery.DeaneryAPI;
 import com.example.deanery.R;
 import com.example.deanery.ServiceGenerator;
 import com.example.deanery.dataModels.GetStatus;
+import com.example.deanery.dataModels.common.DeaneryGetList;
 import com.example.deanery.dataModels.department.Department;
-import com.example.deanery.dataModels.department.GetAllDepartments;
 import com.example.deanery.dataModels.lecturer.Lecturer;
 
 
@@ -59,10 +59,10 @@ public class LecturerUpdateActivity extends AppCompatActivity {
         phone.setText(lecturerForUpdate.getPhoneNumber());
         position.setText(lecturerForUpdate.getPosition());
 
-        Call<GetAllDepartments> getAllDepartments = client.getAllDepartments(token);
-        getAllDepartments.enqueue(new Callback<GetAllDepartments>() {
+        Call<DeaneryGetList<Department>> getAllDepartments = client.getAllDepartments(token);
+        getAllDepartments.enqueue(new Callback<DeaneryGetList<Department>>() {
             @Override
-            public void onResponse(Call<GetAllDepartments> call, Response<GetAllDepartments> response) {
+            public void onResponse(Call<DeaneryGetList<Department>> call, Response<DeaneryGetList<Department>> response) {
 
                 List<Department> departmentsArray = response.body().getData();
                 ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, departmentsArray);
@@ -80,7 +80,7 @@ public class LecturerUpdateActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<GetAllDepartments> call, Throwable t) {
+            public void onFailure(Call<DeaneryGetList<Department>> call, Throwable t) {
                 Log.i("LizatestError", String.valueOf(call.isExecuted()));
             }
         });

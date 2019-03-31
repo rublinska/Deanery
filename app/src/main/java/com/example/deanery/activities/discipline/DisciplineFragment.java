@@ -15,7 +15,7 @@ import com.example.deanery.R;
 import com.example.deanery.ServiceGenerator;
 import com.example.deanery.activities.MainActivity;
 import com.example.deanery.activities.discipline.DisciplineRecyclerViewAdapter;
-import com.example.deanery.dataModels.discipline.GetAllDisciplines;
+import com.example.deanery.dataModels.common.DeaneryGetList;
 import com.example.deanery.dataModels.discipline.Discipline;
 
 import java.util.ArrayList;
@@ -80,10 +80,10 @@ public class DisciplineFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_discipline_list, container, false);
 
 //      token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE1NTI1MDQwODcsImV4cCI6MTU1MjUwNzY4NywibmJmIjoxNTUyNTA0MDg3LCJqdGkiOiJDT2RpaXdJZzRPV3lBT3NCIiwic3ViIjoxLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.O-yZKKxEC4Mt5QPIqxHLTJVT_Sx1Zwzy0w2AIixE8to"
-        Call<GetAllDisciplines> getData = client.getAllDisciplines(token);
-        getData.enqueue(new Callback<GetAllDisciplines>() {
+        Call<DeaneryGetList<Discipline>> getData = client.getAllDisciplines(token);
+        getData.enqueue(new Callback<DeaneryGetList<Discipline>>() {
             @Override
-            public void onResponse(Call<GetAllDisciplines> call, Response<GetAllDisciplines> response) {
+            public void onResponse(Call<DeaneryGetList<Discipline>> call, Response<DeaneryGetList<Discipline>> response) {
             //    Log.i("Lizatest", call.request().url().toString());
             //    Log.i("Lizatest", response.body().getData().get(0).getFullName());
                 if(response.body().getData().size() > 0){
@@ -105,7 +105,7 @@ public class DisciplineFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<GetAllDisciplines> call, Throwable t) {
+            public void onFailure(Call<DeaneryGetList<Discipline>> call, Throwable t) {
 
             }
         });

@@ -1,9 +1,10 @@
 package com.example.deanery.dataModels.schedule;
 
+import com.example.deanery.dataModels.common.DeaneryDto;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class AcademicWeek {
+public class AcademicWeek extends DeaneryDto {
     @SerializedName("id")
     @Expose
     private Integer id;

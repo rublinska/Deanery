@@ -14,10 +14,9 @@ import com.example.deanery.DeaneryAPI;
 import com.example.deanery.R;
 import com.example.deanery.ServiceGenerator;
 import com.example.deanery.dataModels.auditory.Auditory;
-import com.example.deanery.dataModels.auditory.GetAllAuditories;
+import com.example.deanery.dataModels.common.DeaneryGetList;
 import com.example.deanery.dataModels.department.Department;
 import com.example.deanery.dataModels.GetStatus;
-import com.example.deanery.dataModels.lecturer.GetAllLecturers;
 import com.example.deanery.dataModels.lecturer.Lecturer;
 
 
@@ -66,10 +65,10 @@ public class DepartmentUpdateActivity extends AppCompatActivity {
         auditories = findViewById(R.id.department_auditories);
         lecturers = findViewById(R.id.department_lecturers);
 
-        Call<GetAllAuditories> getAllAuditories = client.getAllAuditories(token);
-        getAllAuditories.enqueue(new Callback<GetAllAuditories>() {
+        Call<DeaneryGetList<Auditory>> getAllAuditories = client.getAllAuditories(token);
+        getAllAuditories.enqueue(new Callback<DeaneryGetList<Auditory>>() {
             @Override
-            public void onResponse(Call<GetAllAuditories> call, Response<GetAllAuditories> response) {
+            public void onResponse(Call<DeaneryGetList<Auditory>> call, Response<DeaneryGetList<Auditory>> response) {
                 Log.i("LizatestGEtAuditory", response.raw().toString());
                 if (response.body().getData().size() > 0) {
                     auditoryList = new String[response.body().getData().size()];
@@ -88,16 +87,16 @@ public class DepartmentUpdateActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<GetAllAuditories> call, Throwable t) {
+            public void onFailure(Call<DeaneryGetList<Auditory>> call, Throwable t) {
                 Log.i("LizatestErrgetauditory", String.valueOf(call.isExecuted()));
             }
         });
 
 
-        Call<GetAllLecturers> getAllLecturers = client.getAllLecturers(token);
-        getAllLecturers.enqueue(new Callback<GetAllLecturers>() {
+        Call<DeaneryGetList<Lecturer>> getAllLecturers = client.getAllLecturers(token);
+        getAllLecturers.enqueue(new Callback<DeaneryGetList<Lecturer>>() {
             @Override
-            public void onResponse(Call<GetAllLecturers> call, Response<GetAllLecturers> response) {
+            public void onResponse(Call<DeaneryGetList<Lecturer>> call, Response<DeaneryGetList<Lecturer>> response) {
                 Log.i("LizatestGEtAuditory", String.valueOf(call.request()));
                 if (response.body().getData().size() > 0) {
                     lecturerList = new String[response.body().getData().size()];
@@ -116,7 +115,7 @@ public class DepartmentUpdateActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<GetAllLecturers> call, Throwable t) {
+            public void onFailure(Call<DeaneryGetList<Lecturer>> call, Throwable t) {
                 Log.i("LizatestErrgetauditory", String.valueOf(call.request()));
             }
         });

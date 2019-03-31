@@ -1,10 +1,11 @@
 
 package com.example.deanery.dataModels.login;
 
+import com.example.deanery.dataModels.common.DeaneryDto;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class User {
+public class User extends DeaneryDto {
 
     @SerializedName("id")
     @Expose
@@ -15,12 +16,6 @@ public class User {
     @SerializedName("email")
     @Expose
     private String email;
-    @SerializedName("created_at")
-    @Expose
-    private String createdAt;
-    @SerializedName("updated_at")
-    @Expose
-    private String updatedAt;
 
     public Integer getId() {
         return id;

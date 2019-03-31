@@ -1,5 +1,7 @@
 package com.example.deanery.dataModels.schedule;
 
+import com.example.deanery.dataModels.common.DeaneryDto;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
