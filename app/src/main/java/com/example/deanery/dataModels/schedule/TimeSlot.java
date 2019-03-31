@@ -4,16 +4,19 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class TimeSlot implements Parcelable {
+
     private String timeInterval;
     private String lecturer;
     private String group;
     private String discipline;
+    private String auditory;
 
-    public TimeSlot(String timeInterval, String lecturer, String group, String discipline) {
+    public TimeSlot(String timeInterval, String lecturer, String group, String discipline, String auditory) {
         this.timeInterval = timeInterval;
         this.lecturer = lecturer;
         this.group = group;
         this.discipline = discipline;
+        this.auditory = auditory;
     }
 
     protected TimeSlot(Parcel in) {
@@ -21,9 +24,10 @@ public class TimeSlot implements Parcelable {
         lecturer = in.readString();
         group = in.readString();
         discipline = in.readString();
+        auditory = in.readString();
     }
 
-    public static final Creator<TimeSlot> CREATOR = new Creator<TimeSlot>() {
+    public static final Parcelable.Creator<TimeSlot> CREATOR = new Parcelable.Creator<TimeSlot>() {
         @Override
         public TimeSlot createFromParcel(Parcel in) {
             return new TimeSlot(in);
@@ -37,16 +41,16 @@ public class TimeSlot implements Parcelable {
 
     @Override
     public int describeContents() {
-        return 0; // andlys
+        return 0;
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        // andlys
         dest.writeString(timeInterval);
         dest.writeString(lecturer);
         dest.writeString(group);
         dest.writeString(discipline);
+        dest.writeString(auditory);
     }
 
     public String getTimeInterval() {
@@ -81,4 +85,11 @@ public class TimeSlot implements Parcelable {
         this.discipline = discipline;
     }
 
+    public String getAuditory() {
+        return auditory;
+    }
+
+    public void setAuditory(String auditory) {
+        this.auditory = auditory;
+    }
 }

@@ -63,6 +63,7 @@ public class ScheduleTimeRecyclerViewAdapter extends RecyclerView.Adapter<Schedu
         private TextView discipline;
         private TextView group;
         private TextView lecturer;
+        private TextView auditory;
         private TimeSlot timeSlot;
         private View timeSlotRow;
 
@@ -72,6 +73,7 @@ public class ScheduleTimeRecyclerViewAdapter extends RecyclerView.Adapter<Schedu
             discipline = (TextView) view.findViewById(R.id.schedule_discipline);
             lecturer = (TextView) view.findViewById(R.id.schedule_lecturer);
             group = (TextView) view.findViewById(R.id.schedule_group);
+            auditory = (TextView) view.findViewById(R.id.schedule_auditory);
             timeSlotRow = view.findViewById(R.id.schedule_time_slot_row);
         }
 
@@ -81,6 +83,7 @@ public class ScheduleTimeRecyclerViewAdapter extends RecyclerView.Adapter<Schedu
             discipline.setText(this.timeSlot.getDiscipline());
             group.setText(this.timeSlot.getGroup());
             lecturer.setText(this.timeSlot.getLecturer());
+            auditory.setText(this.timeSlot.getAuditory());
         }
 
         void setOnClick() {

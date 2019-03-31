@@ -50,6 +50,12 @@
         android:layout_height="wrap_content"
         android:text="day_of_week" />
 
+    <EditText
+        android:id="@+id/schedule_auditory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="auditory" />
+
     <!--TODO place it at the bottom-->
     <LinearLayout
         android:layout_width="match_parent"
