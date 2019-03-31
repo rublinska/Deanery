@@ -42,8 +42,8 @@ public class LecturerCreateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lecturer_create);
         //   Toolbar toolbar = findViewById(R.id.toolbar_custom); setSupportActionBar(toolbar);
         token = getIntent().getStringExtra("token");
-        fullName = findViewById(R.id.department_name);
-        departmentSpinner = findViewById(R.id.department);
+        fullName = findViewById(R.id.lecturer_full_name);
+        departmentSpinner = findViewById(R.id.lecturer_department);
         phone = findViewById(R.id.phone_number);
         position = findViewById(R.id.position);
         cancel = findViewById(R.id.cancel);

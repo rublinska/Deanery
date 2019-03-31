@@ -2,19 +2,16 @@ package com.example.deanery.activities.student;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.example.deanery.DeaneryAPI;
 import com.example.deanery.R;
 import com.example.deanery.ServiceGenerator;
 import com.example.deanery.dataModels.common.DeaneryGetList;
-import com.example.deanery.dataModels.lecturer.Lecturer;
 import com.example.deanery.dataModels.specialty.Specialty;
 import com.example.deanery.dataModels.student.Student;
 
@@ -34,7 +31,7 @@ public class StudentCreateActivity extends AppCompatActivity {
     EditText startUni;
     EditText endUni;
     EditText endReason;
-    Spinner specialty;
+    Spinner specialtySpinner;
     Button cancel;
     Button createNewStudent;
 
@@ -52,7 +49,7 @@ public class StudentCreateActivity extends AppCompatActivity {
         endReason = findViewById(R.id.student_endReason);
         cancel = (Button) findViewById(R.id.cancel);
         createNewStudent = (Button) findViewById(R.id.create);
-        specialty = findViewById(R.id.student_specialty);
+        specialtySpinner = findViewById(R.id.student_specialty);
 
         specialtiesArray = new ArrayList<>();
 
@@ -65,7 +62,7 @@ public class StudentCreateActivity extends AppCompatActivity {
                 specialtiesArray = response.body().getData();
                 ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, specialtiesArray);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                specialty.setAdapter(adapter);
+                specialtySpinner.setAdapter(adapter);
             }
 
             @Override
@@ -78,7 +75,7 @@ public class StudentCreateActivity extends AppCompatActivity {
         createNewStudent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Specialty newSpecialty = (Specialty) specialty.getSelectedItem();
+                Specialty newSpecialty = (Specialty) specialtySpinner.getSelectedItem();
                 Student newStudent = new Student(fullName.getText().toString(),startUni.getText().toString(),
                         endUni.getText().toString(), phone.getText().toString(), endReason.getText().toString(), newSpecialty.getId());
 
