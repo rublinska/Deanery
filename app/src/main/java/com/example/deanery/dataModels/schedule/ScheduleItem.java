@@ -21,6 +21,8 @@ public class ScheduleItem {
     @SerializedName("class_time")
     @Expose
     private ClassTime classTime;
+    // TODO UniversityClass field; update when db is fixed
+    // andlys
 
     public Integer getId() {
         return id;
@@ -40,5 +42,16 @@ public class ScheduleItem {
 
     public ClassTime getClassTime() {
         return classTime;
+    }
+
+    @Override
+    public String toString() {
+        return "ScheduleItem{" +
+                "id=" + id +
+                ", weekDay=" + weekDay +
+                ", academicWeek=" + academicWeek +
+                ", auditory=" + auditory +
+                ", classTime=" + classTime +
+                '}';
     }
 }

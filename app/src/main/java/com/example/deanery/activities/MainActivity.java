@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     final DeaneryAPI client = ServiceGenerator.createService(DeaneryAPI.class);
-    static String token = "";
+    private static String token = "";
     static Integer lastItemId = 0;
     FloatingActionButton fab;
     DrawerLayout drawer;
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity
     FragmentManager fragmentManager;
     Context context;
 
-    public String getToken () {
+    public static String getToken () {
         return token;
     }
 

@@ -39,4 +39,15 @@ public class AcademicWeek {
     public String getSemester() {
         return semester;
     }
+
+    @Override
+    public String toString() {
+        return "AcademicWeek{" +
+                "id=" + id +
+                ", weekNum=" + weekNum +
+                ", startDate='" + startDate + '\'' +
+                ", endDate='" + endDate + '\'' +
+                ", semester='" + semester + '\'' +
+                '}';
+    }
 }

@@ -2,7 +2,7 @@ package com.example.deanery;
 
 import com.example.deanery.dataModels.auditory.Auditory;
 import com.example.deanery.dataModels.auditory.GetAllAuditories;
-import com.example.deanery.dataModels.common.GenericGet;
+import com.example.deanery.dataModels.common.DeaneryGetList;
 import com.example.deanery.dataModels.department.Department;
 import com.example.deanery.dataModels.department.DepartmentResponse;
 import com.example.deanery.dataModels.department.GetAllDepartments;
@@ -19,8 +19,6 @@ import com.example.deanery.dataModels.schedule.ScheduleItem;
 import com.example.deanery.dataModels.specialty.GetAllSpecialties;
 import com.example.deanery.dataModels.student.GetAllStudents;
 import com.example.deanery.dataModels.student.Student;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -104,8 +102,7 @@ public interface DeaneryAPI {
     @GET("disciplines")
     Call<GetAllDisciplines> getAllDisciplines(@Query("token") String token);
 
-
     @GET("university-schedules")
-    Call<GenericGet<List<ScheduleItem>>> getAllSchedules(@Query("token") String token);
+    Call<DeaneryGetList<ScheduleItem>> getAllScheduleItems(@Query("token") String token);
 
 }

@@ -22,4 +22,13 @@ public class ClassTime {
     public String getStart_time() {
         return start_time;
     }
+
+    @Override
+    public String toString() {
+        return "ClassTime{" +
+                "id=" + id +
+                ", start_time='" + start_time + '\'' +
+                '}';
+    }
+
 }

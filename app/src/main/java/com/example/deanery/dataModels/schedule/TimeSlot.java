@@ -92,4 +92,15 @@ public class TimeSlot implements Parcelable {
     public void setAuditory(String auditory) {
         this.auditory = auditory;
     }
+
+    @Override
+    public String toString() {
+        return "TimeSlot{" +
+                "timeInterval='" + timeInterval + '\'' +
+                ", lecturer='" + lecturer + '\'' +
+                ", group='" + group + '\'' +
+                ", discipline='" + discipline + '\'' +
+                ", auditory='" + auditory + '\'' +
+                '}';
+    }
 }

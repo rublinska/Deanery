@@ -26,4 +26,12 @@ public class Day {
     public List<TimeSlot> getTimeSlots() {
         return items;
     }
+
+    @Override
+    public String toString() {
+        return "Day{" +
+                "dayName='" + dayName + '\'' +
+                ", items=" + items +
+                '}';
+    }
 }
