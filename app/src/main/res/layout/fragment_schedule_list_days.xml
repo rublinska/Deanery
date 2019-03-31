@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="20dp"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".activities.schedule.ScheduleCreateActivity">
@@ -37,8 +36,8 @@
         android:name="com.example.deanery.activities.ScheduleFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         app:layoutManager="LinearLayoutManager"
         tools:context=".activities.schedule.ScheduleFragment"
         tools:listitem="@layout/fragment_schedule_day"
