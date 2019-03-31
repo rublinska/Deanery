@@ -53,7 +53,7 @@ public class StudentRecyclerViewAdapter extends RecyclerView.Adapter<StudentRecy
         studentPlaceHolder.startUni.setText(student.getStartUniversity());
         studentPlaceHolder.endUni.setText(student.getEndUniversity());
         studentPlaceHolder.endReason.setText(student.getEndReason());
-        Log.i("lizatestSpecialty", student.getSpecialtyId().toString());
+        //Log.i("lizatestSpecialty", student.getSpecialtyId().toString());
         //TODO add startUni
         studentPlaceHolder.specialty.setText(student.getSpecialty().getName());
 

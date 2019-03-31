@@ -131,7 +131,7 @@ public class StudentFragment extends Fragment implements RefreshInterface {
             @Override
             public void onResponse(Call<DeaneryGetList<Student>> call, Response<DeaneryGetList<Student>> response) {
                 //    Log.i("Lizatest", call.request().url().toString());
-                Log.i("LizatestArraySize", String.valueOf(response.body().getData().size()));
+                //Log.i("LizatestArraySize", String.valueOf(response.body().getData().size()));
                 if (response.body().getData().size() > 0) {
                     students = (ArrayList<Student>) response.body().getData();
                     //    departmentAdapter.notifyDataSetChanged();

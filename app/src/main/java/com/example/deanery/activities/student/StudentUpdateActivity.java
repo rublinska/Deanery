@@ -34,7 +34,7 @@ public class StudentUpdateActivity extends AppCompatActivity {
     EditText startUni;
     EditText endUni;
     EditText endReason;
-    Spinner specialty;
+    Spinner specialtySpinner;
 
     Button delete;
     Button cancel;
@@ -58,7 +58,9 @@ public class StudentUpdateActivity extends AppCompatActivity {
         cancel = findViewById(R.id.cancel);
         updateStudent = findViewById(R.id.update);
 
+        specialtySpinner = findViewById(R.id.student_specialty);
         fullName.setText(studentForUpdate.getName());
+        phone.setText(studentForUpdate.getPhone());
         startUni.setText(studentForUpdate.getStartUniversity());
         endUni.setText(studentForUpdate.getEndUniversity());
         endReason.setText(studentForUpdate.getEndReason());
@@ -72,7 +74,16 @@ public class StudentUpdateActivity extends AppCompatActivity {
                 List<Specialty> specialtiesArray = response.body().getData();
                 ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, specialtiesArray);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                specialty.setAdapter(adapter);
+                specialtySpinner.setAdapter(adapter);
+                for (int i = 0; i < adapter.getCount(); i++) {
+
+                    //    Log.i("LizatestCreateLecturer", String.valueOf(((Department) adapter.getItem(i)).getName().equals(lecturerForUpdate.getDepartment().getName())));
+                    //    Log.i("LizatestCreateLecturer", String.valueOf(adapter.getItem(position) == lecturerForUpdate.getDepartment().getName()));
+
+                    if(((Specialty) adapter.getItem(i)).getName().equals(studentForUpdate.getSpecialty().getName())) {
+                        specialtySpinner.setSelection(i);
+                    }
+                }
             }
 
             @Override
@@ -108,7 +119,7 @@ public class StudentUpdateActivity extends AppCompatActivity {
                 studentForUpdate.setPhone(phone.getText().toString());
                 studentForUpdate.setEndReason(endReason.getText().toString());
                 studentForUpdate.setEndUniversity(endUni.getText().toString());
-                Specialty newSpecialty = (Specialty) specialty.getSelectedItem();
+                Specialty newSpecialty = (Specialty) specialtySpinner.getSelectedItem();
                 studentForUpdate.setSpecialtyId(newSpecialty.getId());
 
                 final Call<Student> updateStudent = client.updateStudent(studentForUpdate.getId(),getIntent().getStringExtra("token"), studentForUpdate);
@@ -117,13 +128,13 @@ public class StudentUpdateActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(Call<Student> call, Response<Student> response) {
-                    //    Log.i("LizatestError",response.raw().toString());
+                        Log.i("LizatestErrorStudUpd",response.raw().toString());
                         closeActivity();
                     }
 
                     @Override
                     public void onFailure(Call<Student> call, Throwable t) {
-                    //    Log.i("LizatestError",t.getMessage());
+                        Log.i("LizatestErrorStudUpd",t.getMessage());
                         closeActivity();
                     }
                 });
