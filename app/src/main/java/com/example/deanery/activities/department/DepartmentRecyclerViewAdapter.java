@@ -79,8 +79,8 @@ public class DepartmentRecyclerViewAdapter extends RecyclerView.Adapter<Departme
             super(itemView);
 
             name = (TextView) itemView.findViewById(R.id.department_name);
-            auditoriesNum = (TextView) itemView.findViewById(R.id.lecturers_num);
-            lecturersNum = (TextView) itemView.findViewById(R.id.auditories_num);
+            auditoriesNum = (TextView) itemView.findViewById(R.id.auditories_num);
+            lecturersNum = (TextView) itemView.findViewById(R.id.lecturers_num);
             //item = (Button) itemView.findViewById(R.id.department_button);
             item = (CardView) itemView.findViewById(R.id.department_view);
         }

@@ -55,7 +55,7 @@ public class LecturerCreateActivity extends AppCompatActivity {
         getAllDepartments.enqueue(new Callback<DeaneryGetList<Department>>() {
             @Override
             public void onResponse(Call<DeaneryGetList<Department>> call, Response<DeaneryGetList<Department>> response) {
-            //    Log.i("LizatestCreteLecturer", response.body().getData().get(0).getName());
+                Log.i("LizatestCreteLecturer", response.body().getData().get(0).getName());
             //   Log.i("LizatestCreteLecturer", response.raw().toString());
                 departmentsArray = response.body().getData();
                 ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, departmentsArray);
