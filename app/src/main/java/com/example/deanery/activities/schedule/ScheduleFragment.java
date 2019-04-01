@@ -45,14 +45,14 @@ public class ScheduleFragment extends Fragment implements RefreshInterface {
     @Deprecated // TODO andlys change this to real data
     private static List<Day> getTemporaryTestData() {
         final List<TimeSlot> scheduleItems = new ArrayList<>();
-        scheduleItems.add(new TimeSlot("timeinterval", "lecturer", "group", "discipline", "auditory"));
-        scheduleItems.add(new TimeSlot("timeinterval2", "lecturer2", "group2", "discipline2", "auditory"));
-        scheduleItems.add(new TimeSlot("timeinterval3", "lecturer3", "group3", "discipline3", "auditory"));
+        scheduleItems.add(new TimeSlot("timeinterval", "lecturer", "group", "discipline", "auditory", "week"));
+        scheduleItems.add(new TimeSlot("timeinterval2", "lecturer2", "group2", "discipline2", "auditory", "week"));
+        scheduleItems.add(new TimeSlot("timeinterval3", "lecturer3", "group3", "discipline3", "auditory", "week"));
         final Day monday = new Day("Monday", scheduleItems);
         final List<TimeSlot> scheduleItems2 = new ArrayList<>();
-        scheduleItems2.add(new TimeSlot("timeinterval4", "lecturer4", "group4", "discipline4", "auditory"));
-        scheduleItems2.add(new TimeSlot("timeinterval5", "lecturer5", "group5", "discipline5", "auditory"));
-        scheduleItems2.add(new TimeSlot("timeinterval6", "lecturer6", "group6", "discipline6", "auditory"));
+        scheduleItems2.add(new TimeSlot("timeinterval4", "lecturer4", "group4", "discipline4", "auditory", "week"));
+        scheduleItems2.add(new TimeSlot("timeinterval5", "lecturer5", "group5", "discipline5", "auditory", "week"));
+        scheduleItems2.add(new TimeSlot("timeinterval6", "lecturer6", "group6", "discipline6", "auditory", "week"));
         final Day tuesday = new Day("Tuesday", scheduleItems2);
         final Day wednesday = new Day("Wednesday", scheduleItems);
         return Arrays.asList(monday, tuesday, wednesday);
