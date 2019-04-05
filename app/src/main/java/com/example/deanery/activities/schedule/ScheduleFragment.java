@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.deanery.DeaneryAPI;
@@ -18,13 +19,18 @@ import com.example.deanery.RefreshInterface;
 import com.example.deanery.ServiceGenerator;
 import com.example.deanery.activities.MainActivity;
 import com.example.deanery.dataModels.common.DeaneryGetList;
+import com.example.deanery.dataModels.discipline.Discipline;
 import com.example.deanery.dataModels.schedule.Day;
 import com.example.deanery.dataModels.schedule.ScheduleItem;
 import com.example.deanery.dataModels.schedule.TimeSlot;
+import com.example.deanery.dataModels.specialty.Specialty;
+import com.example.deanery.populators.SchedulePopulator;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -65,15 +71,25 @@ public class ScheduleFragment extends Fragment implements RefreshInterface {
         return result;
     }
 
-    // andlys
-    // TODO
     public void storeSchedule() {
         final Call<DeaneryGetList<ScheduleItem>> call = client.getAllScheduleItems(MainActivity.getToken());
         call.enqueue(new Callback<DeaneryGetList<ScheduleItem>>() {
             @Override
             public void onResponse(Call<DeaneryGetList<ScheduleItem>> call, Response<DeaneryGetList<ScheduleItem>> response) {
-                final DeaneryGetList<ScheduleItem> result = response.body();
+                final List<ScheduleItem> result = response.body().getData();
+                final Call<DeaneryGetList<Discipline>> call2 = client.getAllDisciplines(MainActivity.getToken());
+                call2.enqueue(new Callback<DeaneryGetList<Discipline>>() {
+                    @Override
+                    public void onResponse(Call<DeaneryGetList<Discipline>> call, Response<DeaneryGetList<Discipline>> response) {
+                        List<Discipline> allDisciplines = response.body().getData();
+                        final List<Day> days = SchedulePopulator.populateScheduleDays(result, allDisciplines);
+                    }
 
+                    @Override
+                    public void onFailure(Call<DeaneryGetList<Discipline>> call, Throwable t) {
+                        Log.e("schedule","Failed to get all schedule items", t);
+                    }
+                });
             }
 
             @Override
@@ -96,6 +112,7 @@ public class ScheduleFragment extends Fragment implements RefreshInterface {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(new ScheduleDayRecyclerViewAdapter(days, getActivity()));
+        initSpinners(view);
         return view;
     }
 
@@ -105,5 +122,41 @@ public class ScheduleFragment extends Fragment implements RefreshInterface {
         Toast.makeText(getContext(), "Refreshed",
                 Toast.LENGTH_LONG).show();
         swipeRefresh.setRefreshing(false);
+    }
+
+    // andlys TODO
+    private void initSpinners(final View view) {
+        final Spinner specialtiesSpinner = (Spinner) view.findViewById(R.id.spinner_specialties);
+        final Call<DeaneryGetList<Specialty>> specialtiesCall = client.getAllSpecialties(MainActivity.getToken());
+        specialtiesCall.enqueue(new Callback<DeaneryGetList<Specialty>>() {
+            @Override
+            public void onResponse(Call<DeaneryGetList<Specialty>> call, Response<DeaneryGetList<Specialty>> response) {
+                final List<String> specialties = response.body().getData().
+                        stream().map(Specialty::getName)
+                        .collect(Collectors.toList());
+                //specialtiesSpinner.setAdapter();
+            }
+
+            @Override
+            public void onFailure(Call<DeaneryGetList<Specialty>> call, Throwable t) {
+                Log.e("schedule","Failed to get all schedule items", t);
+            }
+        });
+        final Spinner semestersSpinner = (Spinner) view.findViewById(R.id.spinner_semesters);
+        final Call<DeaneryGetList<ScheduleItem>> semestersCall = client.getAllScheduleItems(MainActivity.getToken());
+        semestersCall.enqueue(new Callback<DeaneryGetList<ScheduleItem>>() {
+            @Override
+            public void onResponse(Call<DeaneryGetList<ScheduleItem>> call, Response<DeaneryGetList<ScheduleItem>> response) {
+                final List<String> specialties = response.body().getData().
+                        stream().map(item -> item.getAcademicWeek().getSemester())
+                        .collect(Collectors.toList());
+                //semestersSpinner.setAdapter();
+            }
+
+            @Override
+            public void onFailure(Call<DeaneryGetList<ScheduleItem>> call, Throwable t) {
+                Log.e("schedule","Failed to get all schedule items", t);
+            }
+        });
     }
 }

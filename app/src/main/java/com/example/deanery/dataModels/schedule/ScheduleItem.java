@@ -22,8 +22,12 @@ public class ScheduleItem extends DeaneryDto {
     @SerializedName("class_time")
     @Expose
     private ClassTime classTime;
-    // TODO UniversityClass field; update when db is fixed
-    // andlys
+    @SerializedName("university_class")
+    @Expose
+    private UniversityClass universityClass;
+    @SerializedName("group")
+    @Expose
+    private Group group;
 
     public Integer getId() {
         return id;
@@ -43,6 +47,14 @@ public class ScheduleItem extends DeaneryDto {
 
     public ClassTime getClassTime() {
         return classTime;
+    }
+
+    public UniversityClass getUniversityClass() {
+        return universityClass;
+    }
+
+    public Group getGroup() {
+        return group;
     }
 
     @Override

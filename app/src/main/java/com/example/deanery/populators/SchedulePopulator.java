@@ -1,17 +1,28 @@
 package com.example.deanery.populators;
 
+import com.example.deanery.dataModels.discipline.Discipline;
+import com.example.deanery.dataModels.schedule.ClassTime;
 import com.example.deanery.dataModels.schedule.Day;
 import com.example.deanery.dataModels.schedule.ScheduleItem;
 import com.example.deanery.dataModels.schedule.TimeSlot;
+import com.example.deanery.dataModels.schedule.UniversityClass;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class SchedulePopulator {
 
-    private SchedulePopulator() {}
+    private static List<Discipline> allDisciplines;
 
-    public static List<Day> populateScheduleDays(final List<ScheduleItem> scheduleItems) {
+    private SchedulePopulator() {
+    }
+
+    public static List<Day> populateScheduleDays(final List<ScheduleItem> scheduleItems,
+                                                 final List<Discipline> discs) {
+        allDisciplines = discs;
         return scheduleItems.stream()
                 .map(ScheduleItem::getWeekDay)
                 .distinct()
@@ -25,18 +36,37 @@ public class SchedulePopulator {
                 .filter(item -> item.getWeekDay().equals(weekDayNumber))
                 .map(SchedulePopulator::convertScheduleToTimeSlot)
                 .collect(Collectors.toList());
-        return new Day(getWeekDayName(weekDayNumber), null);
+        return new Day(getWeekDayName(weekDayNumber), timeSlots);
     }
 
     private static TimeSlot convertScheduleToTimeSlot(final ScheduleItem item) {
         final TimeSlot result = new TimeSlot();
-        result.setAuditory(item.getAuditory().getLocation());
-        result.setDiscipline("Some discipline"); // TODO andlys
+        final UniversityClass universityClass = item.getUniversityClass();
+        final Discipline discipline = getDisciplineById(universityClass.getDisciplineId());
+        result.setDiscipline(String.format("%s %s", discipline.getName(), universityClass.getClassType()));
         result.setLecturer("Some lecturer"); // TODO andlys
-        result.setGroup("Some group"); // TODO andlys
-        result.setTimeInterval(item.getClassTime().getStart_time()); // TODO andlys
+        result.setGroup(item.getGroup().getGroupNumber());
+        result.setTimeInterval(getTimeInterval(item.getClassTime()));
         result.setWeek("1-12w"); // TODO andlys
+        result.setAuditory(item.getAuditory().getLocation());
         return result;
+    }
+
+    private static String getTimeInterval(ClassTime classTime) {
+        final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        final Function<String, String> dateToTimeStr = time -> {
+            String result = "";
+            try {
+                result = timeFormat.format(dateFormat.parse(time));
+            } catch (ParseException e) {
+                System.out.println(e);
+            }
+            return result;
+        };
+        final String startTime = dateToTimeStr.apply(classTime.getStartTime());
+        final String endTime = dateToTimeStr.apply(classTime.getEndTime());
+        return String.format("%s - %s", startTime, endTime);
     }
 
     private static String getWeekDayName(final int weekDayNumber) {
@@ -52,5 +82,12 @@ public class SchedulePopulator {
                     String.format("Unrecognized day number: %s",
                             String.valueOf(weekDayNumber)));
         }
+    }
+
+    private static Discipline getDisciplineById(final Integer id) {
+        return allDisciplines.stream()
+                .filter(d -> d.getId().equals(id))
+                .findFirst()
+                .get();
     }
 }

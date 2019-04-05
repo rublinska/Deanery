@@ -57,6 +57,13 @@
             android:ems="10"
             android:text="auditory" />
 
+        <TextView
+            android:id="@+id/schedule_week"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:text="week" />
+
     </LinearLayout>
 
 </LinearLayout>

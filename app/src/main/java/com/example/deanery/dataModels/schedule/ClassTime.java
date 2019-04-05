@@ -10,26 +10,29 @@ public class ClassTime extends DeaneryDto {
     private Integer id;
     @SerializedName("start_time")
     @Expose
-    private String start_time;
-//    @SerializedName("end_time")
-//    @Expose
-//    private String end_time;
-    // TODO andlys
+    private String startTime;
+    @SerializedName("end_time")
+    @Expose
+    private String endTime;
 
     public Integer getId() {
         return id;
     }
 
-    public String getStart_time() {
-        return start_time;
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
     }
 
     @Override
     public String toString() {
         return "ClassTime{" +
                 "id=" + id +
-                ", start_time='" + start_time + '\'' +
+                ", startTime='" + startTime + '\'' +
+                ", endTime='" + endTime + '\'' +
                 '}';
     }
-
 }
