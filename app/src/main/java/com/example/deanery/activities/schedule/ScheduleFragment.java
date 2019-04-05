@@ -40,7 +40,7 @@ public class ScheduleFragment extends Fragment implements RefreshInterface {
 
     private SwipeRefreshLayout swipeRefresh;
     private final DeaneryAPI client = ServiceGenerator.createService(DeaneryAPI.class);
-    private final List<Day> days = getTemporaryTestData();
+    //private final List<Day> days = getTemporaryTestData(); // TODO delete
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -48,7 +48,7 @@ public class ScheduleFragment extends Fragment implements RefreshInterface {
      */
     public ScheduleFragment() { }
 
-    @Deprecated // TODO andlys change this to real data
+    @Deprecated // TODO andlys change this to real data TODO delete
     private static List<Day> getTemporaryTestData() {
         final List<TimeSlot> scheduleItems = new ArrayList<>();
         scheduleItems.add(new TimeSlot("timeinterval", "lecturer", "group", "discipline", "auditory", "week"));
@@ -67,22 +67,22 @@ public class ScheduleFragment extends Fragment implements RefreshInterface {
     public static ScheduleFragment newInstance(SwipeRefreshLayout swipe) {
         final ScheduleFragment result = new ScheduleFragment();
         result.swipeRefresh = swipe;
-        result.storeSchedule();
         return result;
     }
 
-    public void storeSchedule() {
+    public void pullSchedule(final RecyclerView recyclerView) {
         final Call<DeaneryGetList<ScheduleItem>> call = client.getAllScheduleItems(MainActivity.getToken());
         call.enqueue(new Callback<DeaneryGetList<ScheduleItem>>() {
             @Override
             public void onResponse(Call<DeaneryGetList<ScheduleItem>> call, Response<DeaneryGetList<ScheduleItem>> response) {
-                final List<ScheduleItem> result = response.body().getData();
+                final List<ScheduleItem> scheduleItems = response.body().getData();
                 final Call<DeaneryGetList<Discipline>> call2 = client.getAllDisciplines(MainActivity.getToken());
                 call2.enqueue(new Callback<DeaneryGetList<Discipline>>() {
                     @Override
                     public void onResponse(Call<DeaneryGetList<Discipline>> call, Response<DeaneryGetList<Discipline>> response) {
                         List<Discipline> allDisciplines = response.body().getData();
-                        final List<Day> days = SchedulePopulator.populateScheduleDays(result, allDisciplines);
+                        final List<Day> days = SchedulePopulator.populateScheduleDays(scheduleItems, allDisciplines);
+                        recyclerView.setAdapter(new ScheduleDayRecyclerViewAdapter(days, getActivity()));
                     }
 
                     @Override
@@ -111,7 +111,7 @@ public class ScheduleFragment extends Fragment implements RefreshInterface {
         Context context = view.getContext();
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        recyclerView.setAdapter(new ScheduleDayRecyclerViewAdapter(days, getActivity()));
+        pullSchedule(recyclerView);
         initSpinners(view);
         return view;
     }

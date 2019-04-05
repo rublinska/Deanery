@@ -26,6 +26,7 @@ public class SchedulePopulator {
         return scheduleItems.stream()
                 .map(ScheduleItem::getWeekDay)
                 .distinct()
+                .sorted()
                 .map(dayNumber -> populateDayOfWeek(scheduleItems, dayNumber))
                 .collect(Collectors.toList());
     }
@@ -43,7 +44,7 @@ public class SchedulePopulator {
         final TimeSlot result = new TimeSlot();
         final UniversityClass universityClass = item.getUniversityClass();
         final Discipline discipline = getDisciplineById(universityClass.getDisciplineId());
-        result.setDiscipline(String.format("%s %s", discipline.getName(), universityClass.getClassType()));
+        result.setDiscipline(String.format("%s (%s)", discipline.getName(), universityClass.getClassType()));
         result.setLecturer("Some lecturer"); // TODO andlys
         result.setGroup(item.getGroup().getGroupNumber());
         result.setTimeInterval(getTimeInterval(item.getClassTime()));
