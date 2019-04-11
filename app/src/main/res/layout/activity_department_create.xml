@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="134dp" />
+        app:layout_constraintGuide_begin="79dp" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
@@ -25,18 +25,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="371dp" />
+        app:layout_constraintGuide_end="40dp" />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginRight="40dp"
+        android:layout_height="96dp"
+        android:background="@drawable/header"
         android:text="@string/title_department_create"
-        android:textSize="40sp"
-        app:fontFamily="@font/montserrat_bold"
+        android:textColor="@android:color/white"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:fontFamily="@font/montserrat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -49,9 +50,9 @@
         android:layout_marginTop="40dp"
         android:layout_marginRight="40dp"
         android:background="@drawable/form_input"
-        android:hint="Department name"
+        android:hint="Назва кафедри"
         android:padding="12dp"
-        app:fontFamily="@font/montserrat"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title" />
@@ -64,11 +65,11 @@
         android:background="@drawable/form_button"
         android:dropDownWidth="match_parent"
         android:spinnerMode="dialog"
-        android:text="Press to choose auditories"
+        android:text="Натисніть щоб обрати аудиторії"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="18sp"
-        app:fontFamily="@font/montserrat"
+
         app:layout_constraintEnd_toEndOf="@+id/department_name"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/department_name"
@@ -82,11 +83,11 @@
         android:background="@drawable/form_button"
         android:dropDownWidth="match_parent"
         android:spinnerMode="dialog"
-        android:text="Press to choose lecturers"
+        android:text="Натисніть щоб обрати викладачів"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="18sp"
-        app:fontFamily="@font/montserrat"
+
         app:layout_constraintEnd_toEndOf="@+id/department_auditories"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/department_auditories"
@@ -99,10 +100,10 @@
         android:layout_marginTop="42dp"
         android:background="@drawable/main_button"
         android:padding="16dp"
-        android:text="Create"
+        android:text="Додати"
         android:textColor="@android:color/white"
         android:textSize="20sp"
-        app:fontFamily="@font/montserrat"
+
         app:layout_constraintEnd_toEndOf="@+id/department_lecturers"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/department_lecturers"
@@ -115,10 +116,10 @@
         android:layout_marginTop="12dp"
         android:background="@drawable/transparent_button"
         android:padding="16dp"
-        android:text="Cancel"
+        android:text="Скасувати"
         android:textColor="@color/mainBlue"
         android:textSize="20sp"
-        app:fontFamily="@font/montserrat"
+
         app:layout_constraintEnd_toEndOf="@+id/create"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintHorizontal_chainStyle="spread_inside"

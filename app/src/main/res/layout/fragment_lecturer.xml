@@ -42,7 +42,7 @@
                         android:id="@+id/lecturer_full_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Bohachek Yelyzaveta Mykolyaevna"
+                        android:text="Богачек Єлизавета Миколаївна"
                         android:textSize="17sp"
                         app:fontFamily="@font/montserrat_bold" />
 
@@ -69,7 +69,7 @@
                                 android:id="@+id/postion_hint"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Position"
+                                android:text="Посада"
                                 android:textColor="@color/mainBlue"
                                 android:textSize="10sp"
                                 app:fontFamily="@font/montserrat" />
@@ -78,7 +78,7 @@
                                 android:id="@+id/lecturer_position"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Professor"
+                                android:text="Професор"
                                 android:textSize="12sp"
                                 app:fontFamily="@font/montserrat" />
                         </LinearLayout>
@@ -93,7 +93,7 @@
                                 android:id="@+id/department_hint"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Department"
+                                android:text="Кафедра"
                                 android:textColor="@color/mainBlue"
                                 android:textSize="10sp"
                                 app:fontFamily="@font/montserrat" />
@@ -102,7 +102,7 @@
                                 android:id="@+id/lecturer_department"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Biology"
+                                android:text="Біологія"
                                 android:textSize="12sp"
                                 app:fontFamily="@font/montserrat" />
                         </LinearLayout>
@@ -117,7 +117,7 @@
                                 android:id="@+id/phone_hint"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Phone Number"
+                                android:text="Номер телефону"
                                 android:textColor="@color/mainBlue"
                                 android:textSize="10sp"
                                 app:fontFamily="@font/montserrat" />

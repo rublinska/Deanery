@@ -27,13 +27,14 @@
     <TextView
         android:id="@+id/title"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginRight="40dp"
+        android:layout_height="96dp"
+        android:background="@drawable/header"
         android:text="@string/title_discipline_update"
+        android:textColor="@android:color/white"
         android:textSize="36sp"
-        app:fontFamily="@font/montserrat_bold"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:fontFamily="@font/montserrat"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -88,7 +89,7 @@
         app:fontFamily="@font/montserrat"
         app:layout_constraintEnd_toEndOf="@+id/discipline_selfWorkTime"
         app:layout_constraintStart_toEndOf="@+id/discipline_spec_checkbox"
-        tools:layout_editor_absoluteY="223dp" />
+        tools:layout_editor_absoluteY="252dp" />
 
     <Spinner
         android:id="@+id/discipline_specialty"
@@ -118,7 +119,7 @@
         app:layout_constraintEnd_toEndOf="@+id/text_checkbox1"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/discipline_predisc_checkbox"
-        tools:layout_editor_absoluteY="299dp" />
+        tools:layout_editor_absoluteY="329dp" />
 
     <Spinner
         android:id="@+id/discipline_preDiscipline"

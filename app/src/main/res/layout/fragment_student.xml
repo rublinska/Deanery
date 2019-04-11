@@ -37,7 +37,7 @@
                         android:id="@+id/student_full_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Bohachek Yelyzaveta Mykolyaevna"
+                        android:text="Богачек Єлизавета Миколаївна"
                         android:textSize="17sp"
                         app:fontFamily="@font/montserrat_bold" />
 
@@ -64,7 +64,7 @@
                                 android:id="@+id/speciality_hint"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Speciality"
+                                android:text="Спеціальність"
                                 android:textColor="@color/mainBlue"
                                 android:textSize="10sp"
                                 app:fontFamily="@font/montserrat" />
@@ -73,7 +73,7 @@
                                 android:id="@+id/student_specialty"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Informatics"
+                                android:text="Інформатика"
                                 android:textSize="12sp"
                                 app:fontFamily="@font/montserrat" />
                         </LinearLayout>
@@ -88,7 +88,7 @@
                                 android:id="@+id/endReason_hint"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Reason of education ending"
+                                android:text="Причина завершення"
                                 android:textColor="@color/mainBlue"
                                 android:textSize="10sp"
                                 app:fontFamily="@font/montserrat" />
@@ -126,7 +126,7 @@
                                 android:id="@+id/startUni_hint"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Start date of education"
+                                android:text="Початок навчання"
                                 android:textColor="@color/mainBlue"
                                 android:textSize="10sp"
                                 app:fontFamily="@font/montserrat" />
@@ -135,7 +135,7 @@
                                 android:id="@+id/student_startUni"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Professor"
+                                android:text="2019-03-12"
                                 android:textSize="12sp"
                                 app:fontFamily="@font/montserrat" />
                         </LinearLayout>
@@ -150,7 +150,7 @@
                                 android:id="@+id/endUni_hint"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Ending date of education"
+                                android:text="Завершення навчання"
                                 android:textColor="@color/mainBlue"
                                 android:textSize="10sp"
                                 app:fontFamily="@font/montserrat" />
@@ -188,7 +188,7 @@
                                 android:id="@+id/phone_hint"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Phone Number"
+                                android:text="Номер телефону"
                                 android:textColor="@color/mainBlue"
                                 android:textSize="10sp"
                                 app:fontFamily="@font/montserrat" />

@@ -67,7 +67,7 @@
                             android:id="@+id/auditories_hint"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Auditories"
+                            android:text="Аудиторії"
                             android:textColor="@color/mainBlue"
                             android:textSize="14sp"
                             app:fontFamily="@font/montserrat" />
@@ -95,7 +95,7 @@
                             android:id="@+id/lecturers_hint"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Lecturers"
+                            android:text="Викладачі"
                             android:textColor="@color/mainBlue"
                             android:textSize="14sp"
                             app:fontFamily="@font/montserrat" />

@@ -67,7 +67,7 @@
                             android:id="@+id/selfWorkTime_hint"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Self-work hours"
+                            android:text="Години самоопрацювання"
                             android:textColor="@color/mainBlue"
                             android:textSize="14sp"
                             app:fontFamily="@font/montserrat" />
@@ -95,7 +95,7 @@
                             android:id="@+id/speciality_hint"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Speciality"
+                            android:text="Спеціальність"
                             android:textColor="@color/mainBlue"
                             android:textSize="14sp"
                             app:fontFamily="@font/montserrat" />
@@ -126,7 +126,7 @@
                             android:id="@+id/preDiscipline_hint"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Pre-discipline"
+                            android:text="Дисципліна-передумова"
                             android:textColor="@color/mainBlue"
                             android:textSize="14sp"
                             app:fontFamily="@font/montserrat" />
