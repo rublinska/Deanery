@@ -14,7 +14,9 @@ public class UniversityClass extends DeaneryDto {
     @SerializedName("discipline_id")
     @Expose
     private Integer discipline_id;
-    // TODO andlys lecturer
+    @SerializedName("lecturer_id")
+    @Expose
+    private Integer lecturer_id;
 
     public Integer getId() {
         return id;
@@ -26,5 +28,9 @@ public class UniversityClass extends DeaneryDto {
 
     public String getClassType() {
         return classType;
+    }
+
+    public Integer getLecturerId() {
+        return lecturer_id;
     }
 }

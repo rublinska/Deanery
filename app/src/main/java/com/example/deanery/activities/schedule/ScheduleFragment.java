@@ -2,6 +2,8 @@ package com.example.deanery.activities.schedule;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +12,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -20,6 +24,7 @@ import com.example.deanery.ServiceGenerator;
 import com.example.deanery.activities.MainActivity;
 import com.example.deanery.dataModels.common.DeaneryGetList;
 import com.example.deanery.dataModels.discipline.Discipline;
+import com.example.deanery.dataModels.lecturer.Lecturer;
 import com.example.deanery.dataModels.schedule.Day;
 import com.example.deanery.dataModels.schedule.ScheduleItem;
 import com.example.deanery.dataModels.schedule.TimeSlot;
@@ -71,32 +76,56 @@ public class ScheduleFragment extends Fragment implements RefreshInterface {
     }
 
     public void pullSchedule(final RecyclerView recyclerView) {
-        final Call<DeaneryGetList<ScheduleItem>> call = client.getAllScheduleItems(MainActivity.getToken());
-        call.enqueue(new Callback<DeaneryGetList<ScheduleItem>>() {
-            @Override
-            public void onResponse(Call<DeaneryGetList<ScheduleItem>> call, Response<DeaneryGetList<ScheduleItem>> response) {
-                final List<ScheduleItem> scheduleItems = response.body().getData();
-                final Call<DeaneryGetList<Discipline>> call2 = client.getAllDisciplines(MainActivity.getToken());
-                call2.enqueue(new Callback<DeaneryGetList<Discipline>>() {
-                    @Override
-                    public void onResponse(Call<DeaneryGetList<Discipline>> call, Response<DeaneryGetList<Discipline>> response) {
-                        List<Discipline> allDisciplines = response.body().getData();
-                        final List<Day> days = SchedulePopulator.populateScheduleDays(scheduleItems, allDisciplines);
-                        recyclerView.setAdapter(new ScheduleDayRecyclerViewAdapter(days, getActivity()));
-                    }
+        pullSchedule(recyclerView, "1", "informatics");
+    }
 
-                    @Override
-                    public void onFailure(Call<DeaneryGetList<Discipline>> call, Throwable t) {
-                        Log.e("schedule","Failed to get all schedule items", t);
-                    }
-                });
-            }
-
+    public void pullSchedule(final RecyclerView recyclerView,
+                             final String semester,
+                             final String specialty) {
+        final Handler handler = new Handler() {
             @Override
-            public void onFailure(Call<DeaneryGetList<ScheduleItem>> call, Throwable t) {
-                Log.e("schedule","Failed to get all schedule items", t);
+            public void handleMessage(Message msg) {
+                Bundle bundle = msg.getData();
+                List<ScheduleItem> scheduleItems = bundle.getParcelableArrayList("scheduleItems");
+                List<Discipline> allDisciplines = bundle.getParcelableArrayList("disciplines");
+                List<Lecturer> allLecturers = bundle.getParcelableArrayList("lecturers");
+                final List<Day> days = SchedulePopulator.populateScheduleDays(scheduleItems, allDisciplines, allLecturers, semester, specialty);
+                Bundle b = new Bundle();
+                b.putString("semester", semester);
+                b.putString("specialty", specialty);
+                getActivity().getIntent().putExtras(b);
+                recyclerView.setAdapter(new ScheduleDayRecyclerViewAdapter(days, getActivity()));
             }
-        });
+        };
+        final Thread thread = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    Message msg = handler.obtainMessage();
+                    final List<ScheduleItem> scheduleItems = client.getAllScheduleItems(MainActivity.getToken())
+                            .execute()
+                            .body()
+                            .getData();
+                    final List<Lecturer> lecturers = client.getAllLecturers(MainActivity.getToken())
+                            .execute()
+                            .body()
+                            .getData();
+                    final List<Discipline> disciplines = client.getAllDisciplines(MainActivity.getToken())
+                            .execute()
+                            .body()
+                            .getData();
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelableArrayList("lecturers", new ArrayList(lecturers));
+                    bundle.putParcelableArrayList("disciplines", new ArrayList(disciplines));
+                    bundle.putParcelableArrayList("scheduleItems", new ArrayList(scheduleItems));
+                    msg.setData(bundle);
+                    handler.sendMessage(msg);
+                } catch (IOException e) {
+                    Log.e("schedule","Failed to get all schedule items", e);
+                }
+            }
+        };
+        thread.start();
     }
 
     @Override
@@ -112,20 +141,19 @@ public class ScheduleFragment extends Fragment implements RefreshInterface {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         pullSchedule(recyclerView);
-        initSpinners(view);
+        initSpinners(view, recyclerView);
         return view;
     }
 
     @Override
     public void refreshItems() {
-        // andlys
+        // TODO andlys
         Toast.makeText(getContext(), "Refreshed",
                 Toast.LENGTH_LONG).show();
         swipeRefresh.setRefreshing(false);
     }
 
-    // andlys TODO
-    private void initSpinners(final View view) {
+    private void initSpinners(final View view, final RecyclerView recyclerView) {
         final Spinner specialtiesSpinner = (Spinner) view.findViewById(R.id.spinner_specialties);
         final Call<DeaneryGetList<Specialty>> specialtiesCall = client.getAllSpecialties(MainActivity.getToken());
         specialtiesCall.enqueue(new Callback<DeaneryGetList<Specialty>>() {
@@ -133,8 +161,11 @@ public class ScheduleFragment extends Fragment implements RefreshInterface {
             public void onResponse(Call<DeaneryGetList<Specialty>> call, Response<DeaneryGetList<Specialty>> response) {
                 final List<String> specialties = response.body().getData().
                         stream().map(Specialty::getName)
+                        .sorted()
                         .collect(Collectors.toList());
-                //specialtiesSpinner.setAdapter();
+                ArrayAdapter specialtiesAdapter = new ArrayAdapter(view.getContext(), android.R.layout.simple_spinner_item, specialties);
+                specialtiesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                specialtiesSpinner.setAdapter(specialtiesAdapter);
             }
 
             @Override
@@ -147,15 +178,44 @@ public class ScheduleFragment extends Fragment implements RefreshInterface {
         semestersCall.enqueue(new Callback<DeaneryGetList<ScheduleItem>>() {
             @Override
             public void onResponse(Call<DeaneryGetList<ScheduleItem>> call, Response<DeaneryGetList<ScheduleItem>> response) {
-                final List<String> specialties = response.body().getData().
+                final List<String> semesters = response.body().getData().
                         stream().map(item -> item.getAcademicWeek().getSemester())
+                        .sorted()
                         .collect(Collectors.toList());
-                //semestersSpinner.setAdapter();
+                ArrayAdapter semestersAdapter = new ArrayAdapter(view.getContext(), android.R.layout.simple_spinner_item, semesters);
+                semestersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                semestersSpinner.setAdapter(semestersAdapter);
             }
 
             @Override
             public void onFailure(Call<DeaneryGetList<ScheduleItem>> call, Throwable t) {
                 Log.e("schedule","Failed to get all schedule items", t);
+            }
+        });
+
+        specialtiesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String specialtySelected = parent.getItemAtPosition(position).toString();
+                pullSchedule(recyclerView, semestersSpinner.getSelectedItem().toString(), specialtySelected);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        semestersSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String semesterSelected = parent.getItemAtPosition(position).toString();
+                pullSchedule(recyclerView, semesterSelected, specialtiesSpinner.getSelectedItem().toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
     }

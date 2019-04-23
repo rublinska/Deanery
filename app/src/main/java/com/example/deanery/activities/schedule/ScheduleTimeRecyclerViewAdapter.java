@@ -109,6 +109,8 @@ public class ScheduleTimeRecyclerViewAdapter extends RecyclerView.Adapter<Schedu
                         Intent i = new Intent(view.getContext(), ScheduleUpdateActivity.class);
                         Bundle mBundle = new Bundle();
                         mBundle.putParcelable("schedule_time_slot", timeSlot);
+                        mBundle.putString("specialty", fragmentActivity.getIntent().getExtras().getString("specialty"));
+                        mBundle.putString("semester", fragmentActivity.getIntent().getExtras().getString("semester"));
                         i.putExtras(mBundle);
                         view.getContext().startActivity(i);
                         return true;

@@ -1,6 +1,7 @@
 package com.example.deanery.populators;
 
 import com.example.deanery.dataModels.discipline.Discipline;
+import com.example.deanery.dataModels.lecturer.Lecturer;
 import com.example.deanery.dataModels.schedule.ClassTime;
 import com.example.deanery.dataModels.schedule.Day;
 import com.example.deanery.dataModels.schedule.ScheduleItem;
@@ -16,13 +17,21 @@ import java.util.stream.Collectors;
 public class SchedulePopulator {
 
     private static List<Discipline> allDisciplines;
+    private static List<Lecturer> allLecturers;
+    private static String semester, specialty;
 
     private SchedulePopulator() {
     }
 
     public static List<Day> populateScheduleDays(final List<ScheduleItem> scheduleItems,
-                                                 final List<Discipline> discs) {
+                                                 final List<Discipline> discs,
+                                                 final List<Lecturer> lects,
+                                                 final String semesterStr,
+                                                 final String specialtyStr) {
         allDisciplines = discs;
+        allLecturers = lects;
+        semester = semesterStr;
+        specialty = specialtyStr;
         return scheduleItems.stream()
                 .map(ScheduleItem::getWeekDay)
                 .distinct()
@@ -35,17 +44,30 @@ public class SchedulePopulator {
                                          final Integer weekDayNumber) {
         final List<TimeSlot> timeSlots = scheduleItems.stream()
                 .filter(item -> item.getWeekDay().equals(weekDayNumber))
+                .filter(SchedulePopulator::isApplicableForSemester)
+                .filter(SchedulePopulator::isApplicableForSpecialty)
                 .map(SchedulePopulator::convertScheduleToTimeSlot)
                 .collect(Collectors.toList());
         return new Day(getWeekDayName(weekDayNumber), timeSlots);
+    }
+
+    private static boolean isApplicableForSemester(final ScheduleItem item) {
+        final UniversityClass universityClass = item.getUniversityClass();
+        final Discipline discipline = getDisciplineById(universityClass.getDisciplineId());
+        return discipline.getSpecialty().getName().equals(specialty);
+    }
+
+    private static boolean isApplicableForSpecialty(final ScheduleItem item) {
+        return item.getAcademicWeek().getSemester().equals(semester);
     }
 
     private static TimeSlot convertScheduleToTimeSlot(final ScheduleItem item) {
         final TimeSlot result = new TimeSlot();
         final UniversityClass universityClass = item.getUniversityClass();
         final Discipline discipline = getDisciplineById(universityClass.getDisciplineId());
+        final Lecturer lecturer = getLecturerById(universityClass.getLecturerId());
         result.setDiscipline(String.format("%s (%s)", discipline.getName(), universityClass.getClassType()));
-        result.setLecturer("Some lecturer"); // TODO andlys
+        result.setLecturer(String.format("%s %s", lecturer.getFullName(), lecturer.getPosition()));
         result.setGroup(item.getGroup().getGroupNumber());
         result.setTimeInterval(getTimeInterval(item.getClassTime()));
         result.setWeek("1-12w"); // TODO andlys
@@ -87,6 +109,13 @@ public class SchedulePopulator {
 
     private static Discipline getDisciplineById(final Integer id) {
         return allDisciplines.stream()
+                .filter(d -> d.getId().equals(id))
+                .findFirst()
+                .get();
+    }
+
+    private static Lecturer getLecturerById(final Integer id) {
+        return allLecturers.stream()
                 .filter(d -> d.getId().equals(id))
                 .findFirst()
                 .get();
