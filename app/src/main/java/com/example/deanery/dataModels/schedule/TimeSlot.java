@@ -11,6 +11,7 @@ public class TimeSlot implements Parcelable {
     private String discipline;
     private String auditory;
     private String week;
+    private ScheduleItem scheduleItem;
 
     public TimeSlot() {}
 
@@ -30,6 +31,7 @@ public class TimeSlot implements Parcelable {
         discipline = in.readString();
         auditory = in.readString();
         week = in.readString();
+        scheduleItem = in.readParcelable(ScheduleItem.class.getClassLoader());
     }
 
     public static final Parcelable.Creator<TimeSlot> CREATOR = new Parcelable.Creator<TimeSlot>() {
@@ -57,6 +59,7 @@ public class TimeSlot implements Parcelable {
         dest.writeString(discipline);
         dest.writeString(auditory);
         dest.writeString(week);
+        dest.writeParcelable(scheduleItem, flags);
     }
 
     public String getTimeInterval() {

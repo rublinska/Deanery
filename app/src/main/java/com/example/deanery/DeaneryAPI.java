@@ -14,6 +14,7 @@ import com.example.deanery.dataModels.schedule.ClassTime;
 import com.example.deanery.dataModels.schedule.ScheduleItem;
 import com.example.deanery.dataModels.specialty.Specialty;
 import com.example.deanery.dataModels.student.Student;
+import com.example.deanery.dataModels.student.UniversityGroup;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -102,4 +103,7 @@ public interface DeaneryAPI {
 
     @GET("class-times")
     Call<DeaneryGetList<ClassTime>> getAllClassTimes(@Query("token") String token);
+
+    @GET("university-groups")
+    Call<DeaneryGetList<UniversityGroup>> getAllGroups(@Query("token") String token);
 }

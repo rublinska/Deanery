@@ -83,7 +83,7 @@ public class SchedulePopulator {
             try {
                 result = timeFormat.format(dateFormat.parse(time));
             } catch (ParseException e) {
-                System.out.println(e);
+                System.out.println(e); // TODO
             }
             return result;
         };

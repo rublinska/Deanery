@@ -8,29 +8,41 @@
     android:orientation="vertical"
     tools:context=".activities.schedule.ScheduleCreateActivity">
 
-    <EditText
-        android:id="@+id/schedule_time"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="time" />
+        android:text="Time interval:"/>
+    <Spinner
+        android:id="@+id/schedule_time_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
-    <EditText
-        android:id="@+id/schedule_discipline"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="discipline" />
+        android:text="Discipline:"/>
+    <Spinner
+        android:id="@+id/schedule_discipline_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
-    <EditText
-        android:id="@+id/schedule_lecturer"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="lecturer" />
+        android:text="Lecturer:"/>
+    <Spinner
+        android:id="@+id/schedule_lecturer_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
-    <EditText
-        android:id="@+id/schedule_group"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="group" />
+        android:text="Group:"/>
+    <Spinner
+        android:id="@+id/schedule_group_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <EditText
         android:id="@+id/schedule_semester"
@@ -50,11 +62,14 @@
         android:layout_height="wrap_content"
         android:text="day_of_week" />
 
-    <EditText
-        android:id="@+id/schedule_auditory"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="auditory" />
+        android:text="Auditory:"/>
+    <Spinner
+        android:id="@+id/schedule_auditory_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <!--TODO place it at the bottom-->
     <LinearLayout
@@ -82,6 +97,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.45"
             android:background="#009688"
-            android:text="Create" />
+            android:text="Update" />
     </LinearLayout>
 </LinearLayout>

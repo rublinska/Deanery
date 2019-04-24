@@ -47,36 +47,43 @@ public class ScheduleUpdateActivity extends AppCompatActivity {
         final String semester = getIntent().getStringExtra("semester");
         final String specialty = getIntent().getStringExtra("specialty");
 
-        EditText timeInterval = findViewById(R.id.schedule_time);
-        EditText discipline = findViewById(R.id.schedule_discipline);
-        EditText group = findViewById(R.id.schedule_group);
-        EditText lecturer = findViewById(R.id.schedule_lecturer);
-        EditText auditory = findViewById(R.id.schedule_auditory);
+        //EditText timeInterval = findViewById(R.id.schedule_time);
+        //EditText discipline = findViewById(R.id.schedule_discipline);
+        Spinner groupSpinner = findViewById(R.id.schedule_group_spinner);
+        //EditText lecturer = findViewById(R.id.schedule_lecturer);
+        Spinner auditorySpinner = findViewById(R.id.schedule_auditory_spinner);
         EditText week = findViewById(R.id.schedule_day_of_week);
 
-        timeInterval.setText(timeSlot.getTimeInterval());
-        discipline.setText(timeSlot.getDiscipline());
-        group.setText(timeSlot.getGroup());
-        lecturer.setText(timeSlot.getLecturer());
-        auditory.setText(timeSlot.getAuditory());
+        //timeInterval.setText(timeSlot.getTimeInterval());
+        //discipline.setText(timeSlot.getDiscipline());
+        //group.setText(timeSlot.getGroup());
+        //lecturer.setText(timeSlot.getLecturer());
+        //auditory.setText(timeSlot.getAuditory());
         week.setText(timeSlot.getWeek());
 
         Spinner discSpinner = findViewById(R.id.schedule_discipline_spinner);
         Spinner lecturersSpinner = findViewById(R.id.schedule_lecturer_spinner);
-        Spinner classTimesSpinner = findViewById(R.id.schedule_class_time_spinner);
-        this.<Discipline>setUpSpinnerValues(discSpinner,
+        Spinner classTimesSpinner = findViewById(R.id.schedule_time_spinner);
+        setUpSpinnerValues(discSpinner,
                 disc -> timeSlot.getDiscipline().startsWith(disc.getName()),
                 client.getAllDisciplines(MainActivity.getToken()));
-        this.<Lecturer>setUpSpinnerValues(lecturersSpinner,
+        setUpSpinnerValues(lecturersSpinner,
                 lect -> timeSlot.getLecturer().startsWith(lect.getFullName()),
                 client.getAllLecturers(MainActivity.getToken()));
-        this.<ClassTime>setUpSpinnerValues(lecturersSpinner,
+        setUpSpinnerValues(classTimesSpinner,
                 classTime -> timeSlot.getLecturer().startsWith(classTime.getStartTime()),
                 client.getAllClassTimes(MainActivity.getToken()));
+        setUpSpinnerValues(groupSpinner,
+                group -> timeSlot.getGroup().equals(group.getGroupNumber()),
+                client.getAllGroups(MainActivity.getToken()));
+        setUpSpinnerValues(auditorySpinner,
+                auditory -> timeSlot.getAuditory().equals(auditory.getLocation()),
+                client.getAllAuditories(MainActivity.getToken()));
     }
 
-    private <T> void setUpSpinnerValues(final Spinner spinner, final Predicate<T> predicate,
-                                    final Call<DeaneryGetList<T>> call) {
+    private <T> void setUpSpinnerValues(final Spinner spinner,
+                                        final Predicate<T> predicate,
+                                        final Call<DeaneryGetList<T>> call) {
         call.enqueue(new Callback<DeaneryGetList<T>>() {
             @Override
             public void onResponse(Call<DeaneryGetList<T>> call, Response<DeaneryGetList<T>> response) {
@@ -92,7 +99,6 @@ public class ScheduleUpdateActivity extends AppCompatActivity {
                     }
                 }
             }
-
             @Override
             public void onFailure(Call<DeaneryGetList<T>> call, Throwable t) {
                 Log.i("error", String.valueOf(call.isExecuted()));

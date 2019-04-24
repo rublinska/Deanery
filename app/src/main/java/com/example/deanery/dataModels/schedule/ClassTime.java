@@ -29,10 +29,6 @@ public class ClassTime extends DeaneryDto {
 
     @Override
     public String toString() {
-        return "ClassTime{" +
-                "id=" + id +
-                ", startTime='" + startTime + '\'' +
-                ", endTime='" + endTime + '\'' +
-                '}';
+        return String.format("%s - %s", getStartTime(), getEndTime());
     }
 }
