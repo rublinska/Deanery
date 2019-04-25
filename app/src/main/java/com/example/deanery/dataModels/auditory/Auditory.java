@@ -82,6 +82,6 @@ public class Auditory extends DeaneryDto implements Serializable {
     }
 
     public String toString() {
-        return getBuildingNumber() + "." + getNumber() + "(capacity: " + getCapacity().toString();
+        return getBuildingNumber() + "." + getNumber() + "(capacity: " + getCapacity().toString()+ ")";
     }
 }

@@ -47,10 +47,10 @@ public class LecturerUpdateActivity extends AppCompatActivity {
         token  =getIntent().getStringExtra("token");
         lecturerForUpdate = getIntent().getParcelableExtra("departmentSpinner");
         Log.i("lizatest", String.valueOf(lecturerForUpdate.getId()));
-        fullName = findViewById(R.id.department_name);
+        fullName = findViewById(R.id.lecturer_full_name);
         departmentSpinner = findViewById(R.id.lecturer_department);
         phone = findViewById(R.id.lecturers_num);
-        position = findViewById(R.id.auditories_num);
+        position = findViewById(R.id.position);
         delete = findViewById(R.id.delete);
         cancel = findViewById(R.id.cancel);
         updateLecturer = findViewById(R.id.update);

@@ -99,12 +99,12 @@ public class StudentUpdateActivity extends AppCompatActivity {
                 deleteStudent.enqueue(new Callback<GetStatus>() {
                     @Override
                     public void onResponse(Call<GetStatus> call, Response<GetStatus> response) {
-                    //    Log.i("Lizatest", response.raw().toString());
+                    //    Log.i("LizatestDelSt", response.raw().toString());
                         closeActivity();
                     }
                     @Override
                     public void onFailure(Call<GetStatus> call, Throwable t) {
-                    //    Log.i("LizatestError",t.getMessage());
+                        Log.i("LizatestErrorDelSt",t.getMessage());
                         closeActivity();
                     }
                 });
@@ -128,7 +128,7 @@ public class StudentUpdateActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(Call<Student> call, Response<Student> response) {
-                        Log.i("LizatestErrorStudUpd",response.raw().toString());
+                        Log.i("LizatestStudUpd",response.raw().toString());
                         closeActivity();
                     }
 

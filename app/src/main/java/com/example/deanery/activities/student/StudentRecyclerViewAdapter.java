@@ -50,6 +50,7 @@ public class StudentRecyclerViewAdapter extends RecyclerView.Adapter<StudentRecy
         student = students.get(position);
 
         studentPlaceHolder.fullName.setText(student.getName());
+        studentPlaceHolder.phone.setText(student.getPhone());
         studentPlaceHolder.startUni.setText(student.getStartUniversity());
         studentPlaceHolder.endUni.setText(student.getEndUniversity());
         studentPlaceHolder.endReason.setText(student.getEndReason());
@@ -83,6 +84,7 @@ public class StudentRecyclerViewAdapter extends RecyclerView.Adapter<StudentRecy
     class StudentPlaceHolder extends RecyclerView.ViewHolder {
         TextView fullName;
         TextView specialty;
+        TextView phone;
         TextView startUni;
         TextView endUni;
         TextView endReason;
@@ -96,7 +98,7 @@ public class StudentRecyclerViewAdapter extends RecyclerView.Adapter<StudentRecy
             startUni = itemView.findViewById(R.id.student_startUni);
             endUni = itemView.findViewById(R.id.student_endUni);
             endReason = itemView.findViewById(R.id.student_endReason);
-            //item = itemView.findViewById(R.id.student_button);
+            phone = itemView.findViewById(R.id.student_phone);
             item = itemView.findViewById(R.id.student_view);
         }
 
