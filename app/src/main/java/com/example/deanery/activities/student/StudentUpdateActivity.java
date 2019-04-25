@@ -99,12 +99,12 @@ public class StudentUpdateActivity extends AppCompatActivity {
                 deleteStudent.enqueue(new Callback<GetStatus>() {
                     @Override
                     public void onResponse(Call<GetStatus> call, Response<GetStatus> response) {
-                    //    Log.i("Lizatest", response.raw().toString());
+                    //    Log.i("LizatestDelSt", response.raw().toString());
                         closeActivity();
                     }
                     @Override
                     public void onFailure(Call<GetStatus> call, Throwable t) {
-                    //    Log.i("LizatestError",t.getMessage());
+                        Log.i("LizatestErrorDelSt",t.getMessage());
                         closeActivity();
                     }
                 });
@@ -122,19 +122,18 @@ public class StudentUpdateActivity extends AppCompatActivity {
                 Specialty newSpecialty = (Specialty) specialtySpinner.getSelectedItem();
                 studentForUpdate.setSpecialtyId(newSpecialty.getId());
 
-                final Call<Student> updateStudent = client.updateStudent(studentForUpdate.getId(),getIntent().getStringExtra("token"), studentForUpdate);
-
+                final Call<Student> updateStudent = client.updateStudent(studentForUpdate.getId(), getIntent().getStringExtra("token"), studentForUpdate);
                 updateStudent.enqueue(new Callback<Student>() {
 
                     @Override
                     public void onResponse(Call<Student> call, Response<Student> response) {
-                        Log.i("LizatestErrorStudUpd",response.raw().toString());
+                        Log.i("LizatestStudUpd",response.raw().toString());
                         closeActivity();
                     }
 
                     @Override
                     public void onFailure(Call<Student> call, Throwable t) {
-                        Log.i("LizatestErrorStudUpd",t.getMessage());
+                        Log.i("LizatestErrorStudUpd",call.request().url().toString());
                         closeActivity();
                     }
                 });

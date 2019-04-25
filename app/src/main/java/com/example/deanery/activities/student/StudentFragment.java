@@ -87,12 +87,10 @@ public class StudentFragment extends Fragment implements RefreshInterface {
         recyclerView = (RecyclerView) view;
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-//      token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE1NTI1MDQwODcsImV4cCI6MTU1MjUwNzY4NywibmJmIjoxNTUyNTA0MDg3LCJqdGkiOiJDT2RpaXdJZzRPV3lBT3NCIiwic3ViIjoxLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.O-yZKKxEC4Mt5QPIqxHLTJVT_Sx1Zwzy0w2AIixE8to"
         Call<DeaneryGetList<Student>> getData = client.getAllStudents(token);
         getData.enqueue(new Callback<DeaneryGetList<Student>>() {
             @Override
             public void onResponse(Call<DeaneryGetList<Student>> call, Response<DeaneryGetList<Student>> response) {
-            //    Log.i("Lizatest", call.request().url().toString());
             //    Log.i("Lizatest", response.body().getData().get(0).getFullName());
                 if(response.body().getData().size() > 0){
                     students = response.body().getData();
@@ -130,12 +128,9 @@ public class StudentFragment extends Fragment implements RefreshInterface {
         getAllStudents.enqueue(new Callback<DeaneryGetList<Student>>() {
             @Override
             public void onResponse(Call<DeaneryGetList<Student>> call, Response<DeaneryGetList<Student>> response) {
-                //    Log.i("Lizatest", call.request().url().toString());
                 //Log.i("LizatestArraySize", String.valueOf(response.body().getData().size()));
                 if (response.body().getData().size() > 0) {
                     students = (ArrayList<Student>) response.body().getData();
-                    //    departmentAdapter.notifyDataSetChanged();
-
                     studentAdapter = new StudentRecyclerViewAdapter(students, token, getActivity());
                     recyclerView.setAdapter(studentAdapter);
                     swipeRefresh.setRefreshing(false);

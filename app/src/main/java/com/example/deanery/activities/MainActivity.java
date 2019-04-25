@@ -20,6 +20,8 @@ import com.example.deanery.DeaneryAPI;
 import com.example.deanery.R;
 import com.example.deanery.RefreshInterface;
 import com.example.deanery.ServiceGenerator;
+import com.example.deanery.activities.discipline.DisciplineCreateActivity;
+import com.example.deanery.activities.discipline.DisciplineFragment;
 import com.example.deanery.activities.schedule.ScheduleFragment;
 import com.example.deanery.activities.schedule.ScheduleCreateActivity;
 import com.example.deanery.activities.student.StudentCreateActivity;
@@ -180,10 +182,10 @@ public class MainActivity extends AppCompatActivity
                 fragment = StudentFragment.newInstance(swipeLayout);
                 intent = new Intent(getApplicationContext(), StudentCreateActivity.class);
                 break;
-        /*  case R.id.nav_disciplines:
+            case R.id.nav_disciplines:
                 fragment = DisciplineFragment.newInstance(swipeLayout);
                 intent = new Intent(getApplicationContext(), DisciplineCreateActivity.class);
-                break;*/
+                break;
          /*   case R.id.nav_create_report:
                 fragmentClass = UniReportFragment.class;
                 intent = new Intent(getApplicationContext(), UniReportCreateActivity.class);

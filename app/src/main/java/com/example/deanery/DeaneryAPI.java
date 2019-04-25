@@ -64,11 +64,10 @@ public interface DeaneryAPI {
     @GET("departments")
     Call<DeaneryGetList<Department>> getAllDepartments(@Query("token") String token);
 
-
     @GET("auditories")
     Call<DeaneryGetList<Auditory>> getAllAuditories(@Query("token") String token);
 
-    @POST("departments/{id}")
+    @POST("auditories/{id}")
     Call<Auditory> updateAuditory(@Path("id") Integer id , @Query("token") String token, @Body Auditory auditory);
 
 

@@ -82,8 +82,6 @@ public class DepartmentFragment extends Fragment implements RefreshInterface {
         recyclerView = (RecyclerView) view;
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-
-//      token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE1NTI1MDQwODcsImV4cCI6MTU1MjUwNzY4NywibmJmIjoxNTUyNTA0MDg3LCJqdGkiOiJDT2RpaXdJZzRPV3lBT3NCIiwic3ViIjoxLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.O-yZKKxEC4Mt5QPIqxHLTJVT_Sx1Zwzy0w2AIixE8to"
         Call<DeaneryGetList<Department>> getAllDepartments = client.getAllDepartments(token);
         getAllDepartments.enqueue(new Callback<DeaneryGetList<Department>>() {
             @Override

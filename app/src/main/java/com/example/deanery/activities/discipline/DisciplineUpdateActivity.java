@@ -187,13 +187,13 @@ public class DisciplineUpdateActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(Call<Discipline> call, Response<Discipline> response) {
-                    //    Log.i("LizatestError",response.raw().toString());
+                        Log.i("LizatestErrorDiscUpd",response.raw().toString());
                         closeActivity();
                     }
 
                     @Override
                     public void onFailure(Call<Discipline> call, Throwable t) {
-                    //    Log.i("LizatestError",t.getMessage());
+                        Log.i("LizatestErrorDiscUpd",t.getMessage());
                         closeActivity();
                     }
                 });
