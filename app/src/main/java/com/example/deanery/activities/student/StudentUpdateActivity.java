@@ -122,8 +122,7 @@ public class StudentUpdateActivity extends AppCompatActivity {
                 Specialty newSpecialty = (Specialty) specialtySpinner.getSelectedItem();
                 studentForUpdate.setSpecialtyId(newSpecialty.getId());
 
-                final Call<Student> updateStudent = client.updateStudent(studentForUpdate.getId(),getIntent().getStringExtra("token"), studentForUpdate);
-
+                final Call<Student> updateStudent = client.updateStudent(studentForUpdate.getId(), getIntent().getStringExtra("token"), studentForUpdate);
                 updateStudent.enqueue(new Callback<Student>() {
 
                     @Override
@@ -134,7 +133,7 @@ public class StudentUpdateActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<Student> call, Throwable t) {
-                        Log.i("LizatestErrorStudUpd",t.getMessage());
+                        Log.i("LizatestErrorStudUpd",call.request().url().toString());
                         closeActivity();
                     }
                 });

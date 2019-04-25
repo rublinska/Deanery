@@ -110,32 +110,6 @@ public class DepartmentCreateActivity extends AppCompatActivity {
                 Log.i("LizatestErrgetauditory", String.valueOf(call.request()));
             }
         });
-        /*
-        ArrayAdapter<Auditory> auditoryAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_multiple_choice, auditoryList);
-     //   auditoryAdapter.setC(ListView.CHOICE_MODE_MULTIPLE);
-        auditoryAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item_view);*/
-
-
-/*
-        Call<DeaneryGetList<Lecturer>> getAllLecturers = client.getAllLecturers(token);
-        getAllLecturers.enqueue(new Callback<DeaneryGetList<Lecturer>>() {
-            @Override
-            public void onResponse(Call<DeaneryGetList<Lecturer>> call, Response<DeaneryGetList<Lecturer>> response) {
-                Log.i("LizatestGEtLecturer", response.body().getData().get(0).getFullName());
-                Log.i("LizatestGEtLecturer", response.raw().toString());
-                lecturerList = response.body().getData();
-            }
-
-            @Override
-            public void onFailure(Call<DeaneryGetList<Lecturer>> call, Throwable t) {
-                Log.i("LizatestErrgetlecturers", String.valueOf(call.isExecuted()));
-            }
-        });
-        ArrayAdapter<Lecturer> lecturerAdapter = new ArrayAdapter<Lecturer>(this, android.R.layout.simple_list_item_multiple_choice, lecturerList);
-        //   lecturers.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-        lecturerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item_view);
-        lecturers.setAdapter(lecturerAdapter);*/
-
 
         createNewDepartment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,66 +117,71 @@ public class DepartmentCreateActivity extends AppCompatActivity {
                 List<Auditory> addAuditories  =new ArrayList<>();
                 List<Lecturer> addLecturers = new ArrayList<>();
 
-              /*  for (Pair<Auditory, Boolean> ab : allAuditories)
-                    if (ab.second)
-                        addAuditories.add(ab.first);
-                for (Pair<Lecturer, Boolean> ab : allLecturers)
-                    if (ab.second)
-                        addLecturers.add(ab.first);*/
+                final Department newDepartment = new Department("" + departmentName.getText());
 
-               Department newDepartment = new Department("" + departmentName.getText());
-              //  newDepartment.setAuditories(addAuditories);
-              //  newDepartment.setLecturers(addLecturers);
-
-                //    Log.i("Lizatest", getIntent().getStringExtra("token"));
                 final Call<Department> createDepartment = client.createDepartment(token, newDepartment);
                 createDepartment.enqueue(new Callback<Department>() {
                     @Override
                     public void onResponse(Call<Department> call, Response<Department> response) {
 
-                        Integer departmentID = null;
-                        if (response.isSuccessful()) {
-                            Department department = response.body();
-                            departmentID = department.getId();
-                        }
+                        Call<DeaneryGetList<Department>> getAllDepartments = client.getAllDepartments(token);
+                        getAllDepartments.enqueue(new Callback<DeaneryGetList<Department>>() {
+                            @Override
+                            public void onResponse(Call<DeaneryGetList<Department>> call, Response<DeaneryGetList<Department>> response) {
+                                for (Department d:response.body().getData() ) {
+                                    if (d.getName().equals(newDepartment.getName())) {
+                                        for (Pair<Auditory, Boolean> ab : allAuditories){
 
-                        for (Pair<Auditory, Boolean> ab : allAuditories)
-                            if (ab.second) {
-                                Auditory auditory = ab.first;
-                                Log.i("lizatestdepid", departmentID.toString());
-                                auditory.setDepartmentId(departmentID);
-                                final Call<Auditory> updateAuditory = client.updateAuditory(auditory.getId(), getIntent().getStringExtra("token"), auditory);
-                                updateAuditory.enqueue(new Callback<Auditory>() {
-                                    @Override
-                                    public void onResponse(Call<Auditory> call, Response<Auditory> response) {
-                                        Log.i("LizatestError",response.raw().toString());
-                                    }
+                                            Auditory auditory = ab.first;
+                                            Log.i("lizatestdepid", d.getId().toString());
+                                            if (ab.second)
+                                                auditory.setDepartmentId(d.getId());
+                                            else
+                                                auditory.setDepartmentId(null);
+                                            final Call<Auditory> updateAuditory = client.updateAuditory(auditory.getId(), getIntent().getStringExtra("token"), auditory);
+                                            updateAuditory.enqueue(new Callback<Auditory>() {
+                                                @Override
+                                                public void onResponse(Call<Auditory> call, Response<Auditory> response) {
+                                                    Log.i("LizatestError",response.raw().toString());
+                                                }
 
-                                    @Override
-                                    public void onFailure(Call<Auditory> call, Throwable t) {
-                                        Log.i("LizatestError",t.getMessage());
+                                                @Override
+                                                public void onFailure(Call<Auditory> call, Throwable t) {
+                                                    Log.i("LizatestError",t.getMessage());
+                                                }
+                                            });
+                                        }
+                                        for (Pair<Lecturer, Boolean> ab : allLecturers) {
+
+                                            Lecturer lecturer = ab.first;
+                                            Log.i("lizatestdepid", d.getId().toString());
+                                            if (ab.second)
+                                                lecturer.setDepartmentId(d.getId());
+                                            else
+                                                lecturer.setDepartmentId(null);
+                                            final Call<Lecturer> updateLecturer = client.updateLecturer(lecturer.getId(), getIntent().getStringExtra("token"), lecturer);
+                                            updateLecturer.enqueue(new Callback<Lecturer>() {
+                                                @Override
+                                                public void onResponse(Call<Lecturer> call, Response<Lecturer> response) {
+                                                    Log.i("LizatestError", response.raw().toString());
+                                                }
+
+                                                @Override
+                                                public void onFailure(Call<Lecturer> call, Throwable t) {
+                                                    Log.i("LizatestError", t.getMessage());
+                                                }
+                                            });
+                                        }
+                                        break;
                                     }
-                                });
+                                }
                             }
 
+                            @Override
+                            public void onFailure(Call<DeaneryGetList<Department>> call, Throwable t) {
 
-                        for (Pair<Lecturer, Boolean> ab : allLecturers)
-                            if (ab.second) {
-                                Lecturer lecturer = ab.first;
-                                Log.i("lizatestdepid", departmentID.toString());
-                                lecturer.setDepartmentId(departmentID);
-                                final Call<Lecturer> updateLecturer = client.updateLecturer(lecturer.getId(),getIntent().getStringExtra("token"), lecturer);
-                                updateLecturer.enqueue(new Callback<Lecturer>() {
-                                    @Override
-                                    public void onResponse(Call<Lecturer> call, Response<Lecturer> response) {
-                                        Log.i("LizatestError",response.raw().toString());
-                                    }
-                                    @Override
-                                    public void onFailure(Call<Lecturer> call, Throwable t) {
-                                        Log.i("LizatestError",t.getMessage());
-                                    }
-                                });
                             }
+                        });
                     }
                     @Override
                     public void onFailure(Call<Department> call, Throwable t) {

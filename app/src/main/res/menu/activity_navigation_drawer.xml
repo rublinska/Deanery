@@ -27,10 +27,6 @@
     <item android:title="Schedule">
         <menu>
             <item
-                android:id="@+id/nav_create_report"
-                android:icon="@android:drawable/ic_menu_agenda"
-                android:title="Reports" />
-            <item
                 android:id="@+id/nav_schedule_cells"
                 android:icon="@android:drawable/ic_menu_today"
                 android:title="Schedule" />
