@@ -10,8 +10,10 @@ import com.example.deanery.dataModels.login.BodyForLogin;
 import com.example.deanery.dataModels.GetStatus;
 import com.example.deanery.dataModels.lecturer.Lecturer;
 import com.example.deanery.dataModels.login.User;
+import com.example.deanery.dataModels.schedule.AcademicWeek;
 import com.example.deanery.dataModels.schedule.ClassTime;
 import com.example.deanery.dataModels.schedule.ScheduleItem;
+import com.example.deanery.dataModels.schedule.UniversityClass;
 import com.example.deanery.dataModels.specialty.Specialty;
 import com.example.deanery.dataModels.student.Student;
 import com.example.deanery.dataModels.student.UniversityGroup;
@@ -106,4 +108,10 @@ public interface DeaneryAPI {
 
     @GET("university-groups")
     Call<DeaneryGetList<UniversityGroup>> getAllGroups(@Query("token") String token);
+
+    @GET("university-classes")
+    Call<DeaneryGetList<UniversityClass>> getAllUniversityClasses(@Query("token") String token);
+
+    @GET("academic-weeks")
+    Call<DeaneryGetList<AcademicWeek>> getAllAcademicWeeks(@Query("token") String token);
 }

@@ -20,47 +20,20 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Discipline:"/>
-    <Spinner
-        android:id="@+id/schedule_discipline_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Lecturer:"/>
-    <Spinner
-        android:id="@+id/schedule_lecturer_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="Group:"/>
     <Spinner
         android:id="@+id/schedule_group_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <EditText
-        android:id="@+id/schedule_semester"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="semester" />
-
-    <EditText
-        android:id="@+id/schedule_specialty"
+        android:text="Academic week:"/>
+    <Spinner
+        android:id="@+id/schedule_week_spinner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="specialty" />
-
-    <EditText
-        android:id="@+id/schedule_day_of_week"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="day_of_week" />
+        android:layout_height="wrap_content"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -68,6 +41,15 @@
         android:text="Auditory:"/>
     <Spinner
         android:id="@+id/schedule_auditory_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="University class:"/>
+    <Spinner
+        android:id="@+id/schedule_university_class_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

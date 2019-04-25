@@ -33,13 +33,15 @@ public class ScheduleItem extends DeaneryDto implements Parcelable {
     private Group group;
 
     public ScheduleItem(Parcel o) {
-        this.id = (Integer) o.readValue(Integer.class.getClassLoader());
-        this.weekDay = (Integer) o.readValue(Integer.class.getClassLoader());
-        this.academicWeek = (AcademicWeek) o.readValue(AcademicWeek.class.getClassLoader());
-        this.auditory = (Auditory) o.readValue(Auditory.class.getClassLoader());
-        this.classTime= (ClassTime) o.readValue(ClassTime.class.getClassLoader());
-        this.universityClass = (UniversityClass) o.readValue(UniversityClass.class.getClassLoader());
-        this.group = (Group) o.readValue(Group.class.getClassLoader());
+        this.id = o.readInt();
+        this.weekDay = o.readInt();
+        this.academicWeek = o.readParcelable(AcademicWeek.class.getClassLoader());
+        this.auditory = o.readParcelable(Auditory.class.getClassLoader());
+        this.classTime= o.readParcelable(ClassTime.class.getClassLoader());
+        this.universityClass = new UniversityClass(o.readInt());
+        this.group = new Group(o.readInt());
+        //this.universityClass = o.readParcelable(UniversityClass.class.getClassLoader());
+        //this.group = o.readParcelable(Group.class.getClassLoader());
     }
 
     public Integer getId() {
@@ -81,15 +83,15 @@ public class ScheduleItem extends DeaneryDto implements Parcelable {
                 '}';
     }
 
-    public static final Parcelable.Creator<TimeSlot> CREATOR = new Parcelable.Creator<TimeSlot>() {
+    public static final Parcelable.Creator<ScheduleItem> CREATOR = new Parcelable.Creator<ScheduleItem>() {
         @Override
-        public TimeSlot createFromParcel(Parcel in) {
-            return new TimeSlot(in);
+        public ScheduleItem createFromParcel(Parcel in) {
+            return new ScheduleItem(in);
         }
 
         @Override
-        public TimeSlot[] newArray(int size) {
-            return new TimeSlot[size];
+        public ScheduleItem[] newArray(int size) {
+            return new ScheduleItem[size];
         }
     };
 
@@ -100,12 +102,14 @@ public class ScheduleItem extends DeaneryDto implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(id);
-        dest.writeValue(weekDay);
-        dest.writeValue(academicWeek);
-        dest.writeValue(auditory);
-        dest.writeValue(classTime);
-        dest.writeValue(universityClass);
-        dest.writeValue(group);
+        dest.writeInt(id);
+        dest.writeInt(weekDay);
+        dest.writeParcelable(academicWeek, flags);
+        dest.writeParcelable(auditory, flags);
+        dest.writeParcelable(classTime, flags);
+        dest.writeInt(universityClass.getId());
+        dest.writeInt(group.getId());
+        //dest.writeParcelable(universityClass, flags);
+        //dest.writeParcelable(group, flags);
     }
 }

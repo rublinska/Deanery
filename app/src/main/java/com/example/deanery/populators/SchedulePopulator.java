@@ -72,6 +72,7 @@ public class SchedulePopulator {
         result.setTimeInterval(getTimeInterval(item.getClassTime()));
         result.setWeek("1-12w"); // TODO andlys
         result.setAuditory(item.getAuditory().getLocation());
+        result.setScheduleItem(item);
         return result;
     }
 

@@ -110,6 +110,14 @@ public class TimeSlot implements Parcelable {
         this.week = week;
     }
 
+    public ScheduleItem getScheduleItem() {
+        return scheduleItem;
+    }
+
+    public void setScheduleItem(ScheduleItem scheduleItem) {
+        this.scheduleItem = scheduleItem;
+    }
+
     @Override
     public String toString() {
         return "TimeSlot{" +

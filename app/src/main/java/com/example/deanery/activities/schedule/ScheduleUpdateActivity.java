@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.deanery.DeaneryAPI;
@@ -14,10 +13,7 @@ import com.example.deanery.R;
 import com.example.deanery.ServiceGenerator;
 import com.example.deanery.activities.MainActivity;
 import com.example.deanery.dataModels.common.DeaneryGetList;
-import com.example.deanery.dataModels.department.Department;
-import com.example.deanery.dataModels.discipline.Discipline;
-import com.example.deanery.dataModels.lecturer.Lecturer;
-import com.example.deanery.dataModels.schedule.ClassTime;
+import com.example.deanery.dataModels.schedule.ScheduleItem;
 import com.example.deanery.dataModels.schedule.TimeSlot;
 
 import java.util.List;
@@ -44,41 +40,28 @@ public class ScheduleUpdateActivity extends AppCompatActivity {
         });
 
         final TimeSlot timeSlot = getIntent().getParcelableExtra("schedule_time_slot");
-        final String semester = getIntent().getStringExtra("semester");
-        final String specialty = getIntent().getStringExtra("specialty");
+        final ScheduleItem scheduleItem = timeSlot.getScheduleItem();
 
-        //EditText timeInterval = findViewById(R.id.schedule_time);
-        //EditText discipline = findViewById(R.id.schedule_discipline);
         Spinner groupSpinner = findViewById(R.id.schedule_group_spinner);
-        //EditText lecturer = findViewById(R.id.schedule_lecturer);
+        Spinner weekSpinner = findViewById(R.id.schedule_week_spinner);
         Spinner auditorySpinner = findViewById(R.id.schedule_auditory_spinner);
-        EditText week = findViewById(R.id.schedule_day_of_week);
-
-        //timeInterval.setText(timeSlot.getTimeInterval());
-        //discipline.setText(timeSlot.getDiscipline());
-        //group.setText(timeSlot.getGroup());
-        //lecturer.setText(timeSlot.getLecturer());
-        //auditory.setText(timeSlot.getAuditory());
-        week.setText(timeSlot.getWeek());
-
-        Spinner discSpinner = findViewById(R.id.schedule_discipline_spinner);
-        Spinner lecturersSpinner = findViewById(R.id.schedule_lecturer_spinner);
+        Spinner universityClass = findViewById(R.id.schedule_university_class_spinner);
         Spinner classTimesSpinner = findViewById(R.id.schedule_time_spinner);
-        setUpSpinnerValues(discSpinner,
-                disc -> timeSlot.getDiscipline().startsWith(disc.getName()),
-                client.getAllDisciplines(MainActivity.getToken()));
-        setUpSpinnerValues(lecturersSpinner,
-                lect -> timeSlot.getLecturer().startsWith(lect.getFullName()),
-                client.getAllLecturers(MainActivity.getToken()));
         setUpSpinnerValues(classTimesSpinner,
-                classTime -> timeSlot.getLecturer().startsWith(classTime.getStartTime()),
+                classTime -> classTime.getId().equals(scheduleItem.getClassTime().getId()),
                 client.getAllClassTimes(MainActivity.getToken()));
+        setUpSpinnerValues(universityClass,
+                uniClass -> uniClass.getId().equals(scheduleItem.getUniversityClass().getId()),
+                client.getAllUniversityClasses(MainActivity.getToken()));
         setUpSpinnerValues(groupSpinner,
-                group -> timeSlot.getGroup().equals(group.getGroupNumber()),
+                group -> group.getId().equals(scheduleItem.getGroup().getId()),
                 client.getAllGroups(MainActivity.getToken()));
         setUpSpinnerValues(auditorySpinner,
-                auditory -> timeSlot.getAuditory().equals(auditory.getLocation()),
+                auditory -> auditory.getId().equals(scheduleItem.getAuditory().getId()),
                 client.getAllAuditories(MainActivity.getToken()));
+        setUpSpinnerValues(weekSpinner,
+                academicWeek -> academicWeek.getId().equals(scheduleItem.getAcademicWeek().getId()),
+                client.getAllAcademicWeeks(MainActivity.getToken()));
     }
 
     private <T> void setUpSpinnerValues(final Spinner spinner,
