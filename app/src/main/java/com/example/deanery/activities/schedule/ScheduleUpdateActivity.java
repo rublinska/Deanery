@@ -12,9 +12,15 @@ import com.example.deanery.DeaneryAPI;
 import com.example.deanery.R;
 import com.example.deanery.ServiceGenerator;
 import com.example.deanery.activities.MainActivity;
+import com.example.deanery.dataModels.auditory.Auditory;
 import com.example.deanery.dataModels.common.DeaneryGetList;
+import com.example.deanery.dataModels.schedule.AcademicWeek;
+import com.example.deanery.dataModels.schedule.ClassTime;
 import com.example.deanery.dataModels.schedule.ScheduleItem;
+import com.example.deanery.dataModels.schedule.ScheduleItemDto;
 import com.example.deanery.dataModels.schedule.TimeSlot;
+import com.example.deanery.dataModels.schedule.UniversityClass;
+import com.example.deanery.dataModels.student.UniversityGroup;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -45,12 +51,12 @@ public class ScheduleUpdateActivity extends AppCompatActivity {
         Spinner groupSpinner = findViewById(R.id.schedule_group_spinner);
         Spinner weekSpinner = findViewById(R.id.schedule_week_spinner);
         Spinner auditorySpinner = findViewById(R.id.schedule_auditory_spinner);
-        Spinner universityClass = findViewById(R.id.schedule_university_class_spinner);
+        Spinner universityClassSpinner = findViewById(R.id.schedule_university_class_spinner);
         Spinner classTimesSpinner = findViewById(R.id.schedule_time_spinner);
         setUpSpinnerValues(classTimesSpinner,
                 classTime -> classTime.getId().equals(scheduleItem.getClassTime().getId()),
                 client.getAllClassTimes(MainActivity.getToken()));
-        setUpSpinnerValues(universityClass,
+        setUpSpinnerValues(universityClassSpinner,
                 uniClass -> uniClass.getId().equals(scheduleItem.getUniversityClass().getId()),
                 client.getAllUniversityClasses(MainActivity.getToken()));
         setUpSpinnerValues(groupSpinner,
@@ -62,10 +68,37 @@ public class ScheduleUpdateActivity extends AppCompatActivity {
         setUpSpinnerValues(weekSpinner,
                 academicWeek -> academicWeek.getId().equals(scheduleItem.getAcademicWeek().getId()),
                 client.getAllAcademicWeeks(MainActivity.getToken()));
+
+        Button createNewScheduleItem = findViewById(R.id.create);
+        createNewScheduleItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int groupId = ((UniversityGroup) groupSpinner.getSelectedItem()).getId();
+                int weekId = ((AcademicWeek) weekSpinner.getSelectedItem()).getId();
+                int auditoryId = ((Auditory) auditorySpinner.getSelectedItem()).getId();
+                int uniClassId = ((UniversityClass) universityClassSpinner.getSelectedItem()).getId();
+                int classTimeId = ((ClassTime) classTimesSpinner.getSelectedItem()).getId();
+                final ScheduleItemDto newItem = new ScheduleItemDto(classTimeId, weekId, auditoryId, uniClassId, groupId);
+                final Call<ScheduleItem> createLecturer = client.updateScheduleItem(scheduleItem.getId(), MainActivity.getToken(), newItem);
+                createLecturer.enqueue(new Callback<ScheduleItem>() {
+                    @Override
+                    public void onResponse(Call<ScheduleItem> call, Response<ScheduleItem> response) {
+                        Log.i("scheduleCreate", response.raw().toString());
+                        closeActivity();
+                    }
+
+                    @Override
+                    public void onFailure(Call<ScheduleItem> call, Throwable t) {
+                        Log.i("scheduleCreate", t.getMessage());
+                        closeActivity();
+                    }
+                });
+            }
+        });
     }
 
     private <T> void setUpSpinnerValues(final Spinner spinner,
-                                        final Predicate<T> predicate,
+                                        final Predicate<T> shouldBeSelected,
                                         final Call<DeaneryGetList<T>> call) {
         call.enqueue(new Callback<DeaneryGetList<T>>() {
             @Override
@@ -77,7 +110,7 @@ public class ScheduleUpdateActivity extends AppCompatActivity {
                 spinner.setAdapter(adapter);
                 for (int i = 0; i < adapter.getCount(); i++) {
                     T disc = (T) adapter.getItem(i);
-                    if(predicate.test(disc)) {
+                    if(shouldBeSelected.test(disc)) {
                         spinner.setSelection(i);
                     }
                 }
