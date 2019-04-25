@@ -24,22 +24,27 @@ public class ScheduleItemDto extends DeaneryDto {
     @SerializedName("university_group_id")
     @Expose
     private Integer universityGroupId;
+    @SerializedName("week_day")
+    @Expose
+    private Integer weekDay;
 
-    public ScheduleItemDto(Integer id, Integer classTimeId, Integer academicWeekId, Integer auditoryId, Integer universityClassId, Integer universityGroupId) {
+    public ScheduleItemDto(Integer id, Integer classTimeId, Integer academicWeekId, Integer auditoryId, Integer universityClassId, Integer universityGroupId, Integer weekDay) {
         this.id = id;
         this.classTimeId = classTimeId;
         this.academicWeekId = academicWeekId;
         this.auditoryId = auditoryId;
         this.universityClassId = universityClassId;
         this.universityGroupId = universityGroupId;
+        this.weekDay = weekDay;
     }
 
-    public ScheduleItemDto(Integer classTimeId, Integer academicWeekId, Integer auditoryId, Integer universityClassId, Integer universityGroupId) {
+    public ScheduleItemDto(Integer classTimeId, Integer academicWeekId, Integer auditoryId, Integer universityClassId, Integer universityGroupId, Integer weekDay) {
         this.classTimeId = classTimeId;
         this.academicWeekId = academicWeekId;
         this.auditoryId = auditoryId;
         this.universityClassId = universityClassId;
         this.universityGroupId = universityGroupId;
+        this.weekDay = weekDay;
     }
 
     public Integer getId() {
@@ -99,6 +104,7 @@ public class ScheduleItemDto extends DeaneryDto {
                 ", auditoryId=" + auditoryId +
                 ", universityClassId=" + universityClassId +
                 ", universityGroupId=" + universityGroupId +
+                ", weekDay=" + weekDay +
                 '}';
     }
 }

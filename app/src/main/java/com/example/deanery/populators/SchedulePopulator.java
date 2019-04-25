@@ -37,6 +37,7 @@ public class SchedulePopulator {
                 .distinct()
                 .sorted()
                 .map(dayNumber -> populateDayOfWeek(scheduleItems, dayNumber))
+                .filter(day -> !day.getTimeSlots().isEmpty())
                 .collect(Collectors.toList());
     }
 
@@ -69,7 +70,7 @@ public class SchedulePopulator {
         result.setDiscipline(String.format("%s (%s)", discipline.getName(), universityClass.getClassType()));
         result.setLecturer(String.format("%s %s", lecturer.getFullName(), lecturer.getPosition()));
         result.setGroup(item.getGroup().getGroupNumber());
-        result.setTimeInterval(getTimeInterval(item.getClassTime()));
+        result.setTimeInterval(item.getClassTime().toString());
         result.setWeek("1-12w"); // TODO andlys
         result.setAuditory(item.getAuditory().getLocation());
         result.setScheduleItem(item);

@@ -25,6 +25,7 @@ import com.example.deanery.activities.MainActivity;
 import com.example.deanery.dataModels.common.DeaneryGetList;
 import com.example.deanery.dataModels.discipline.Discipline;
 import com.example.deanery.dataModels.lecturer.Lecturer;
+import com.example.deanery.dataModels.schedule.AcademicWeek;
 import com.example.deanery.dataModels.schedule.Day;
 import com.example.deanery.dataModels.schedule.ScheduleItem;
 import com.example.deanery.dataModels.schedule.TimeSlot;
@@ -76,7 +77,7 @@ public class ScheduleFragment extends Fragment implements RefreshInterface {
     }
 
     public void pullSchedule(final RecyclerView recyclerView) {
-        pullSchedule(recyclerView, "1", "informatics");
+        pullSchedule(recyclerView, "2", "Specialty test name");
     }
 
     public void pullSchedule(final RecyclerView recyclerView,
@@ -95,12 +96,14 @@ public class ScheduleFragment extends Fragment implements RefreshInterface {
                 b.putString("specialty", specialty);
                 getActivity().getIntent().putExtras(b);
                 recyclerView.setAdapter(new ScheduleDayRecyclerViewAdapter(days, getActivity()));
+                Log.i("schedule", "schedule accepted on ui");
             }
         };
         final Thread thread = new Thread() {
             @Override
             public void run() {
                 try {
+                    Log.i("schedule", "started loading schedule data");
                     Message msg = handler.obtainMessage();
                     final List<ScheduleItem> scheduleItems = client.getAllScheduleItems(MainActivity.getToken())
                             .execute()
@@ -114,12 +117,14 @@ public class ScheduleFragment extends Fragment implements RefreshInterface {
                             .execute()
                             .body()
                             .getData();
+                    Log.i("schedule", "finished loading schedule data");
                     Bundle bundle = new Bundle();
                     bundle.putParcelableArrayList("lecturers", new ArrayList(lecturers));
                     bundle.putParcelableArrayList("disciplines", new ArrayList(disciplines));
                     bundle.putParcelableArrayList("scheduleItems", new ArrayList(scheduleItems));
                     msg.setData(bundle);
                     handler.sendMessage(msg);
+                    Log.i("schedule", "sent schedule data to ui");
                 } catch (IOException e) {
                     Log.e("schedule","Failed to get all schedule items", e);
                 }
@@ -174,12 +179,13 @@ public class ScheduleFragment extends Fragment implements RefreshInterface {
             }
         });
         final Spinner semestersSpinner = (Spinner) view.findViewById(R.id.spinner_semesters);
-        final Call<DeaneryGetList<ScheduleItem>> semestersCall = client.getAllScheduleItems(MainActivity.getToken());
-        semestersCall.enqueue(new Callback<DeaneryGetList<ScheduleItem>>() {
+        final Call<DeaneryGetList<AcademicWeek>> semestersCall = client.getAllAcademicWeeks(MainActivity.getToken());
+        semestersCall.enqueue(new Callback<DeaneryGetList<AcademicWeek>>() {
             @Override
-            public void onResponse(Call<DeaneryGetList<ScheduleItem>> call, Response<DeaneryGetList<ScheduleItem>> response) {
+            public void onResponse(Call<DeaneryGetList<AcademicWeek>> call, Response<DeaneryGetList<AcademicWeek>> response) {
                 final List<String> semesters = response.body().getData().
-                        stream().map(item -> item.getAcademicWeek().getSemester())
+                        stream().map(item -> item.getSemester())
+                        .distinct()
                         .sorted()
                         .collect(Collectors.toList());
                 ArrayAdapter semestersAdapter = new ArrayAdapter(view.getContext(), android.R.layout.simple_spinner_item, semesters);
@@ -188,7 +194,7 @@ public class ScheduleFragment extends Fragment implements RefreshInterface {
             }
 
             @Override
-            public void onFailure(Call<DeaneryGetList<ScheduleItem>> call, Throwable t) {
+            public void onFailure(Call<DeaneryGetList<AcademicWeek>> call, Throwable t) {
                 Log.e("schedule","Failed to get all schedule items", t);
             }
         });

@@ -53,6 +53,7 @@ public class ScheduleUpdateActivity extends AppCompatActivity {
         Spinner auditorySpinner = findViewById(R.id.schedule_auditory_spinner);
         Spinner universityClassSpinner = findViewById(R.id.schedule_university_class_spinner);
         Spinner classTimesSpinner = findViewById(R.id.schedule_time_spinner);
+        Spinner weekDaySpinner = findViewById(R.id.schedule_week_day_spinner);
         setUpSpinnerValues(classTimesSpinner,
                 classTime -> classTime.getId().equals(scheduleItem.getClassTime().getId()),
                 client.getAllClassTimes(MainActivity.getToken()));
@@ -78,7 +79,8 @@ public class ScheduleUpdateActivity extends AppCompatActivity {
                 int auditoryId = ((Auditory) auditorySpinner.getSelectedItem()).getId();
                 int uniClassId = ((UniversityClass) universityClassSpinner.getSelectedItem()).getId();
                 int classTimeId = ((ClassTime) classTimesSpinner.getSelectedItem()).getId();
-                final ScheduleItemDto newItem = new ScheduleItemDto(classTimeId, weekId, auditoryId, uniClassId, groupId);
+                int weekDay = Integer.valueOf((String) weekDaySpinner.getSelectedItem());
+                final ScheduleItemDto newItem = new ScheduleItemDto(classTimeId, weekId, auditoryId, uniClassId, groupId, weekDay);
                 final Call<ScheduleItem> createLecturer = client.updateScheduleItem(scheduleItem.getId(), MainActivity.getToken(), newItem);
                 createLecturer.enqueue(new Callback<ScheduleItem>() {
                     @Override
