@@ -64,6 +64,7 @@ public class ScheduleTimeRecyclerViewAdapter extends RecyclerView.Adapter<Schedu
         private TextView group;
         private TextView lecturer;
         private TextView auditory;
+        private TextView week;
         private TimeSlot timeSlot;
         private View timeSlotRow;
 
@@ -74,6 +75,7 @@ public class ScheduleTimeRecyclerViewAdapter extends RecyclerView.Adapter<Schedu
             lecturer = (TextView) view.findViewById(R.id.schedule_lecturer);
             group = (TextView) view.findViewById(R.id.schedule_group);
             auditory = (TextView) view.findViewById(R.id.schedule_auditory);
+            week = (TextView) view.findViewById(R.id.schedule_week);
             timeSlotRow = view.findViewById(R.id.schedule_time_slot_row);
         }
 
@@ -84,6 +86,7 @@ public class ScheduleTimeRecyclerViewAdapter extends RecyclerView.Adapter<Schedu
             group.setText(this.timeSlot.getGroup());
             lecturer.setText(this.timeSlot.getLecturer());
             auditory.setText(this.timeSlot.getAuditory());
+            week.setText(this.timeSlot.getWeek());
         }
 
         void setOnClick() {
@@ -106,6 +109,8 @@ public class ScheduleTimeRecyclerViewAdapter extends RecyclerView.Adapter<Schedu
                         Intent i = new Intent(view.getContext(), ScheduleUpdateActivity.class);
                         Bundle mBundle = new Bundle();
                         mBundle.putParcelable("schedule_time_slot", timeSlot);
+                        //mBundle.putString("specialty", fragmentActivity.getIntent().getExtras().getString("specialty"));
+                        //mBundle.putString("semester", fragmentActivity.getIntent().getExtras().getString("semester"));
                         i.putExtras(mBundle);
                         view.getContext().startActivity(i);
                         return true;

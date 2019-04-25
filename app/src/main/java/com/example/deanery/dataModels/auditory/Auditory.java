@@ -1,13 +1,16 @@
 
 package com.example.deanery.dataModels.auditory;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.example.deanery.dataModels.common.DeaneryDto;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Auditory extends DeaneryDto implements Serializable {
+public class Auditory extends DeaneryDto implements Serializable, Parcelable {
 
     @SerializedName("id")
     @Expose
@@ -24,6 +27,22 @@ public class Auditory extends DeaneryDto implements Serializable {
     @SerializedName("department_id")
     @Expose
     private Integer departmentId;
+
+    public Auditory(Parcel in) {
+        id = in.readInt();
+    }
+
+    public static final Creator<Auditory> CREATOR = new Creator<Auditory>() {
+        @Override
+        public Auditory createFromParcel(Parcel in) {
+            return new Auditory(in);
+        }
+
+        @Override
+        public Auditory[] newArray(int size) {
+            return new Auditory[size];
+        }
+    };
 
     public Integer getId() {
         return id;
@@ -82,6 +101,23 @@ public class Auditory extends DeaneryDto implements Serializable {
     }
 
     public String toString() {
-        return getBuildingNumber() + "." + getNumber() + "(capacity: " + getCapacity().toString();
+        return getLocation();
+    }
+
+    public String getLocation() {
+        return String.format("%s - %s (places: %s)",
+                getBuildingNumber(),
+                getNumber(),
+                getCapacity());
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(getId());
     }
 }

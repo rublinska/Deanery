@@ -107,4 +107,8 @@ public class UniversityGroup extends DeaneryDto implements Parcelable
         return  0;
     }
 
+    @Override
+    public String toString() {
+        return getGroupNumber();
+    }
 }

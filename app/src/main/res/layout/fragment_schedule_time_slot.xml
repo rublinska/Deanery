@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="30dp"
+    android:layout_height="wrap_content"
     android:background="@drawable/rounded_corners_for_cards"
     android:orientation="horizontal"
     android:paddingStart="5dp"
@@ -16,7 +16,7 @@
     <LinearLayout
         android:id="@+id/schedule_time_slot_row"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@drawable/rounded_corners_for_cards_light_blue"
         android:clickable="true"
         android:paddingStart="10dp"
@@ -24,7 +24,7 @@
 
         <TextView
             android:id="@+id/schedule_time"
-            android:layout_width="80dp"
+            android:layout_width="70dp"
             android:layout_height="match_parent"
             android:ems="10"
             android:text="8:30 - 9:50" />
@@ -34,7 +34,7 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:text="discipline" />
+            android:text="discipline very long name" />
 
         <TextView
             android:id="@+id/schedule_lecturer"
@@ -45,17 +45,24 @@
 
         <TextView
             android:id="@+id/schedule_group"
-            android:layout_width="80dp"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:text="group" />
 
         <TextView
             android:id="@+id/schedule_auditory"
-            android:layout_width="80dp"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:text="auditory" />
+
+        <TextView
+            android:id="@+id/schedule_week"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:text="week" />
 
     </LinearLayout>
 

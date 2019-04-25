@@ -10,13 +10,18 @@ public class TimeSlot implements Parcelable {
     private String group;
     private String discipline;
     private String auditory;
+    private String week;
+    private ScheduleItem scheduleItem;
 
-    public TimeSlot(String timeInterval, String lecturer, String group, String discipline, String auditory) {
+    public TimeSlot() {}
+
+    public TimeSlot(String timeInterval, String lecturer, String group, String discipline, String auditory, String week) {
         this.timeInterval = timeInterval;
         this.lecturer = lecturer;
         this.group = group;
         this.discipline = discipline;
         this.auditory = auditory;
+        this.week = week;
     }
 
     protected TimeSlot(Parcel in) {
@@ -25,6 +30,8 @@ public class TimeSlot implements Parcelable {
         group = in.readString();
         discipline = in.readString();
         auditory = in.readString();
+        week = in.readString();
+        scheduleItem = in.readParcelable(ScheduleItem.class.getClassLoader());
     }
 
     public static final Parcelable.Creator<TimeSlot> CREATOR = new Parcelable.Creator<TimeSlot>() {
@@ -51,6 +58,8 @@ public class TimeSlot implements Parcelable {
         dest.writeString(group);
         dest.writeString(discipline);
         dest.writeString(auditory);
+        dest.writeString(week);
+        dest.writeParcelable(scheduleItem, flags);
     }
 
     public String getTimeInterval() {
@@ -93,6 +102,22 @@ public class TimeSlot implements Parcelable {
         this.auditory = auditory;
     }
 
+    public String getWeek() {
+        return week;
+    }
+
+    public void setWeek(String week) {
+        this.week = week;
+    }
+
+    public ScheduleItem getScheduleItem() {
+        return scheduleItem;
+    }
+
+    public void setScheduleItem(ScheduleItem scheduleItem) {
+        this.scheduleItem = scheduleItem;
+    }
+
     @Override
     public String toString() {
         return "TimeSlot{" +
@@ -101,6 +126,7 @@ public class TimeSlot implements Parcelable {
                 ", group='" + group + '\'' +
                 ", discipline='" + discipline + '\'' +
                 ", auditory='" + auditory + '\'' +
+                ", week='" + week + '\'' +
                 '}';
     }
 }

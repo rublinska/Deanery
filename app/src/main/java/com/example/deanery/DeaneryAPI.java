@@ -10,9 +10,14 @@ import com.example.deanery.dataModels.login.BodyForLogin;
 import com.example.deanery.dataModels.GetStatus;
 import com.example.deanery.dataModels.lecturer.Lecturer;
 import com.example.deanery.dataModels.login.User;
+import com.example.deanery.dataModels.schedule.AcademicWeek;
+import com.example.deanery.dataModels.schedule.ClassTime;
 import com.example.deanery.dataModels.schedule.ScheduleItem;
+import com.example.deanery.dataModels.schedule.ScheduleItemDto;
+import com.example.deanery.dataModels.schedule.UniversityClass;
 import com.example.deanery.dataModels.specialty.Specialty;
 import com.example.deanery.dataModels.student.Student;
+import com.example.deanery.dataModels.student.UniversityGroup;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -98,5 +103,26 @@ public interface DeaneryAPI {
 
     @GET("university-schedules")
     Call<DeaneryGetList<ScheduleItem>> getAllScheduleItems(@Query("token") String token);
+
+    @GET("class-times")
+    Call<DeaneryGetList<ClassTime>> getAllClassTimes(@Query("token") String token);
+
+    @GET("university-groups")
+    Call<DeaneryGetList<UniversityGroup>> getAllGroups(@Query("token") String token);
+
+    @GET("university-classes")
+    Call<DeaneryGetList<UniversityClass>> getAllUniversityClasses(@Query("token") String token);
+
+    @GET("academic-weeks")
+    Call<DeaneryGetList<AcademicWeek>> getAllAcademicWeeks(@Query("token") String token);
+
+    @POST("university-schedules")
+    Call<ScheduleItem> createScheduleItem(@Query("token") String token,
+                                          @Body ScheduleItemDto scheduleItemDto);
+
+    @POST("university-schedules/{id}")
+    Call<ScheduleItem> updateScheduleItem(@Path("id") Integer id,
+                                          @Query("token") String token,
+                                          @Body ScheduleItemDto scheduleItemDto);
 
 }
