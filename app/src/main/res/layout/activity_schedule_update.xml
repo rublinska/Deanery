@@ -1,104 +1,217 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="20dp"
-    android:gravity="center"
-    android:orientation="vertical"
-    tools:context=".activities.schedule.ScheduleCreateActivity">
+    tools:context=".activities.LecturerCreateActivity">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="134dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="40dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="371dp" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Edit existing schedule item"
-        android:textAlignment="center"
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="96dp"
+        android:background="@drawable/header"
+        android:text="@string/title_schedule_update"
+        android:textColor="@android:color/white"
+        android:textSize="36sp"
         android:textStyle="bold"
-        android:textAllCaps="true"
-        android:textSize="20sp"
-        android:layout_marginBottom="50dp"/>
+        android:gravity="center"
+        app:fontFamily="@font/montserrat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
+        android:id="@+id/schedule_time_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Time interval:"/>
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="Час:"
+        app:layout_constraintEnd_toEndOf="@+id/title"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/title"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
     <Spinner
         android:id="@+id/schedule_time_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/schedule_time_text"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/schedule_time_text"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_time_text" />
 
     <TextView
+        android:id="@+id/schedule_group_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Group:"/>
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="Група"
+        app:layout_constraintEnd_toEndOf="@+id/schedule_time_spinner"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/schedule_time_spinner"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_time_spinner" />
     <Spinner
         android:id="@+id/schedule_group_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/schedule_group_text"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/schedule_group_text"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_group_text" />
 
     <TextView
+        android:id="@+id/schedule_week_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Academic week:"/>
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="Тиждень:"
+        app:layout_constraintEnd_toEndOf="@+id/schedule_group_spinner"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/schedule_group_spinner"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_group_spinner" />
     <Spinner
         android:id="@+id/schedule_week_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/schedule_week_text"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/schedule_week_text"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_week_text" />
 
     <TextView
+        android:id="@+id/schedule_auditory_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Auditory:"/>
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="Аудиторія:"
+        app:layout_constraintEnd_toEndOf="@+id/schedule_week_spinner"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/schedule_week_spinner"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_week_spinner" />
     <Spinner
         android:id="@+id/schedule_auditory_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/schedule_auditory_text"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/schedule_auditory_text"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_auditory_text" />
 
     <TextView
+        android:id="@+id/schedule_university_class_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="University class:"/>
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="Клас:"
+        app:layout_constraintEnd_toEndOf="@+id/schedule_auditory_spinner"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/schedule_auditory_spinner"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_auditory_spinner" />
     <Spinner
         android:id="@+id/schedule_university_class_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/schedule_university_class_text"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/schedule_university_class_text"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_university_class_text" />
 
     <TextView
+        android:id="@+id/schedule_week_day_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Week day (ordered):"/>
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="День тижня:"
+        app:layout_constraintEnd_toEndOf="@+id/schedule_university_class_spinner"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/schedule_university_class_spinner"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_university_class_spinner" />
     <Spinner
         android:id="@+id/schedule_week_day_spinner"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:entries="@array/week_days"/>
+        app:layout_constraintEnd_toEndOf="@+id/schedule_week_day_text"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/schedule_week_day_text"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_week_day_text" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/delete"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="32dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/delete_button"
+        android:padding="16dp"
+        android:text="Видалити"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:fontFamily="@font/montserrat"
+        app:layout_constraintEnd_toStartOf="@+id/update"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="@+id/schedule_week_day_spinner"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_week_day_spinner" />
 
-        <Button
-            android:id="@+id/cancel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.45"
-            android:background="#F44336"
-            android:text="Cancel" />
+    <Button
+        android:id="@+id/update"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/main_button"
+        android:padding="16dp"
+        android:text="Оновити"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:fontFamily="@font/montserrat"
+        app:layout_constraintEnd_toEndOf="@+id/schedule_week_day_spinner"
+        app:layout_constraintStart_toEndOf="@+id/delete"
+        app:layout_constraintTop_toBottomOf="@+id/schedule_week_day_spinner" />
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="0.04" />
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/transparent_button"
+        android:padding="16dp"
+        android:text="Скасувати"
+        android:textColor="@color/mainBlue"
+        android:textSize="20sp"
+        app:fontFamily="@font/montserrat"
+        app:layout_constraintEnd_toEndOf="@+id/update"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/delete"
+        app:layout_constraintTop_toBottomOf="@+id/update" />
 
-        <Button
-            android:id="@+id/create"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.45"
-            android:background="#009688"
-            android:text="Update" />
-    </LinearLayout>
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>

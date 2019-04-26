@@ -28,6 +28,8 @@
     <string name="title_discipline_update">Дисципліна</string>
     <string name="title_student_create">Новий студент</string>
     <string name="title_student_update">Студент</string>
+    <string name="title_schedule_create">Новий розклад</string>
+    <string name="title_schedule_update">Розклад</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
